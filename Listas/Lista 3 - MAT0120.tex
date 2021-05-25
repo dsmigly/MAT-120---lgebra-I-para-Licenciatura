@@ -1,0 +1,917 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage{mathtext}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{tasks}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{tikz}
+\usepackage{tikz-cd}%Para diagramas 
+\usepackage[framemethod=Tikz]{mdframed}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{pifont}
+\usepackage{arydshln} %dashed line nas matrizes
+%\usepackage{lipsum}
+%\usepackage{CJKutf8} %Pacote para escrever em japonês \begin{CJK}{UTF8}{min} \end{CJK}
+\usepackage{multicol}
+% \usepackage{colorspace}
+\usepackage[arrow,matrix,curve]{xy}
+\usepackage{enumitem}
+\usepackage{graphicx, color}
+%\usepackage{eulervm} %Fonte de texto
+\usepackage{exsheets} %Mostrar soluções
+\usepackage{commath}
+\usepackage{mathpazo}
+\usepackage{cancel}
+%-------------------------------------------------------------
+%Comandos úteis
+\newcommand{\mdc}{{\rm mdc}}
+\newcommand{\mmc}{{\rm mmc}}
+\newcommand{\sen}{{\rm sen}}
+\newcommand{\tg}{{\rm tg}}
+\newcommand{\cotg}{{\rm cotg}}
+\newcommand{\cossec}{{\rm cossec}}
+\newcommand{\arctg}{{\rm arctg}}
+\newcommand{\arcsen}{{\rm arcsen}}
+\newcommand{\negrito}[1]{\mbox{\boldmath{$#1$}}} 
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\diamonde}{\ensuremath\diamondsuit}
+\newtheorem{defi}{Definição}
+\newtheorem{prop}{Proposição}
+\newtheorem{dem}{Demonstração}
+\newtheorem{coro}{Corolário}
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\setlength{\parindent}{0pt}
+\newcommand{\tn}[1]{\textnormal{#1}} 
+\newcommand{\Hom}{\tn{Hom}}
+\newcommand{\End}{\tn{End}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\rmdefault}{ptm} 
+\newcommand{\spec}{\textrm{Spec}}
+
+%-------------------------------------------------------------
+%Boxes para critérios de correção, caso seja necessário
+
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Criterios}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!75!green}
+    
+%Box padrão    
+\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!white}
+    
+%\mdfdefinestyle{Solução}{%
+%    linecolor=blue,
+%    outerlinewidth=1pt,
+%    roundcorner=8pt,
+%    innertopmargin=4pt%\baselineskip,
+%    innerbottommargin=0pt%\baselineskip,
+%    innerrightmargin=20pt,
+%    innerleftmargin=20pt,
+%    backgroundcolor=white!50!white}
+    
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Aviso}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!green}
+    
+%----------------------------------------------------------------
+%Cores do documento
+\definecolor{Floresta}{rgb}{0.13,0.54,0.13}    
+% \definespotcolor{mygreen}{PANTONE 7716 C}{.83, 0, .00, .51}
+% \definespotcolor{tuti}{}{0.6, 0, 1, .508}
+
+%----------------------------------------------------------------
+%Uso de counters para numeração automática dos exercícios 
+%Para mais infos: https://www.overleaf.com/learn/latex/Counters
+
+\newcounter{exercicio}[section]
+\newenvironment{exercicio}[1][]{\refstepcounter{exercicio}\par\medskip
+ \textcolor{blue}{\bf(\theexercicio)} \rmfamily}{\medskip }
+   
+ \usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+ 
+ \makeatletter 
+ \newcommand{\isempty}[1]{%
+  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+
+% \newcommand{\isempty}[1]{%
+%  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+  
+    
+ 
+ 
+\newenvironment{solucao}[1][]{\textbf{\\ \\ \textcolor{red}{Solução:}}#1 \rmfamily}{\medskip }
+
+
+\newenvironment{criterios}[1][]{
+ \textcolor{blue}{\bf Critérios de Correção:} \rmfamily \par\medskip #1 }{\medskip }
+ 
+\newcommand{\itens}[1]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](1) #1\end{tasks}}
+
+\newcommand{\itensladoalado}[2]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](#1) #2 \end{tasks}}
+
+\newcommand{\alt}[1]{\textcolor{Floresta}{$\negrito{(#1)} $}}
+
+%\newcommand{\alt}[1]{\task[\pers{#1}]}
+
+%\newcommand{\solucao}[1]{
+%\textbf{\\ \\ \textcolor{red}{Solução:}} #1}
+
+%----------------------------------------------------------------
+%Dados da lista:
+
+\newcommand{\titulo}{MAT0120 - Álgebra I para Licenciatura}
+\newcommand{\lista}{Lista 1}
+\newcommand{\professor}{Kostiantyn Iusenko}
+\newcommand{\monitor}{Douglas de Araujo Smigly}
+\newcommand{\semestre}{1º Semestre de 2021}
+%----------------------------------------------------------------
+
+%Mostrar ou não as soluções
+%\SetupExSheets{solution/print=true} %Se print=false, este arquivo Não imprime as soluções.
+\SetupExSheets{solution/print=true}
+
+
+%Solução sem numeração (pois vem logo depois da questão) - se quiser com números, basta comentar os comandos abaixo:
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+  attach = {
+    main[l,vc]title[l,vc](0pt,0pt) ;
+    main[r,vc]points[l,vc](\marginparsep,0pt)
+  }
+}
+
+%  {question}[headings=block-subtitle] - por bloco
+\RenewQuSolPair
+  {question}[headings=block-no-nr]
+  {solution}[headings=block-no-nr]
+
+%Personalização de Questão/ Solução
+\SetupExSheets{
+  counter-format=se.qu.,
+  question/name= ,
+  solution/name=\textcolor{red}{Solução}
+}
+
+%Cabeçalho
+%----------------------------------------------------------------
+\title{\vspace{-15mm}\fontsize{16pt}{10pt}\selectfont\textbf{\titulo} \\ \vspace{5mm} \textbf{\textcolor{Floresta}{\lista}} \PrintSolutionsT{ - \textcolor{blue}{Soluções}}} % Article title
+%\title{\fontsize{16pt}{10pt}{\textbf{MAT0501/MAT6680 - Tópicos de Anéis e Módulos}}
+\author{Professor: \professor \\ Monitor: \monitor}
+\date{\semestre}
+\begin{document}
+\maketitle
+%------------------------------------------------------------
+%Caso queira multicols, só descomentar as linhas abaixo 
+%e lembrar de colocar \end{multicols*} no final do documento
+%e columnbreak se quiser criar uma nova coluna
+
+%\begin{multicols*}{2}
+%\setlength{\columnseprule}{0.78pt}
+%\raggedcolumns
+%\columnbreak
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%
+% Exemplos de exercícios:
+%
+%------------------------------------------------------------
+\section{Equações Diofantinas}
+%Questão simples
+\begin{exercicio}
+Resolva as seguintes equações diofantinas:
+\itens{
+	\task[\alt{a}] $3x+5y=47$,
+	\task[\alt{b}] $47x+29y=99$.
+}
+\end{exercicio}
+\begin{solution}
+ \itens{   \task[\alt{a}] Como $\mdc(3, 5)=1$ e $1\mid47$, então a equação tem solução. Temos então que
+    $$3\cdot2+5\cdot \left( -1 \right) =1 \Rightarrow$$
+        $$\textcolor{PineGreen}{47} \cdot 3\cdot2+\textcolor{PineGreen}{47} \cdot 5\cdot \left( -1 \right) =\textcolor{PineGreen}{47} \cdot 1 \Rightarrow$$
+            $$ 3\cdot(47 \cdot 2) + 5\cdot \left( 47 \cdot (-1) \right) =47 \Rightarrow$$
+    $$3\cdot 94+ 5\cdot \left( -47 \right) =47.$$
+    Assim,  $x_{0}=94$ e  $y_{0}=-47$ é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo \[ S= \left\{( 94+5t,-47-3t):t \in \Z \right\}.\]
+    \item[b)] Como $\mdc\left( 47, 29 \right) =1 $  e  $ 1\mid99 $ , então a equação tem solução. Assim,
+    \[ 47\cdot \left( -1 \right) +29\cdot2=11 \Rightarrow\]
+    \[ \textcolor{PineGreen}{9} \cdot 47\cdot \left( -1 \right) + \textcolor{PineGreen}{9} \cdot 29\cdot2= \textcolor{PineGreen}{9} \cdot 11 \Rightarrow\]
+    \[  47\cdot \left( 9 \cdot (-1) \right) + 29\cdot (9 \cdot 2) = 99 \Rightarrow\]
+    $$ 47\cdot \left( -9 \right) +29\cdot18=99. $$
+    Assim,  $ x_{0}=-9 $  e  $ y_{0}=18 $  é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo  \[ S= \left\{  \left( -9+29t,18-47t \right) :t \in \Z \right\}.\]
+    }
+\end{solution}
+\begin{exercicio}
+Determine todas as soluções inteiras das equações abaixo que verificam $x\geq 0$, e $y\geq 0$.
+\itens{
+	\task[\alt{a}] $54x+21y=906$,
+	\task[\alt{b}] $30x+17y=300$.
+	}
+\end{exercicio}
+
+\begin{solution}
+\itens{
+	\task[\alt{a}] Como $\mdc   \left( 54, 21 \right) =3 $  e  $ 3\mid906 $ , então a equação tem solução. Observe que
+    $$ 54x+21y=906 \Rightarrow \dfrac{54x+21y}{3}=\dfrac{906}{3} \Rightarrow  18x+7y=302 $$ 
+Agora, encontremos inteiros $r$ e $s$ tais que $18r + 7s = 1:$ 
+    $$ 18\cdot2+7\cdot \left( -5 \right) =1 \Rightarrow$$
+    $$ \textcolor{PineGreen}{302} \cdot 18\cdot2+ \textcolor{PineGreen}{302} \cdot 7\cdot \left( -5 \right) =\textcolor{PineGreen}{302} \cdot 1 \Rightarrow$$
+    $$  18\cdot(302 \cdot 2)+  7\cdot \left( 302 \cdot (-5) \right) =302 \Rightarrow$$
+    $$ 18\cdot604+7\cdot \left( -1510 \right) =302 $$ 
+    Assim, $ x_{0}=604 $  e  $ y_{0}=-1510 $  é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo  \[ S= \left\{  \left( 604+7t,-1510-18t \right) :t \in \Z \right\}  .\]
+    Como  $ x \geq 0 $  e  $ y \geq 0 $ , temos:
+    $$  \left\{ \begin{array}{c}
+	604+7t \geq 0\\
+	-1510-18t \geq 0\\
+	\end{array}\right.\stackrel{t \in \Z}{\Longrightarrow}  t \in  \left\{ -86,-85,-84 \right\}, $$ 
+	pois da primeira equação temos que $t \geq \lceil - \dfrac{604}{7} \rceil = -86$ e da segunda, $t \leq \lceil -\dfrac{1510}{18} \rceil = -83.$
+    Portanto, as soluções pertencem ao conjunto  \[ S= \left\{  \left( 2, 38 \right) , \left( 9, 20 \right) , \left( 16, 2\right)  \right\}.\]
+	\task[\alt{b}] Como $\mdc \left( 30, 17 \right) =1 $  e  $ 1\mid300 $, então a equação tem solução.
+	Temos que
+    $$ 30\cdot \left( -1 \right) +17\cdot2=4 \Rightarrow$$ 
+    $$ \textcolor{PineGreen}{75} \cdot 30\cdot \left( -1 \right) + \textcolor{PineGreen}{75} \cdot  17\cdot2= \textcolor{PineGreen}{75} \cdot  4 \Rightarrow$$
+      $$  30\cdot \left(75 \cdot (-1)\right) +  17\cdot(75 \cdot 2) = 300 \Rightarrow$$  
+    $$30\cdot \left( -75 \right) +17\cdot150=300.$$ 
+    Assim,  $ x_{0}=-75 $  e  $ y_{0}=150 $  é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo  $ S= \left\{  \left( -75+17t,150-30t \right) :t \in \Z \right\}  $.
+    Como  $ x \geq 0 $  e  $ y \geq 0 $ , temos:
+    $$  \left\{ \begin{array}{c}
+	-75+17t \geq 0\\
+	150-30t \geq 0\\
+	\end{array}\right. \stackrel{t \in \Z}{\Longrightarrow} t=5, $$ 
+	pois da primeira equação temos que $t \geq \lceil  \dfrac{75}{17} \rceil = 5$ e da segunda, $t \leq \lceil \dfrac{150}{30} \rceil = 5.$ 
+    Portanto, a única solução é  \[ S= \left\{  \left( 10, 0 \right)  \right\}.\]
+	}
+
+\end{solution}
+	\begin{exercicio}
+	Seja $p$ um primo. Prove que a equação $x^4+4y^4=p$ tem solução inteira se e só se $p=5$. Nesse caso, determine suas soluções.
+	\textsf{[Dica:]} Use a identidade de Sophie-Germain: $a^4 + 4b^4 = (a^2 + 2b^2 + 2ab)(a^2 + 2b^2 - 2ab)$
+	\end{exercicio}
+	
+	\begin{solution}
+Observe que
+\begin{align*}
+   p&=x^{4}+4y^{4}\\
+   &=\left( x^{2}+2y^{2} \right) ^{2}-4x^{2}y^{2}\\
+   &=\left( x^{2}+2xy+2y^{2} \right)  \left( x^{2}-2xy+2y^{2} \right)\\
+   &=\left(  \left( x+y \right) ^{2}+y^{2} \right)  \left(  \left( x-y \right) ^{2}+y^{2} \right)
+\end{align*}
+Note que os dois fatores são não negativos. Como  $ p $  é primo, um deles deve ser igual a 1. Assim, temos as seguintes possibilidades:
+$$  \left\{ \begin{array}{c}
+	 \left(  \left( x+y \right) ^{2}=1\wedge y^{2}=0 \right)  \vee  \left(  \left( x+y \right) ^{2}=0\wedge y^{2}=1 \right) \\
+	 \vee \\
+	 \left(  \left( x-y \right) ^{2}=1\wedge y^{2}=0 \right)  \vee  \left(  \left( x-y \right) ^{2}=0\wedge y^{2}=1 \right) \\
+	\end{array}\right.  \Rightarrow  $$ 
+
+$$  \left\{ \begin{array}{c}
+	 \left( x=1\wedge y=0 \right)  \vee  \left( x=-1\wedge y=0 \right)  \vee  \left( x=-1\wedge y=1 \right)  \vee  \left( x=1\wedge y=-1 \right) \\
+	 \vee \\
+	 \left( x=1\wedge y=1 \right)  \vee  \left( x=-1\wedge y=-1 \right) \\
+	\end{array}\right.$$ 
+
+Para  $ x= \pm 1 $  e  $ y=0 $ ,  $ p=1 $  não é primo, e para  $ x= \pm 1 $  e  $ y= \pm 1 $ ,  $ p=5 $ .
+
+	\end{solution}
+
+\begin{exercicio}
+Determine todos os múltiplos positivos de 11 e 9 cuja soma seja 270.
+\end{exercicio}
+\begin{solution}
+Podemos representar a questão proposta por meio da seguinte equação diofantina:
+$$ 11x+9y=270 $$ 
+Como $\mdc   \left( 11, 9 \right) =1 $  e  $ 1\mid270 $ , a equação tem solução. Agora, veja que
+$$ 11\cdot1+9\cdot \left( -1 \right) =2 \Rightarrow $$
+$$ \textcolor{PineGreen}{135} \cdot 11\cdot1+  \textcolor{PineGreen}{135} \cdot 9\cdot \left( -1 \right) = \textcolor{PineGreen}{135} \cdot 2 \Rightarrow $$ 
+$$11\cdot(135 \cdot 1) +   9\cdot \left(135 \cdot (-1) \right) = 270 \Rightarrow $$ 
+$$ 11\cdot135+9 \left( -135 \right) =270 $$ 
+Assim,  $ x_{0}=135 $  e  $ y_{0}=-135 $  é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo  $ S= \left\{  \left( 135+9t,-135-11t \right) :t \in \Z \right\}  $ . Como  $ x \geq 0 $  e  $ y \geq 0 $ , temos:
+$$  \left\{ \begin{array}{c}
+	135+9t>0\\
+	-135-11t>0\\
+	\end{array}\right. \stackrel{t \in \Z}{\Longrightarrow} t=-13 \vee t=-14, $$ 
+	pois da primeira equação temos que $t > \lceil  -\dfrac{135}{9} \rceil = -15$ e da segunda, $t < \lceil - \dfrac{135}{11} \rceil = -12.$ 
+	Assim, as soluções positivas são
+\[ S= \left\{  \left( 18,8 \right), (9,19)  \right\}.\]
+Portanto, as soluções são  $ 11\cdot18=198 $  e  $ 9\cdot8=72 $  ou  $ 11\cdot9=99 $  e  $ 9\cdot19=171$ .
+\end{solution}
+
+\begin{exercicio}
+Determine todos os inteiros positivos menores de que 1000 que têm restos 9 e 15 quando divididos respectivamente por 37 e 52.
+\end{exercicio}
+\begin{solution}
+Queremos encontrar  $ n \in \mathbb{N}^{*} ;n<1000 $ , tal que:
+$$  \left\{ \begin{array}{c}
+	n=37x+9\\
+	n=52y+15\\
+	\end{array}\right.  \Rightarrow 37x-52y=6;x,y \in \mathbb{N} $$ 
+
+Como $\mdc \left( 37, 52 \right) =1 $  e  $ 1\mid6 $ , a equação diofantina tem solução.
+$$ 37\cdot \left( -7 \right) -52\cdot \left( -5 \right) =1 \Rightarrow $$ 
+$$ \textcolor{Cyan}{6} \cdot 37\cdot \left( -7 \right) - \textcolor{Cyan}{6} \cdot 52\cdot \left( -5 \right) = \textcolor{Cyan}{6} \cdot 1 \Rightarrow $$ 
+$$ 37\cdot \left(6 \cdot (-7) \right) -52\cdot \left( 6 \cdot (-5) \right) =6 \Rightarrow $$ 
+$$ 37\cdot \left( -42 \right) -52\cdot \left( -30 \right) =6 $$ 
+
+Assim,  $ x_{0}=-42 $  e  $ y_{0}=-30 $  é uma solução particular da equação diofantina, enquanto todas as soluções são do tipo  $ S= \left\{  \left( -42-52t,-30-37t \right) :t \in \Z \right\}  $ . Como  $ 1000>n \geq 0 $ , temos:
+$$  \left\{ \begin{array}{c}
+	1000>37x+9>0\\
+	1000>52y+15>0\\
+	\end{array} \right. \Rightarrow  \left\{ \begin{array}{c}
+	\frac{991}{37}>x>-\frac{9}{37}\\
+	\frac{985}{52}>y>-\frac{15}{52}\\
+	\end{array} \right. \Rightarrow 
+	\left\{ \begin{array}{c}
+	\frac{991}{37}>-42-52t>-\frac{9}{37}\\
+	\frac{985}{52}>-30-37t>-\frac{15}{52}\\
+	\end{array}\right.  \Rightarrow $$
+	 $$\left\{ \begin{array}{c}
+	\frac{2545}{37}>-52t>\frac{1545}{37}\\
+	\frac{2545}{52}>-37t>\frac{1545}{52}\\
+	\end{array}\right.  \Rightarrow  \left\{ \begin{array}{c}
+	-\frac{2545}{1924}<t<-\frac{1545}{1924}\\
+	-\frac{2545}{1924}<t<-\frac{1545}{1924}\\
+	\end{array}\right.\stackrel{t \in \Z}{\Longrightarrow}  t=-1. $$ 
+
+Assim,  $ x=10 $  e  $ y=7 $ . Portanto, o único número é  $ n=37\cdot10+9=379 $ .
+\end{solution}
+\begin{exercicio}
+Somando-se um certo múltiplo $6x$ de $6$ com certo múltiplo $9y$ de $9$, obtém-se $126$. Trocando $x$ por $y$ e $y$ por $x$, a nova soma é $114$. Determine $x$ e $y$.
+\end{exercicio}
+\begin{solution}
+Pelas informações do enunciado, temos
+$$  \left\{ \begin{array}{c}
+	6x+9y=126\\
+	9x+6y=114\\
+	\end{array}\right.  \Rightarrow  \left\{ \begin{array}{c}
+	2x+3y=42\\
+	3x+2y=38\\
+	\end{array} \right. \Rightarrow  \left\{ \begin{array}{c}
+	4x+6y=84\\
+	9x+6y=114\\
+	\end{array}\right.  \Rightarrow  \left\{ \begin{array}{c}
+	5x=30\\
+	9x+6y=114\\
+	\end{array}\right.  \Rightarrow  \left\{ \begin{array}{c}
+	x=6\\
+	y=10\\
+	\end{array}\right.  $$
+Logo, os números procurados são $x = 6$ e $y = 10.$
+
+\end{solution}
+\begin{exercicio}
+Se $x$ e $y$ são inteiros tais que $2x+3y$ é múltiplo de 17, prove então que $9x+5y$ é também múltiplo de 17.
+\end{exercicio}
+
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Certo senhor, ao descontar um cheque, recebeu sem notar o número de reais trocado pelo número de centavos e vice-versa. Em seguida, gastou 68 centavos e observou, surpreso, que tinha o dobro da quantia original do cheque. Determine o menor valor possível para o cheque.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Um pescador tenta pescar um cardume jogando diversas redes na água. Se cair exatamente um peixe em cada rede, salvam-se ainda $n$ peixes. Se caírem $n$ peixes em cada rede, sobram $n$ redes vazias. Quantas são as redes? Quantos são os peixes?
+\end{exercicio}
+\begin{solution}
+Sejam  $ p $  e  $ r$ o número total de peixes e de redes, respectivamente. Vamos ``matematizar'' os dados do enunciado.
+
+Como se cair um peixe em cada rede, salvam-se $n$ peixes, temos que $p = 1 \cdot r + n.$ 
+
+
+Se caírem $n$ peixes em cada rede, sobram $n$ redes vazias, e portanto $p = n \cdot (r - n).$ 
+
+Temos então que
+\[
+p = n(r-n) \Rightarrow \textcolor{Cerulean}{p} = nr - n^2 \Rightarrow \textcolor{Cerulean}{r+n} = nr - n^2 \Rightarrow r=\frac{n^{2}+n}{n-1} \Rightarrow \]\[r = \frac{(n-1)(n+2) + 2}{n-1} \Rightarrow r = n+2+\frac{2}{n-1}
+\]
+
+Como  $ r,n \in \mathbb{N} $ , temos que  $ n-1\mid2 \Leftrightarrow n=2 \mbox{ ou } n=3 $ .
+
+Observe também que a quantidade peixes pode ser escrita em função de $n,$ pois
+\[
+p = r + n \Rightarrow p = \frac{n^2+n}{n-1} + n \Rightarrow p = \frac{n^2 + n + n^2 - n}{n-1} \Rightarrow p = \frac{2n^2}{n-1} 
+\]
+Assim, se $n = 2:$
+\[
+\begin{cases}
+p = \dfrac{2 \cdot 2^2}{2-1}\\
+r = \dfrac{2^2 + 2}{2-1}
+\end{cases} \Rightarrow p = 8 \quad \mbox{e} \quad r = 6
+\]
+e se $n = 3:$
+\[
+\begin{cases}
+p = \dfrac{3 \cdot 3^2}{3-1}\\
+r = \dfrac{3^2 + 3}{3-1}
+\end{cases} \Rightarrow p = 9  \quad \mbox{e} \quad r = 6
+\]
+
+Em suma, se  $ n=2 $ , temos  $ r=6 $  redes e  $ p=8 $  peixes; se  $ n=3 $ , temos  $ r=6 $  redes e  $ p=9 $  peixes.
+\end{solution}
+\begin{exercicio}
+Uma pessoa tem R\$ 13,60 para gastar em cervejas e refrigerantes. Se cada cerveja custa R\$ 1,50 e cada refrigerante custa R\$ 0,70 quantas cervejas e quantos refrigerantes ela poderá comprar?
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Uma certa tinta pode ser comprada em galões de $18\ell$ ou em latas de $3\ell$. Precisa-se de $250\ell$ dessa tinta. De quantas maneiras se pode comprar latas e galões para que a quantidade de sobra seja mínima?
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Um hospital deseja adquirir medicamentos $A$ e $B$ de modo a distribuí-los entre alguns pacientes. Cada paciente receberá 20 vidros de cada medicamento devendo ainda sobrar 84 vidros de cada medicamento. Sabendo que $A$ é vendido em caixas de 132 vidros e $B$, em caixas de 242 vidros, determine:
+\itens{
+	\task[\alt{a}] o número mínimo de caixas de cada medicamento que o hospital deve comprar;
+	\task[\alt{b}] o número de pacientes que receberão os medicamentos.
+}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Um peão está em um dos quadradinhos de uma tira infinita (tanto para a esquerda, quanto para a direita) de papel quadriculado com uma unidade de altura. Ele pode se mover $m$ quadradinhos para a direita ou $n$ quadradinhos para a esquerda. %Quando $m$ e $n$ satisfazem a propriedade de que o peão pode ser movido (depois de vários movimentos) a terminar no quadradinho à direita de onde começou? Qual o número mínimo de movimentos para fazer isso? 
+\itens{
+	\task[\alt{a}] O peão pode ser movido depois de vários movimentos de modo a terminar no quadradinho à direita de onde começou se $m = 59$ e $n = 83?$ Em caso afirmativo, qual o mínimo de movimentos para fazer isso?
+	\task[\alt{b}] \textcolor{Blue}{*} O peão pode ser movido depois de vários movimentos de modo a terminar no quadradinho à direita de onde começou se $n = 67^{67} - 61^{67}$ e $m = 67^{61} - 61^{61}?$
+
+	\textsf{[Dica:]} Use o Exercício 16 - Parte 2 da Lista 2.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}] Se fizermos $x$ movimentos para a direita (deslocando o peão $m$ quadradinhos para a direita em cada um desses movimentos) e $y$ movimentos para a esquerda, então o deslocamento resultante é igual a $mx -  ny$ quadradinhos para a direita (um resultado negativo significa um deslocamento para a esquerda). O número $1$ pode ser representado por essa expressão se, e somente se $\mdc(m,n) = 1,$ ou seja, se $m$ e $n$ forem primos entre si:
+	\[
+	mx - ny = 1 \Leftrightarrow \mdc(m,n) \mid 1.
+	\]
+	Como $\mdc(59,83)=1,$ já que $59$ e $83$ são números primos, segue que é possível terminar no quadradinho à direita de onde começou.
+	
+	Agora vamos resolver a equação diofantina
+	\[
+	59x - 83y = 1,
+	\]
+	que é equivalente à resolver a equação
+	\[
+	59x + 83y' = 1,
+	\]
+	Para $y' = -y.$
+	As soluções para esta equação serão da forma 
+	\[
+	(x_0 + 83k, y_0' - 59k), \quad k \in \mathbb{Z},
+	\]
+	onde $(x_0, y_0')$ é uma solução particular dessa equação. Vamos então encontrá-la.
+	
+	Precisamos encontrar inteiros $r$ e $s$ tais que $59r + 83s = 1.$ Observe que podemos escrever
+	\begin{align*}
+	59r + \textcolor{Emerald}{83}s &= 59r + \textcolor{Emerald}{(59 + 24)}s \\&= \textcolor{Cyan}{59}(r+s) + 24s \\&= \textcolor{Cyan}{(2 \cdot 24 + 11)}(r+s) + 24s \\&= 11(r+s) + \textcolor{Red}{24}(2r+3s) \\&= 11(r+s) + \textcolor{Red}{(2 \cdot 11 + 2)}(2r+3s) \\&= 2(2r+3s) + 11(5r+7s)  
+	\end{align*}
+	Assim, encontrar $r$ e $s$ tais que $59r+83s = 1$ equivale a encontrar $r'$ e $s'$ tais que $2r'+11s' = 1,$ onde $r' = 2r+3s$ e $s' = 5r+7s.$ Claramente temos que $2(-5) + 11 \cdot 1 = 1.$ Portanto,
+	\[
+	\begin{cases}
+	2r+3s = -5 \\
+	5r+7s = 1
+	\end{cases} \Rightarrow r = 38 \quad \mbox{e} \quad s = -27
+	\]
+	Assim, $(x_0, y_0') = (38,-27),$ e as soluções de $59x + 83y' = 1$ são da forma
+	\[
+	(38 + 83k, -27 - 59k), \quad k \in \mathbb{Z},
+	\]
+	e como $y' = -y,$ as soluções de $59x - 83y = 1$ são da forma
+	\[
+	(38 + 83k, 27 + 59k), \quad k \in \mathbb{Z}.
+	\]
+	Logo, o número de movimentos será $38 + 83k + 27 + 59k = 65 + 142k.$ O menor valor positivo será obtido quando $k = 0.$
+	
+	Portanto, o número mínimo de movimentos para que o peão acabe no quadradinho à direita de onde começou é $65.$
+	
+	\task[\alt{b}] Pelo Exercício 16 - Parte 2 da Lista 2,
+	\[\mdc(67^{67} - 61^{67}, 67^{61} - 61^{61}) = 67^{\mdc(67,61)} - 61^{\mdc(67,61)} = 67 - 61 = 6.\]
+	Logo, $m$ e $n$ não são primos entre si, e  o peão não pode ser movido nesse caso.
+	}
+\end{solution}
+
+\begin{exercicio}
+Vovô Pedro deseja repartir uma quantia entre seus netos. 
+\itens{
+\task[\alt{a}] Qual é a quantia mínima que ele deverá separar se quiser distribuir igualmente valores de $R\$ 12,00$ \textbf{ou} $R\$ 20,00$ a cada um?
+\task[\alt{b}] Se Vovô Pedro dispõe de $R\$ 136,00$ e vai distribuir valores de $R\$ 12,00$ \textbf{e} $R\$ 20,00$ a seus netos, quantos netos ele possui?
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Seja $c$ a quantia mínima que Vovô Pedro precisa separar. Para que ele consiga dividir $c$ em grupos de $R\$ 12,00$ ou $R\$ 20,00,$ precisamos que $12 \mid c$ e $20 \mid c,$ ou seja, que $c$ seja múltiplo simultaneamente de $12$ e de $20.$ Assim, procuramos por $\mmc(12, 20).$ 
+De fato, 
+\[
+\begin{cases}
+12 = \textcolor{PineGreen}{2^{2}} \cdot \textcolor{Cerulean}{3^{1}} \cdot \textcolor{Plum}{5^{0}} \\
+20 =\textcolor{PineGreen}{2^{2}} \cdot \textcolor{Cerulean}{3^{0}} \cdot \textcolor{Plum}{5^{1}}
+\end{cases} \Rightarrow \mmc(12,20) = \textcolor{PineGreen}{2^{\max(2,2)}} \cdot \textcolor{Cerulean}{3^{\max(1,0)}} \cdot  \textcolor{Plum}{5^{\max(0,1)}} = 2^2 \cdot 3 \cdot 5 = 60
+\]
+Portanto, a quantia mínima que Vovô Pedro deverá separar é de $R\$ 60,00.$
+
+\task[\alt{b}] Sejam $x$ a quantidade de netos que receberam valores de $R\$ 12,00$ e $y$ a quantidade de netos que receberam valores de $R\$ 20,00.$ Precisamos resolver a Equação Diofantina Linear
+\[
+12x + 20y = 136,
+\]
+Do item anterior, sabemos que $\mmc(12,20) = 60,$ ao passo que
+\[
+\mdc(12,20) = \dfrac{12 \cdot 20}{\mmc(12,20)} = \dfrac{240}{60} = 4.
+\]
+Como $4 \mid 136,$ segue que a equação possui soluções inteiras e estas serão da forma 
+	\[
+	(x_0 + 20k, y_0 - 12k), \quad k \in \mathbb{Z},
+	\]
+	onde $(x_0, y_0)$ é uma solução particular dessa equação. 
+	
+	Procuremos inicialmente por $r$ e $s$ inteiros tais que $12r + 20s = 136,$ ou seja, tais que $3r+5s = 34.$ 
+Observe que podemos escrever
+	\begin{align*}
+	3r + \textcolor{Emerald}{5}s &= 3r + \textcolor{Emerald}{(3+2)}s \\&= \textcolor{Cyan}{3}(r+s) + 2s \\&= \textcolor{Cyan}{(2+1)}(r+s) + 2s \\&= (r+s) + 2(r+2s)
+	\end{align*}
+	Assim, encontrar $r$ e $s$ tais que $12r+20s = 136$ equivale a encontrar $r'$ e $s'$ tais que $r'+2s' = 34,$ onde $r' = r+s$ e $s' = r+2s.$ Claramente temos que $1 \cdot 0 + 2 \cdot 17 = 34.$ Portanto,
+	\[
+	\begin{cases}
+	r+s = 0 \\
+	r+2s = 17
+	\end{cases} \Rightarrow r = -17 \quad \mbox{e} \quad s = 17
+	\]
+	Assim, $(x_0, y_0) = (-17,17),$ e as soluções de $12x + 20y = 136$ são da forma
+	\[
+	(-17 + 20k, 17 - 12k), \quad k \in \mathbb{Z}.
+	\]
+
+Como a quantidade de netos é um número natural positivo, devemos ter
+\[
+\begin{cases}
+-17 + 20k > 0 \\
+17 - 12k > 0
+\end{cases} \Rightarrow \begin{cases}
+k > \left\lfloor - \dfrac{17}{20} \right\rfloor \\
+k < \left\lceil \dfrac{17}{12} \right\rceil
+\end{cases} \Rightarrow \begin{cases}
+k > 0 \\
+k < 2
+\end{cases} \Rightarrow k = 1.
+\]
+Assim, $x = -17 + 20 = 3$ e $y = 17 - 12 = 5,$ e Vovô Pedro tem $3+5 = 8$ netos.
+}
+\end{solution}
+\begin{exercicio}
+A venda do Seu Joaquim está fazendo uma promoção de balas mastigáveis recheadas importadas, vendendo por $R\$ 2,00,$ $R \$ 3,00$ e $R\$ 5,00$ pacotes de balas de laranja, cereja e framboesa, respectivamente. Yasmim, querendo aproveitar a promoção comprou vários pacotes e gastou ao todo $R\$ 23,00.$ Se o pacote de bala de cereja custasse $R\$2,00$ a mais e o pacote de bala de framboesa custasse $R\$5,00$ a mais, ela teria pago $R\$ 42, 00.$ Quantos pacotes de balas Yasmim comprou?
+\end{exercicio}
+\begin{solution}
+Sejam $x, y$ e $z$ as quantidades de pacotes de balas de laranja, cereja e framboesa, respectivamente, que Yasmim comprou. Pelas informações do enunciado, temos que
+\[
+\begin{cases}
+2x+3y+5z = 23 \\
+2x + 5y + 10z = 42
+\end{cases}
+\]
+Subtraindo a primeira da segunda equação, ficamos com
+\[
+2y + 5z = 19
+\]
+Como $\mdc(2,5)=1,$ a equação acima possui soluções inteiras, e estas serão da forma 
+	\[
+	(x_0 + 5k, y_0 - 2k), \quad k \in \mathbb{Z},
+	\]
+	onde $(x_0, y_0)$ é uma solução particular dessa equação. 
+	
+	Procuremos inicialmente por $r$ e $s$ inteiros tais que $2r + 5s = 19.$
+Observe que podemos escrever
+	\begin{align*}
+	2r + \textcolor{Emerald}{5}s &= 2r + \textcolor{Emerald}{(3+2)}s \\&= \textcolor{Cyan}{3}s + 2(r+s) \\&= \textcolor{Cyan}{(2+1)}s + 2(r+s) \\&= s + 2(r+2s)
+	\end{align*}
+	Claramente temos que $1 + 2 \cdot 9 = 19.$ Portanto,
+	\[
+	\begin{cases}
+	s = 1 \\
+	r+2s = 9
+	\end{cases} \Rightarrow r = 7 \quad \mbox{e} \quad s = 1
+	\]
+	Assim, $(x_0, y_0) = (7,1),$ e as soluções de $5x + 2y = 19$ são da forma
+	\[
+	(7 + 5k, 1 - 2k), \quad k \in \mathbb{Z}.
+	\]
+
+Como a quantidade de pacotes de balas é um número natural positivo, devemos ter
+\[
+\begin{cases}
+7 + 5k > 0 \\
+1 - 2k > 0
+\end{cases} \Rightarrow \begin{cases}
+k > \left\lfloor -\dfrac{7}{5} \right\rfloor \\
+k < \left\lceil \dfrac{1}{2} \right\rceil
+\end{cases} \Rightarrow \begin{cases}
+k > -2 \\
+k < 1
+\end{cases} \Rightarrow k = -1 \mbox{ou} k = 0 .
+\]
+Se $k = -1,$ então temos a solução $(2, 3),$ e $x = \dfrac{23 - 3 \cdot 2 - 5 \cdot 3}{2} = 1$ e se $k = 0,$ temos a solução $(7,1),$ e $x = \dfrac{23 - 3 \cdot 7 - 5 \cdot 1}{2} = -\dfrac{3}{2} \notin \mathbb{Z}.$ 
+
+Assim, Yasmim comprou $1+2+3 = 6$ pacotes de balas.
+
+\end{solution}
+\begin{exercicio} \textcolor{Blue}{*}\textsf{[Problema de \textit{McNuggets}]} Originalmente, os \textit{McNuggets} de Frango do \textit{McDonald's} eram embalados em caxias com capacidade para $6,$ $9$ e $20$ McNuggets. Dizemos que $n$ é um número de McNuggets se a quantidade de $n$ McNuggets pode ser acondicionada nas embalagens de modo que não haja sobra.
+\itens{
+	\task[\alt{a}] Prove que $43$ não é um número de McNuggets.
+	\task[\alt{b}] Mostre que todo $n \ge 44$ é um número de McNuggets. 
+	}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}] Sejam $x,y$ e $z$ as quantidades de embalagens com capacidade $6$, 9 e 20, respectivamente, supostamente utilizadas para embalar $43$ McNuggets. Temos então a Equação Diofantina Linear
+	\[
+	6x + 9y + 20z = 43 \Rightarrow 6x + 9y = 43 -20z
+	\]
+	Para que esta equação tenha solução, como $\mdc(6,9) = 3,$ precisamos que $6 \mid 43-20z.$ Então, devemos ter $z = 2.$ Mas $6x +  9z = 3$ não possui soluções inteiras positivas. Portanto, $43$ não é um número de McNuggets.
+	\task[\alt{b}] Vamos verificar que $44, 45, 46, 47, 48$ e $49$ são números de McNuggets. Dessa forma, se $n \ge 43,$ vamos poder escrever $n = 6n + r,$ onde $r \in \{ 44,45,46,47,48,49 \},$ e como $6$ é a capacidade de um tamanho de caixa, teremos nosso resultado comprovado. De fato, temos:
+	\begin{itemize}
+	\item $44 = 6 + 9 + 9 + 20$
+\item $45 = 9 + 9 + 9 + 9 + 9$
+\item$46 = 6 + 20 + 20$
+\item$47 = 9 + 9 + 9 + 20$
+\item$48 = 6 + 6 + 9 + 9 + 9 + 9$
+\item$49 = 9 + 20 + 20$
+	\end{itemize}
+	Logo, todo $n \ge 44$ é um número de McNuggets.
+	}
+\end{solution}
+\section{Números primos e Teorema Fundamental da Aritmética}
+
+\begin{exercicio}
+Encontre todos os inteiros positivos $a$ tais que 
+$$
+	\left \{ \begin{array}{r c l}
+	\mmc(120,a)&=&360\\
+	\mdc(450,a)&=&90
+	\end{array} \right.
+$$
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Resolva em $\mathbb Z$ o sistema abaixo
+$$
+	\left \{ \begin{array}{r c l}
+	\mmc(x,y)&=&420\\
+	\mdc(x,y)&=&20
+	\end{array} \right.
+$$
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Seja $n$ um inteiro positivo. Mostre que se $n$ divide $(n-1)!+1$, então $n$ é primo. 
+
+\textit{Dica:} Tome um divisor primo $p$ de $n$ e mostre que $p\geq n$.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Seja $a,b \in \mathbb Z$ tais que $\mdc(a,b)=p$, um inteiro primo. O que se pode dizer sobre $\mdc(a^2,b)$ e $\mdc(a^2,b^2)$?
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Mostre que três inteiros positivos ímpares consecutivos não podem ser todos primos, com exceção de $3,5,$ e $7.$
+\end{exercicio}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Sejam $p,q$ primos tais que $p\geq q\geq 5$. Prove que $24 | p^2-q^2$.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Seja $n$ um inteiro positivo. Provar que 
+\itens{
+	\task[\alt{a}] Se $2^n-1$ é primo então $n$ é primo;
+	\task[\alt{b}] $n^4+4$ é composto, para todo $n>1$;
+    \task[\alt{c}]  todo inteiro positivo da forma $3n+2$ tem um fator primo dessa forma;
+    \task[\alt{d}] Se $n^3-1$ é primo, então $n=2$;
+	\task[\alt{e}] Se $n$ é primo e $3n+1$ é um quadrado, então $n=5$.
+	}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Vamos explorar a decomposição de $n!$ em termos de seus fatores primos.
+\itens{
+	\task[\alt{a}] Determine em quantos zeros termina $100!$. 
+	\task[\alt{b}] Determine a maior potência de 14 que divide $100!$; 
+	\task[\alt{c}] Determine todos os primos que dividem $50!$.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}]
+	\task[\alt{b}]
+	\task[\alt{c}]
+	}
+\end{solution}
+
+\begin{exercicio}
+Mostre que existem infinitos primos da forma $3n+2$, com $n\in \mathbb Z$.
+\end{exercicio}
+
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Mostre que se $2^m+1$ é primo para algum $m>0$ então $m$ é uma potência de 2.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Seja $p_1=2, p_2=3, p_3=5, \ldots, p_n,\ldots$ a sequência dos números primos positivos em sua ordem natural.
+\itens{
+\task[\alt{a}] Encontre o menor valor de $k$ para o qual $p_1 \cdot p_2 + p_2 \cdot p_3 + \ldots + p_{k-1} \cdot p_{k}$ é primo;
+	\task[\alt{b}] Mostre que $p_{n+1}\leq p_1\cdot p_2\cdot \dots \cdot p_n+1$;
+	\task[\alt{c}] Mostre que $p_n\leq 2^{2^{n-1}}$, para todo $n\geq 1$. \textsf{[Dica:]} use indução.
+	\task[\alt{d}] Conclua que existem pelo menos $n+1$ primos menores $2^{2^n}$.
+}
+
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{comment}
+\begin{exercicio}\textsf{[Teorema de Clement]} 
+Prove que se $n$ é tal que $n(n+2)$ divide $4((n-1)!+1) + n$ então $n$ e $n+2$ são números primos gêmeos.
+\textsf{[Dica:]} Utilize o exercício 3.
+
+\end{exercicio}
+\begin{solution}
+Se $n(n+2)$ divide $4((n-1)!+1) + n,$ então existe um $k \in \mathbb{Z}$ tal que
+\[
+4((n-1)!+1) + n = k n(n+2)
+\]
+Assim, temos
+\[
+4((n-1)!+1) + n = k n(n+2) \Rightarrow4((n-1)!+1) = kn(n+2) - n \Rightarrow 4((n-1)!+1) = n(k(n+2) - 1)
+\]
+Assim, concluímos que $n \mid 4((n-1)!+1).$
+
+Observe também que
+\[
+4((n-1)!+1) + n = k n(n+2) \Rightarrow 4(n-1)! + 4 + n = kn(n+2) \Rightarrow 4n(n+1)(n-1)! + 4 = (4n(n+1)-4)(n-1)! + kn(n+2) - n = 
+\]
+
+Assim, concluímos que $n+2 \mid 4((n+1)!+1).$
+
+
+
+Vamos provar que $n$ e $n+2$ são números primos. Pelo exercício 3, sabemos que se $n \mid (n-1)!+1,$ então $n$ é primo. Além disso, podemos escrever
+\begin{equation}\label{k}
+n \mid (n-1)!+1 \Rightarrow (n-1)!+1 = kn, k \in \mathbb{Z}.
+\end{equation}
+
+Agora, sabemos que, se $n+2 \mid (n+2-1)! + 1 \Rightarrow n+2 \mid (n+1)! + 1,$ então $n+2$ é primo. Além disso,
+\[
+n+2 \mid ((n+1)!+1) \Rightarrow (n(n+1)(n-1)!+1) = \ell (n+2), \ell \in \mathbb{Z}.
+\]
+Observe que
+\[
+n(n+1) = (n-1)(n+2)+2,
+\]
+e portanto
+\[
+n(n+1)(n-1)!+1 = \ell (n+2) \Rightarrow ((n-1)(n+2)+2)(n-1)!+1 = \ell (n+2) \Rightarrow 
+2(n-1)!+1 = \ell (n+2) - (n-1)(n+2)(n-1)! \Rightarrow 
+2(n-1)!+1 = \ell^{\prime} (n+2) 
+\]
+onde $\ell' = \ell - (n-1)(n-1)!.$ 
+
+Assim, temos que
+\[
+2(n-1)!+1 = \ell^{\prime} (n+2) \Rightarrow (n-1)! + \textcolor{Cyan}{(n-1)!+1} = \ell^{\prime} (n+2) \Rightarrow (n-1)! + \textcolor{Cyan}{kn} = \ell^{\prime} (n+2) \Rightarrow (n-1)! + kn = \ell' n + 2 \ell' \Rightarrow 2 \ell' - \textcolor{Plum}{(n-1)!} = kn - \ell' n \Rightarrow 2 \ell' - \textcolor{Plum}{(kn-1)} = kn - \ell' n \Rightarrow 2 \ell' - 1 = 2kn - \ell' n \Rightarrow 2 \ell^{\prime} - 1 = n \ell^{\prime \prime},
+\]
+onde $\ell^{\prime \prime} = 2k - \ell'.$
+
+
+
+
+Observe então que
+\[
+n(n+1)(n-1)!+1 = \ell (n+2) \Rightarrow n(n+1)(n-1)! - \ell n = 2 \ell - 1.
+\]
+\[
+n(n+1)(n-1)! - \ell n = 2 \ell - 1 \Rightarrow n(n+1)(n-1)! - \ell n = 2 \ell - (kn - (n-1)!) \Rightarrow n(n+1)(n-1)! - \ell n = 2 \ell - kn + (n-1)! \Rightarrow (n(n+1)-1)(n-1)! = (n+2)\ell - kn 
+
+(n^2 + n - 1)(n-1)! \cdot n \ell \cdot (n+2)k = n(n+2) \ell^2 \cdot (n+2)k - n(n+2) \cdot n \ell \cdot k
+
+(n^2 + n - 1)(n-1)! \cdot n \ell \cdot (n+2)k = n(n+2)( \ell^2 \cdot (n+2)k -  n \ell \cdot k)
+
+(n^2 + n - 1)(n-1)! \cdot n \cdot k \cdot (n(n+1)(n-1)! +1) = n(n+2)( \ell^2 \cdot (n+2)k -  n \ell \cdot k)
+
+(n^2 + n - 1)(n-1)! \cdot ((n-1)!+1) \cdot (n(n+1)(n-1)!+1) = n(n+2)( \ell^2 \cdot (n+2)k -  n \ell \cdot k)
+
+(n^2 + n - 1)(n-1)! \cdot ((n-1)!+1) \cdot (n(n+1)(n-1)!+1) = n(n+2)( \ell^2 \cdot (n+2)k -  n \ell \cdot k)
+\]
+
+
+
+\[
+((n-1)!+1) = kn \Rightarrow n(n+1)((n-1)!+1) = kn^2(n+1) \Rightarrow n(n+1)(n-1)!+n(n+1) = kn^2(n+1) \Rightarrow n(n+1)(n-1)!+n^2 + n - 1 + 1 = kn^2(n+1) \Rightarrow
+n(n+1)(n-1)!+n^2 + 1 + n - 1 = kn^2(n+1) \Rightarrow
+\ell (n+2) + n^2 + n - 1 = kn^2(n+1) \Rightarrow
+\]
+\end{solution}
+\end{comment}
+\begin{exercicio}\textsf{[Primos de Chen]} 
+
+
+
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+
+\begin{exercicio}
+Prove que não existem três números primos $p,q$ e $r$ tais que $p^2 + q^2 = r^2.$
+%https://homepages.dcc.ufmg.br/~loureiro/md/md_LE3_Solucao.pdf - ex 14 pg 3
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Seja $S_n$ a soma dos $n$ primeiros números primos. Por exemplos, $S_4 = 2 + 3 + 5 + 7 = 17$ e $S_7 = 2 + 3 + 5 + 7 + 11 + 13 + 17 = 58.$ Prove que existe ao menos um número quadrado perfeito entre $S_n$ e $S_{n+1}.$
+\end{exercicio}
+\begin{solution}
+Seja $m$ um número natural tal que $m^2 \le S_n.$ Vamos provar que $(m+1)^2 - m^2 <S_{n+1} - S_n = p_{n+1}.$
+Veja que
+\[
+2\sqrt{S_n} + 1 \le 2m+1 = (m+1)^2 - m^2.
+\]
+Mostremos que $p_{n+1} > 2\sqrt{S_n} + 1.$
+%https://i.stack.imgur.com/X9mxx.png
+%https://math.stackexchange.com/questions/1811331/is-the-sum-of-the-first-n-primes-a-prime-infinitely-many-times?rq=1
+\end{solution}
+
+\begin{exercicio}
+%https://math.stackexchange.com/questions/1502062/primes-written-as-the-sum-of-two-squares?rq=1
+\end{exercicio}
+\section{  Congruências }
+
+
+\end{document}
+
+
+\od{}{x} \dfrac{f}{g} = \dfrac{f'g - fg'}{g^2}
+\od[2]{}{x} = \od{}{x} \dfrac{f'g - fg'}{g^2} = \dfrac{(f'g - fg')' g^2 - (f'g - fg')(g^2)'}{g^4} =  \dfrac{(f''g - fg'')g^2 - 2(f'g'g^2 - fg(g')^2)}{g^4}

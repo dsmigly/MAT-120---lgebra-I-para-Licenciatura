@@ -1,0 +1,1567 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage{mathtext}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{tasks}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{tikz}
+\usepackage{tikz-cd}%Para diagramas 
+\usepackage[framemethod=Tikz]{mdframed}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{pifont}
+\usepackage{arydshln} %dashed line nas matrizes
+%\usepackage{lipsum}
+%\usepackage{CJKutf8} %Pacote para escrever em japonês \begin{CJK}{UTF8}{min} \end{CJK}
+\usepackage{multicol}
+% \usepackage{colorspace}
+\usepackage[arrow,matrix,curve]{xy}
+\usepackage{enumitem}
+\usepackage{graphicx, color}
+%\usepackage{eulervm} %Fonte de texto
+\usepackage{exsheets} %Mostrar soluções
+\usepackage{commath}
+\usepackage{mathpazo}
+\usepackage{cancel}
+%-------------------------------------------------------------
+%Comandos úteis
+\newcommand{\mdc}{{\rm mdc}}
+\newcommand{\mmc}{{\rm mmc}}
+\newcommand{\sen}{{\rm sen}}
+\newcommand{\tg}{{\rm tg}}
+\newcommand{\cotg}{{\rm cotg}}
+\newcommand{\cossec}{{\rm cossec}}
+\newcommand{\arctg}{{\rm arctg}}
+\newcommand{\arcsen}{{\rm arcsen}}
+\newcommand{\negrito}[1]{\mbox{\boldmath{$#1$}}} 
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\diamonde}{\ensuremath\diamondsuit}
+\newtheorem{defi}{Definição}
+\newtheorem{prop}{Proposição}
+\newtheorem{dem}{Demonstração}
+\newtheorem{coro}{Corolário}
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\setlength{\parindent}{0pt}
+\newcommand{\tn}[1]{\textnormal{#1}} 
+\newcommand{\Hom}{\tn{Hom}}
+\newcommand{\End}{\tn{End}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\rmdefault}{ptm} 
+\newcommand{\spec}{\textrm{Spec}}
+
+%-------------------------------------------------------------
+%Boxes para critérios de correção, caso seja necessário
+
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Criterios}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!75!green}
+    
+%Box padrão    
+\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!white}
+    
+%\mdfdefinestyle{Solução}{%
+%    linecolor=blue,
+%    outerlinewidth=1pt,
+%    roundcorner=8pt,
+%    innertopmargin=4pt%\baselineskip,
+%    innerbottommargin=0pt%\baselineskip,
+%    innerrightmargin=20pt,
+%    innerleftmargin=20pt,
+%    backgroundcolor=white!50!white}
+    
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Aviso}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!green}
+    
+%----------------------------------------------------------------
+%Cores do documento
+\definecolor{Floresta}{rgb}{0.13,0.54,0.13}    
+% \definespotcolor{mygreen}{PANTONE 7716 C}{.83, 0, .00, .51}
+% \definespotcolor{tuti}{}{0.6, 0, 1, .508}
+
+%----------------------------------------------------------------
+%Uso de counters para numeração automática dos exercícios 
+%Para mais infos: https://www.overleaf.com/learn/latex/Counters
+
+\newcounter{exercicio}[section]
+\newenvironment{exercicio}[1][]{\refstepcounter{exercicio}\par\medskip
+ \textcolor{blue}{\bf(\theexercicio)} \rmfamily}{\medskip }
+   
+ \usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+ 
+ \makeatletter 
+ \newcommand{\isempty}[1]{%
+  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+
+% \newcommand{\isempty}[1]{%
+%  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+  
+    
+ 
+ 
+\newenvironment{solucao}[1][]{\textbf{\\ \\ \textcolor{red}{Solução:}}#1 \rmfamily}{\medskip }
+
+
+\newenvironment{criterios}[1][]{
+ \textcolor{blue}{\bf Critérios de Correção:} \rmfamily \par\medskip #1 }{\medskip }
+ 
+\newcommand{\itens}[1]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](1) #1\end{tasks}}
+
+\newcommand{\itensladoalado}[2]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](#1) #2 \end{tasks}}
+
+\newcommand{\alt}[1]{\textcolor{Floresta}{$\negrito{(#1)} $}}
+
+%\newcommand{\alt}[1]{\task[\pers{#1}]}
+
+%\newcommand{\solucao}[1]{
+%\textbf{\\ \\ \textcolor{red}{Solução:}} #1}
+
+%----------------------------------------------------------------
+%Dados da lista:
+
+\newcommand{\titulo}{MAT0120 - Álgebra I para Licenciatura}
+\newcommand{\lista}{Lista 2}
+\newcommand{\professor}{Kostiantyn Iusenko}
+\newcommand{\monitor}{Douglas de Araujo Smigly}
+\newcommand{\semestre}{1º Semestre de 2021}
+%----------------------------------------------------------------
+
+%Mostrar ou não as soluções
+%\SetupExSheets{solution/print=true} %Se print=false, este arquivo Não imprime as soluções.
+\SetupExSheets{solution/print=false}
+
+
+%Solução sem numeração (pois vem logo depois da questão) - se quiser com números, basta comentar os comandos abaixo:
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+  attach = {
+    main[l,vc]title[l,vc](0pt,0pt) ;
+    main[r,vc]points[l,vc](\marginparsep,0pt)
+  }
+}
+
+%  {question}[headings=block-subtitle] - por bloco
+\RenewQuSolPair
+  {question}[headings=block-no-nr]
+  {solution}[headings=block-no-nr]
+
+%Personalização de Questão/ Solução
+\SetupExSheets{
+  counter-format=se.qu.,
+  question/name= ,
+  solution/name=\textcolor{red}{Solução}
+}
+
+%Cabeçalho
+%----------------------------------------------------------------
+\title{\vspace{-15mm}\fontsize{16pt}{10pt}\selectfont\textbf{\titulo} \\ \vspace{5mm} \textbf{\textcolor{Floresta}{\lista}} \PrintSolutionsT{ - \textcolor{blue}{Soluções}}} % Article title
+%\title{\fontsize{16pt}{10pt}{\textbf{MAT0501/MAT6680 - Tópicos de Anéis e Módulos}}
+\author{Professor: \professor \\ Monitor: \monitor}
+\date{\semestre}
+\begin{document}
+\maketitle
+%------------------------------------------------------------
+%Caso queira multicols, só descomentar as linhas abaixo 
+%e lembrar de colocar \end{multicols*} no final do documento
+%e columnbreak se quiser criar uma nova coluna
+
+%\begin{multicols*}{2}
+%\setlength{\columnseprule}{0.78pt}
+%\raggedcolumns
+%\columnbreak
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%
+% Exemplos de exercícios:
+%
+%------------------------------------------------------------
+\section{Divisibilidade}
+%Questão simples
+\begin{exercicio}
+Mostre que um número inteiro $a$ é par se e somente se $a^2$ for par.
+\end{exercicio}
+\begin{solution}
+$\left(  \Rightarrow  \right)$\\
+Suponha que $a$ é par. Então, existe um inteiro $k$ tal que $a = 2k.$ Dessa forma,
+$$a=2k \Rightarrow a^{2}=4k^{2}=2\left( 2k^{2} \right) \quad k \in \mathbb{Z}.$$
+Logo, se  $a$ é par, então $a^{2}$ também é.
+
+$\left(  \Leftarrow  \right)$\\
+Para verificar que se $a^2$ é par, então $a$ é par, podemos provar a contra-positiva: se $a$ é ímpar, então $a^{2}$ é ímpar. De fato:
+$$a=2k+1 \Rightarrow a^{2}=4k^{2}+4k+1=2 \left( 2k^{2}+2k \right) +1=2q+1 \quad q \in \Z.$$
+\end{solution}
+\begin{exercicio}
+Mostre que o produto de três inteiros consecutivos é divisível por $6$ e que o produto de quatro inteiros consecutivos é divisível por $24.$ 
+\end{exercicio}
+\begin{solution}
+Seja $ x=n \left( n+1 \right)  \left( n+2 \right)$ o produto de três números consecutivos. Precisamos provar que $ 6 \mid x $. De fato, em três números consecutivos, temos no mínimo um número par e apenas um número múltiplo de $3$, logo, o produto é múltiplo de  $6$.
+
+No entanto, vamos provar utilizando o algoritmo da divisão, onde $n=6k+r$ para $k \in \Z$ e $r \in  \left\{ 0,1,2,3,4,5 \right\}$.
+
+\begin{itemize}
+	\item  $ n=6k \Rightarrow x=6k \left( 6k+1 \right)  \left( 6k+2 \right)  \Rightarrow 6 \mid x$;
+	\item  $n=6k+1 \Rightarrow x= \left( 6k+1 \right)  \left( 6k+2 \right)  \left( 6k+3 \right) =6 \left( 6k+1 \right)  \left( 3k+1 \right)  \left( 2k+1 \right)  \Rightarrow 6 \mid x$;
+	\item $n=6k+2 \Rightarrow x= \left( 6k+2 \right)  \left( 6k+3 \right)  \left( 6k+4 \right) =6 \left( 3k+1 \right)  \left( 2k+1 \right)  \left( 6k+4 \right)  \Rightarrow 6 \mid x$;
+	\item  $n=6k+3 \Rightarrow x= \left( 6k+3 \right)  \left( 6k+4 \right)  \left( 6k+5 \right) =6 \left( 2k+1 \right)  \left( 3k+2 \right)  \left( 6k+5 \right)  \Rightarrow 6 \mid x$;
+	\item  $n=6k+4 \Rightarrow x= \left( 6k+4 \right)  \left( 6k+5 \right)  \left( 6k+6 \right) =6 \left( 6k+4 \right)  \left( 6k+5 \right)  \left( k+1 \right)  \Rightarrow 6 \mid x$;
+	\item  $n=6k+5 \Rightarrow x= \left( 6k+5 \right)  \left( 6k+6 \right)  \left( 6k+7 \right) =6 \left( 6k+5 \right)  \left( k+1 \right)  \left( 6k+7 \right)  \Rightarrow 6 \mid x$.
+\end{itemize}
+Em todos os casos, concluímos que $6$ divide o produto de três números inteiros consecutivos.\\ \\
+Seja  $y=n \left( n+1 \right)  \left( n+2 \right)  \left( n+3 \right)$ o produto de quatro números consecutivos. Precisamos provar que $24 \mid y$. De fato, em quatro números consecutivos, temos obrigatoriamente dois pares e dois ímpares. Dentre os pares, um deles é múltiplo de $2$  enquanto o outro é múltiplo de  $4$, logo, o produto é múltiplo de $8$ e, dentre os ímpares, um dos dois é obrigatoriamente múltiplo de $3$.
+
+Como, pelo item (a), $6 \mid n \left( n+1 \right)  \left( n+2 \right)$, então  $6 \mid y$, logo  $3 \mid y$. Além disso, como $\mdc \left( 3,8 \right) =1$, temos que $24 \mid y \Leftrightarrow 3 \mid y\ \mbox{ e } \ 8 \mid y$. 
+
+Vamos provar que $8 \mid y$. Para isso, basta analisar o comportamento de $y$ para os restos da divisão de $n$ por $4.$
+
+Pelo algoritmo da divisão, temos que $n=4k+r$  para $k \in \Z$ e  $r \in  \left\{0, 1, 2, 3 \right\}$.
+
+\begin{itemize}
+	\item $n=4k.$ Nesse caso, temos que:
+	\begin{align*}
+	     y=n(n+1)(n+2)(n+3) &= 4k \left( 4k+1 \right)  \left( 4k+2 \right)  \left( 4k+3 \right) \\&= 8 \textcolor{RawSienna}{k\left( 4k+1 \right)  \left( 2k+1 \right)  \left( 4k+3 \right)} \\&= 8\textcolor{RawSienna}{q}, q \in \mathbb{Z}
+	\end{align*}
+	Logo, $8 \mid x$ para $n = 4k.$
+	\item  $n=4k+1.$ Nesse caso,
+	\begin{align*}
+	     y=n(n+1)(n+2)(n+3) &= \left( 4k+1 \right)  \left( 4k+2 \right)  \left( 4k+3 \right)  \left( 4k+4 \right) \\&= 8 \textcolor{RawSienna}{\left( 4k+1 \right)  \left( 2k+1 \right)  \left( 4k+3 \right)  \left( k+1 \right) } \\&= 8\textcolor{RawSienna}{q}, q \in \mathbb{Z}
+	\end{align*}
+	Logo, $8 \mid x$ para $n = 4k+1.$	
+
+	\item $n=4k+2.$ Nesse caso, temos que:
+	
+	\begin{align*}
+	     y=n(n+1)(n+2)(n+3) &= \left( 4k+2 \right)  \left( 4k+3 \right)  \left( 4k+4 \right)  \left( 4k+5 \right) \\&= 8 \textcolor{RawSienna}{\left( 2k+1 \right)  \left( 4k+3 \right)  \left( k+1 \right)  \left( 4k+5 \right)  } \\&= 8\textcolor{RawSienna}{q}, q \in \mathbb{Z}
+	\end{align*}
+	Logo, $8 \mid x$ para $n = 4k+2.$
+	
+	\item $n=4k+3.$Nesse caso, temos que:
+	
+	\begin{align*}
+	     y=n(n+1)(n+2)(n+3) &=  \left( 4k+3 \right)  \left( 4k+4 \right)  \left( 4k+5 \right)  \left( 4k+6 \right) \\&= 8 \textcolor{RawSienna}{ \left( 4k+3 \right)  \left( k+1 \right)  \left( 4k+5 \right)  \left( 2k+3 \right) } \\&= 8\textcolor{RawSienna}{q}, q \in \mathbb{Z}
+	\end{align*}
+	Logo, $8 \mid x$ para $n = 4k+2.$
+\end{itemize}
+
+Em todos os casos, concluímos que $24$ divide o produto de quatro números inteiros consecutivos.
+
+\end{solution}
+\begin{exercicio}
+Mostre que $4 \nmid n^2+2$ para qualquer inteiro $n$.
+\end{exercicio}
+\begin{solution}
+Pelo algoritmo da divisão, $ n=2k+r;k \in \Z$  e  $r \in  \left\{0, 1 \right\}$. Testemos ambos os casos:
+\begin{itemize}
+	\item $n=2k \Rightarrow n^{2}+2=4k^{2}+2 \Rightarrow 4\nmid n^{2}+2$ pois $4\mid4k^{2}\ \mbox{ e } \ 4\nmid 2$;
+	\item $n=2k+1 \Rightarrow n^{2}+2=4k^{2}+4k+3 \Rightarrow 4\nmid n^{2}+2$ pois $4\mid\left( 4k^{2}+4k \right)\ \mbox{ e } \ 4\nmid 3$.
+\end{itemize}
+Assim, concluímos que $4 \nmid n^2 + 2.$
+\end{solution}
+
+\begin{exercicio}
+ Prove que se $a\in \mathbb Z$, então $360 \mid a^2(a^2-1)(a^2-4)$.
+\end{exercicio}
+\begin{solution}
+Seja $x=a^{2} \left( a^{2}-1 \right)  \left( a^{2}-4 \right) =\underbrace{\left( a-2 \right)  \left( a-1 \right) a \left( a+1 \right)  \left( a+2 \right) }_{\text{cinco números consecutivos}}a$.
+
+Para provar que $360 \mid x$, podemos verificar que $5 \mid x, 9 \mid x$ e $8 \mid x,$ pois $\mdc(5,8,9) = 1$ e $5 \cdot 8 \cdot 9 = 360.$
+
+Analisemos $x$ para cada caso:
+\begin{itemize}
+    \item $5 \mid x:$ Pelo algoritmo da divisão, $a=5k+r;k \in \Z$ e  $r \in  \left\{0, 1, 2, 3, 4 \right\}$. Assim:
+\begin{itemize}
+	\item $a=5k \Rightarrow 5 \mid x$;
+	\item $a=5k+1 \Rightarrow  \left( a-1 \right) =5k \Rightarrow 5 \mid x$;
+	\item $a=5k+2 \Rightarrow  \left( a-2 \right) =5k \Rightarrow 5 \mid x$;
+	\item $a=5k+3 \Rightarrow  \left( a+2 \right) =5k+5=5 \left( k+1 \right)  \Rightarrow 5 \mid x$;
+	\item $a=5k+2 \Rightarrow  \left( a-2 \right) =5k \Rightarrow 5 \mid x$.
+\end{itemize}
+Logo, $5 \mid x $.
+
+
+\item $9 \mid x:$ Novamente, pelo algoritmo da divisão, $ a=3k+r;k \in \Z$ e $r \in  \left\{0, 1, 2 \right\}$.
+\begin{itemize}
+	\item $a=3k \Rightarrow a^{2}=9 \Rightarrow 9 \mid x$;
+	\item $a=3k+1 \Rightarrow  \left( a-1 \right)  \left( a+2 \right) =9k \left( k+1 \right)  \Rightarrow 9 \mid x$;
+	\item $a=3k+2 \Rightarrow  \left( a-2 \right)  \left( a+1 \right) =9k \left( k+1 \right)  \Rightarrow 9 \mid x$.
+\end{itemize}
+Logo, $3 \mid x.$
+
+\item $8 \mid x:$ Como pelo exercício 2 sabemos que 8 divide 4 números consecutivos, então  $8 \mid x$.
+\end{itemize}
+
+Portanto, temos que
+$$5 \mid x \mbox{ e }  9 \mid x\ \mbox{ e }  8 \mid x \Rightarrow \mmc\left(5, 9, 8\right) \mid x \Rightarrow 360 \mid x.$$
+\end{solution}
+\begin{exercicio}
+ Seja $a$ um inteiro. Mostre que: 
+\itens{
+	\task[\alt{a}] $a^2-a$ é divisível por $2$;
+	\task[\alt{b}] $a^3-a$ é divisível por $6$;
+	\task[\alt{c}] $a^5-a$ é divisível por $30$.
+}
+%\textbf{Observação:} Podemos conjecturar que $a^p - a$ é divisível por $p(p+1)$ se $p$ é primo? Dica: $a^{13} - a$ é divisível por $78.$
+\end{exercicio}
+\begin{solution}
+\itens{ 
+\task[\alt{a}] Seja $x=a^{2}-a=a \left( a-1 \right)$. Usando o algoritmo da divisão, podemos escrever $a=2k+r;k \in \Z$ e $r \in  \left\{ 0, 1 \right\}$. Temos então:
+    \begin{itemize}
+     	\item $n=2k \Rightarrow a \left( a-1 \right) =2k \left( 2k-1 \right)  \Rightarrow 2\mid a^{2}-a$;
+     	\item $n=2k+1 \Rightarrow a \left( a-1 \right) =2k \left( 2k+1 \right)  \Rightarrow 2\mid a^{2}-a$.
+    \end{itemize}
+    Em ambos os casos, concluímos que $a^2 - a$ é divisível por $2.$
+    
+\task[\alt{b}] Seja $x=a^{3}-a= \left( a-1 \right) a \left( a+1 \right)$. Provamos no exercício 2 que $6$ divide três números consecutivos. Logo, $a^3 -a$ é divisível por $6.$
+    
+\task[\alt{c}] Seja 
+
+\begin{align*} 
+x=a^{5}-a&=a \textcolor{Cyan}{\left( a^{4}-1 \right)} \\&= a \textcolor{Cyan}{\left( a^2 -1\right) \left(a^2 + 1\right)} \\&= a \left(a^2 + 1\right) \textcolor{PineGreen}{\left(a^2 - 1\right)} \\&= a \left(a^2 + 1\right) \textcolor{PineGreen}{(a+1)(a-1)} \\&= \left( a-1 \right) a \left( a+1 \right)  \left( a^{2}+1 \right).
+\end{align*}
+
+Pelo exercício 2, sabemos que $6 \mid x,$ pois um dos fatores de $x$ é o produto de três números inteiros consecutivos. Como $6 \cdot 5 = 30$ e $\mdc(5,6) = 1,$ resta verificar que $5 \mid x.$
+
+    Pelo algoritmo da divisão, $a=5k+r;k \in \Z$ e $r \in  \left\{0, 1, 2, 3, 4 \right\}$. Analisando cada uma das situações possíveis:
+
+    \begin{itemize}
+        \item $a=5k \Rightarrow 5 \mid x$;
+    	\item $a=5k+1 \Rightarrow  \left( a-1 \right) =5k \Rightarrow 5 \mid x$;
+    	\item $a=5k+2 \Rightarrow  \left( a^{2}+1 \right) =5 \left( 5k^{2}+4k+1 \right)  \Rightarrow 5 \mid x$;
+    	\item $a=5k+3 \Rightarrow  \left( a^{2}+1 \right) =5 \left( 5k^{2}+6k+2 \right)  \Rightarrow 5 \mid x$;
+    	\item $a=5k+4 \Rightarrow  \left( a+1 \right) =5 \left( k+1 \right)  \Rightarrow 5 \mid x$.
+    \end{itemize}
+    Assim:
+     $$5 \mid x\ \mbox{ e } 6 \mid x \Rightarrow \mmc \left( 5,6 \right) \mid x \Rightarrow 30 \mid x.$$
+}
+\end{solution}
+\begin{exercicio}
+ Mostre que todo inteiro do forma $6k+5$ é também da forma $3k+2$, mas o contrário é falso.
+\end{exercicio}
+\begin{solution}
+Temos que \[6k+5=2\cdot3k+3+2=3 \left( 2k+1 \right) +2=3k'+2;k' \in \Z.\] 
+
+Vejamos um número da forma $3k + 2$ que não é da forma $6k+ 5.$ Um deles é $8=3\cdot2+2=6\cdot1+2$.
+
+Na verdade, os números da forma $3k+2$ que não são da forma $6k+5$ são
+\[
+2,8,14,20,26,32,38,44,50,56, \ldots
+\]
+que correspondem justamente aos números na forma $6k-2.$
+\end{solution}
+
+\begin{exercicio}
+ Usando o Algoritmo da Divisão, mostre que: 
+\itens{
+	\task[\alt{a}] todo inteiro ímpar é da forma $4k+1$ ou $4k+3$;
+	\task[\alt{b}] o quadrado de todo inteiro é da forma ou $3k$ ou $3k+1$;
+    \task[\alt{c}] o cubo de todo inteiro é da forma $9k$ ou $9k+1$ ou $9k+8$;
+    \task[\alt{d}] o cubo de todo inteiro é da forma $7k$ ou $7k+1$ ou $7k+6.$
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}] Se $n$ é um inteiro ímpar, então deve ser da forma $2p+1.$ Pelo algoritmo da divisão, $p=2k+r;k \in \Z$ e $r \in  \left\{ 0, 1 \right\}$. Analisando os possíveis casos, temos:
+    \begin{itemize}
+        \item $p=2k \Rightarrow n=4k+1$;
+        \item $p=2k+1 \Rightarrow n=4k+3$.
+    \end{itemize}
+	Logo, concluímos que $n$ é da forma $4k+1$ ou $4k+3$.
+	\task[\alt{b}] Pelo algoritmo da divisão, $n=3p+r;p \in \Z$ e $r \in  \left\{ 0, 1, 2 \right\}$. Assim,
+	
+	\begin{itemize}
+	    \item $n=3p \Rightarrow n^{2}=3\cdot \left( 3p^{2} \right) =3k;k \in \Z$;
+	    \item $n=3p+1 \Rightarrow n^{2}=3\cdot \left( 3p^{2}+2p \right) +1=3k+1;k \in \Z$;
+	    \item $n=3p+2 \Rightarrow n^{2}=3\cdot \left( 3p^{2}+4p+1 \right) +1=3k+1;k \in \Z$.
+	\end{itemize}
+	Logo, quadrado de todo inteiro é do forma ou $3k$ ou $3k+1$.
+	\task[\alt{c}] Pelo algoritmo da divisão, $n=3p+r;p \in \Z$ e $r \in \left\{0, 1, 2 \right\}$.
+	\begin{itemize}
+	    \item $n=3p \Rightarrow n^{3}=9\cdot \left( 3p^{3} \right) =9k;k \in \Z$;
+	    \item $n=3p+1 \Rightarrow n^{3}=9\cdot \left( 3p^{3}+3p^{2}+p \right) +1=9k+1;k \in \Z$;
+	    \item $n=3p+2 \Rightarrow n^{3}=9\cdot \left( 3p^{3}+6p^{2}+4p \right) +8=9k+8;k \in \Z$.
+	\end{itemize}
+	Logo, o cubo de todo inteiro é do forma $9k$ ou $9k+1$ ou $9k+8$.
+	\task[\alt{d}] Pelo algoritmo da divisão, $n=7p+r;p \in \Z$ e $r \in \left\{0, 1, 2, 3, 4, 5,6 \right\}$.
+	\begin{itemize}
+	    \item $n=7p \Rightarrow n^{3}=7\cdot \left( 49p^{3} \right) =7k;k \in \Z$;
+	    \item $n=7p+1 \Rightarrow n^{3}=7\cdot \left( 49p^3+21p^2+3p \right) +1=7k+1;k \in \Z$;
+	    \item $n=7p+2 \Rightarrow n^{3}=7\cdot \left( 49p^{3}+42p^{2}+12p + 1\right) +1=7k+1;k \in \Z$.
+	    \item $n=7p+3 \Rightarrow n^{3}=7\cdot \left( 49p^{3}+63p^{2}+27p + 3\right) +6=7k+6;k \in \Z$.
+	    \item $n=7p+4 \Rightarrow n^{3}=7\cdot \left( 49p^{3}+84p^{2}+48p + 9\right) +1=7k+1;k \in \Z$.
+	    \item $n=7p+5 \Rightarrow n^{3}=7\cdot \left( 49p^{3}+105p^{2}+75p + 17\right) +6=7k+6;k \in \Z$.
+	    \item $n=7p+6 \Rightarrow n^{3}=7\cdot \left( 49p^{3}+126p^{2}+108p + 30\right) +6=7k+6;k \in \Z$.
+	\end{itemize}
+	Logo, o cubo de todo inteiro é do forma $7k$ ou $7k+1$ ou $7k+6$.
+}
+\end{solution}
+
+\begin{exercicio}
+ Prove que nenhum inteiro da sequência $11, 111, 1111, \ldots$ é um quadrado perfeito.
+ 
+ \textsf{[Dica:] Mostre que todo número quadrado perfeito é da forma $4k$ ou $4k+1.$}
+\end{exercicio}
+\begin{solution}
+Observe inicialmente que 
+\[
+\underbrace{11\ldots 11}_{n \text{ números }1} = \dfrac{10^n-1}{9}
+\]
+Agora, podemos escrever que 
+\[
+10^n - 1 = (10 - 1)(10^{n-1} + 10^{n-2} + \ldots + 10 + 1).
+\]
+Logo, 
+\[ \dfrac{10^n-1}{9} = \dfrac{(10 - 1)(10^{n-1} + 10^{n-2} + \ldots + 10 + 1)}{9} = 10^{n-1} + 10^{n-2}  \ldots + 10 + 1.\]
+
+Vamos analisar os restos da divisão de um número da forma $1 \ldots 1$ por 4. Da expressão acima, observe que, como $10 = 2 \cdot 5,$ então, se $\eta > 1,$ temos que
+\[
+10^{\eta} = (2 \cdot 5)^{\eta} = \textcolor{RawSienna}{2^{\eta}} \cdot 5^{\eta} =\textcolor{RawSienna}{ 2^2 \cdot 2^{\eta - 2}} \cdot 5^{ \eta} = 4 \cdot  2^{\eta - 2} \cdot 5^{ \eta}
+\]
+Assim, concluímos que $4 \mid 10^{\eta}$ para todo $\eta > 1.$ Dessa forma, temos
+\begin{align*}\textcolor{Plum}{10^{n-1}} + \textcolor{OrangeRed}{10^{n-2}}  \ldots \textcolor{NavyBlue}{100} + 10 + 1 &= \textcolor{Plum}{4(2^{n-3} \cdot 5^{n-1})} + \textcolor{OrangeRed}{4(2^{n-4} \cdot 5^{n-3})} + \ldots + \textcolor{NavyBlue}{4(2^0 \cdot 5^2)} + 10 + 1 \\&= 4(2^{n-3} \cdot 5^{n-1} + 2^{n-4} \cdot 5^{n-3} + \ldots + 2^0 \cdot 5^2) + \textcolor{Periwinkle}{11}
+\\&= 4(2^{n-3} \cdot 5^{n-1} + 2^{n-4} \cdot 5^{n-3} + \ldots + 2^0 \cdot 5^2) + \textcolor{Periwinkle}{8+3}
+\\&= 4\textcolor{Green}{(2^{n-3} \cdot 5^{n-1} + 2^{n-4} \cdot 5^{n-3} + \ldots + 2^0 \cdot 5^2 + 2)} + 3 \\&= 4 \textcolor{Green}{k} + 3
+\end{align*}
+Ou seja, qualquer número da sequência  $11, 111, 1111, \ldots$ é da forma $4k+3.$ Vamos mostrar que um número quadrado perfeito não pode ser escrito nessa forma. Para isso, vamos utilizar o algoritmo da divisão.
+
+   Devemos ter $a=4k+r;k \in \Z$ e $r \in  \left\{0, 1, 2, 3, 4 \right\}$. Analisando cada uma das situações possíveis:
+
+    \begin{itemize}
+        \item $a=4k \Rightarrow a^2 = (4k)^2 = 16k^2 = 4\textcolor{Cyan}{(4k^2)} = 4\textcolor{Cyan}{q};$
+    	\item $a=4k+1 \Rightarrow a^2 = (4k+1)^2 = 16k^2 + 8k + 1 = 4\textcolor{Cyan}{(4k^2 + 2k)} + 1 = 4\textcolor{Cyan}{q} + 1;$
+         \item $a=4k+2 \Rightarrow a^2 = (4k+2)^2 = 16k^2 + 16k + 4 = 4\textcolor{Cyan}{(4k^2 + 4k + 1)} = 4\textcolor{Cyan}{q};$
+    	\item $a=4k+3 \Rightarrow a^2 = (4k+3)^2 = 16k^2 + 24k + 9 = 4\textcolor{Cyan}{(4k^2 + 6k + 2)} + 1 = 4\textcolor{Cyan}{q} + 1.$ 
+    \end{itemize}
+    
+    Assim, os possíveis restos na divisão por $4$ de um número quadrado perfeito são $0$ e $1.$ Como o resto na divisão por $4$ em um número na sequência é sempre 3, concluímos que nenhum desses termos pode ser um número quadrado perfeito.
+  
+\textbf{\textcolor{Red}{Solução Alternativa:}} O Critério de Divisibilidade por $4$ afirma que um número é divisível por $4$ se, e somente se, os dois últimos algarismos formarem um número divisível por $4$. Observe que cada termo da sequência pode ser escrito na forma
+\[
+111\ldots 111\textcolor{Green}{08} + 3
+\]
+Como $4 \mid \textcolor{Green}{08},$ concluímos que qualquer número na sequência é da forma $4k+3,$ e o quadrado de todo inteiro é da forma $4k$ ou $4k+1,$ sendo impossível essa situação.
+\end{solution}
+
+
+\begin{exercicio}
+ Para $n\geq 1$, mostre que $\displaystyle \frac{n(n+1)(2n+1)}{6}$ é um inteiro. 
+ 
+\textsf{[Dica:]} Usando o Algoritmo da Divisão, $n$ tem a forma $6k$ ou $6k+1$ ou $\cdots$ ou $6k+5$. Mostre o resultado em todos os casos.
+\end{exercicio}
+ \begin{solution}
+ Seja $\displaystyle x=\frac{n \left( n+1 \right)  \left( 2n+1 \right) }{6}$. Pelo algoritmo da divisão, $n=6p+r;p \in \Z$ e $r \in  \left\{ 0, 1, 2, 3, 4, 5 \right\}$. Analisemos os possíveis casos:
+
+\begin{itemize}
+	\item $n=6p \Rightarrow x=k \left( 6k+1 \right)  \left( 12k+1 \right)  \in \Z$;
+	\item $n=6p+1 \Rightarrow x= \left( 6k+1 \right)  \left( 3k+1 \right)  \left( 4k+1 \right)  \in \Z$;
+	\item $n=6p+2 \Rightarrow x= \left( 3k+1 \right)  \left( 2k+1 \right)  \left( 12k+5 \right)  \in \Z$;
+	\item $n=6p+3 \Rightarrow x= \left( 2k+1 \right)  \left( 3k+2 \right)  \left( 12k+7 \right)  \in \Z$;
+	\item $n=6p+4 \Rightarrow x= \left( 3k+2 \right)  \left( 6k+5 \right)  \left( 4k+3 \right)  \in \Z$;
+	\item $n=6p+5 \Rightarrow x= \left( 6k+5 \right)  \left( k+1 \right)  \left( 12k+1 \right)  \in \Z$. 
+\end{itemize}
+Em todos os casos, concluímos que $\dfrac{n(n+1)(2n+1)}{6}$ é um inteiro. 
+
+
+ \textbf{\textcolor{Red}{Solução Alternativa:}} Na lista 1, provamos que 
+ \[
+ \sum\limits_{k=1}^n k^2 = 1^2 + 2^2 + \ldots + n^2 = \dfrac{n(n+1)(2n+1)}{6}
+ \]
+ Assim, sendo $\frac{n(n+1)(2n+1)}{6}$ uma soma de números quadrados perfeitos, segue que este valor é um inteiro.
+ \end{solution}
+\begin{exercicio}
+Verifique que se um inteiro $n$ é um quadrado e um cubo simultaneamente (como no caso $64=8^2=4^3$), então $n$ é da forma $7k$ ou $7k+1$.
+\end{exercicio}
+
+\begin{solution}
+Seja $n$ um número que é um quadrado e um cubo simultaneamente. Assim, $\exists a,b \in \Z$ tais que $n=a^{2}=b^{3}$.
+
+Pelo algoritmo da divisão, temos que $x=7p+r;p \in Z$ e $r \in  \left\{ 0, 1, 2, 3, 4, 5, 6 \right\}$. Analisando as situações:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{$x$} & \textbf{$x^2$}          & \textbf{$x^3$}                   \\ \hline
+$7p$         & $7(7p^2)=7k$            & $7(49p^3)=7k$                    \\ \hline
+$7p+1$       & $7(7p^2+2p)+1=7k+1$     & $7(49p^3+21p^2+3p)+1=7k+1$       \\ \hline
+$7p+2$       & $7(7p^2+4p)+4=7k+4$     & $7(49p^3+42p^2+12p+1)+1=7k+1$    \\ \hline
+$7p+3$       & $7(7p^2+6p+1)+2=7k+2$   & $7(49p^3+63p^2+27p+3)+6=7k+6$    \\ \hline
+$7p+4$       & $7(7p^2+8p+2)+2=7k+2$   & $7(49p^3+84p^2+48p+9)+1=7k+1$    \\ \hline
+$7p+5$       & $7(7p^2+10p+21)+4=7k+4$ & $7(49p^3+105p^2+75p+17)+6=7k+6$  \\ \hline
+$7p+6$       & $7(7p^2+12p+35)+1=7k+1$ & $7(49p^3+126p^2+108p+30)+6=7k+6$ \\ \hline
+\end{tabular}
+\end{table}
+
+Assim, o resto da divisão de $a^2$ por $7$ pertence ao conjunto $\left\{0,1,2,4\right\}$ e o resto da divisão de $b^3$ por $7$ pertence ao conjunto $\left\{0,1,6\right\}$. Logo, se o número for simultaneamente quadrado e cubo perfeito, seu resto na divisão por $7$ pertence ao conjunto $\left\{0,1,2,4\right\} \cap \left\{0,1,6\right\} = \left\{0,1\right\}$  Assim, $x$ é do tipo $7k$ ou $7k+1$.
+\end{solution}
+%\newpage
+\begin{exercicio}
+ Seja $n$ um inteiro positivo. Prove por indução que:  
+\itensladoalado{3}{
+	\task[\alt{a}]  $7\mid 2^{3n}-1$.
+	\task[\alt{b}] $8\mid 3^{2n}+7$.
+	\task[\alt{c}] $3\mid 2^n+(-1)^{n+1}$.
+}
+
+
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}] Nosso caso \textbf{base} será $n=1.$ Temos
+	}
+    $$2^{3\cdot1}-1=8-1=7=1\cdot7.$$
+    Como \textbf{hipótese}, assuma que a afirmação é válida para $n=k>1$, os seja,
+    $$2^{3k}-1=7p;p \in \Z$$
+    Provemos que é válido como \textbf{passo indutivo} para $n=k+1:$
+    \begin{align*}
+    2^{3 \left( k+1 \right) }-1&=2^{3k}\cdot2^{3}-1\\&=8 \cdot 2^{3k} -1 \\&= \textcolor{Magenta}{2^{3k}-1}+7\cdot2^{3k}\\&=\textcolor{Magenta}{7p}+7\cdot2^{3k}\\&=7 \textcolor{RawSienna}{\left( p+2^{3k} \right)} =7\textcolor{RawSienna}{q};\quad q \in \Z.
+    \end{align*}
+    
+    
+    \itens{
+	\task[\alt{b}] Para o \textbf{caso base} $n=1$,
+    $$3^{2\cdot1}+7=9+7=16=2\cdot8$$
+    Suponha por \textbf{hipótese} que para $n=k>1,$ tenhamos
+    $$3^{2k}+7=8p;p \in \Z$$
+    Vejamos que a divisibilidade ocorre para $n=k+1,$ compreendendo o \textbf{passo indutivo}:
+    \begin{align*}
+    3^{2 \left( k+1 \right) }+7&=3^{2k}\cdot3^{2}+7\\&=9 \cdot 3^{2k}+7\\&=\textcolor{Magenta}{3^{2k}+7}+8\cdot3^{2k}\\&=\textcolor{Magenta}{8p}+8\cdot3^{2k}=8 \textcolor{RawSienna}{\left( p+3^{2k} \right)} =8\textcolor{RawSienna}{q}; \quad q \in \Z.
+    \end{align*}
+
+ 
+\task[\alt{c}] 
+    Para o \textbf{caso base} $n=1$,
+    $$2^{1}+ \left( -1 \right) ^{1+1}=2+1=3=1\cdot3$$
+    Suponha por \textbf{hipótese} que para $n=k>1,$ tenhamos 
+    $$2^{k}+ \left( -1 \right) ^{k+1}=3p;p \in \Z$$
+    $$2^{k-1}+ \left( -1 \right) ^{k}=3p';p' \in \Z$$
+    Vejamos que a divisibilidade ocorre para $n=k+1,$ compreendendo o \textbf{passo indutivo}:
+    \begin{align*}
+    2^{k+1}+ \left( -1 \right) ^{k+2}&=2^{k}\cdot2^{1}+(-1) \left( -1 \right) ^{k+1}\\&=2^{k}\cdot2^{1}- \left( -1 \right) ^{k+1} \\&=\textcolor{Magenta}{2^{k}+ \left( -1 \right) ^{k+1}}+2^{k}-2 \left( -1 \right) ^{k+1}\\&=
+    \textcolor{Magenta}{3p}+2 \textcolor{Magenta}{\left( 2^{k-1}- \left( -1 \right) ^{k} \right)} \\&=3p+2\cdot3\textcolor{Magenta}{p'}=3 \textcolor{RawSienna}{\left( p+2p^{\prime} \right)} =3\textcolor{RawSienna}{q}; \quad q \in \Z
+    \end{align*}
+}
+\end{solution}
+\begin{exercicio}
+ Sejam $x,y$ inteiros ímpares. Mostre que $x^2+y^2$ é par mas não é divisível por $4$.
+\end{exercicio}
+\begin{solution}
+Se um número é par mas não é divisível por $4,$ isso significa que ele deve ser da forma $4q +2,$ com $q$ inteiro. Buscaremos então mostrar que $x^2 + y^2$ possui essa forma.
+
+Sejam $x=2k+1;k \in \Z$ e $y=2\ell+1;\ell \in \Z.$ Então
+
+\begin{align*}x^{2}+y^{2}&=\textcolor{Blue}{(2k+1)^2} + \textcolor{Green}{(2\ell + 1)^2} \\&= \textcolor{Blue}{4k^2 + 4k + 1} + \textcolor{Green}{4\ell^2 + 4\ell + 1} \\&= 2 \left( 2k^{2}+2\ell^2+2k+2\ell+1 \right) \\&=4 \textcolor{RawSienna}{\left( k^{2}+\ell^2+k+\ell \right) }+2 \\&= 4\textcolor{RawSienna}{q} + 2.
+\end{align*}
+Assim, $x^2+y^2$ é par mas não é divisível por $4$.
+\end{solution}
+\begin{exercicio}
+ Encontre todos os valores de $n$ tais que $n^2+1$ é divisível por $n+1$.
+\end{exercicio}
+\begin{solution}
+Vamos primeiramente observar as relações existentes entre $n^2 + 1$ e $n + 1.$ Como estamos analisando a divisibilidade desses termos, utilizemo-nos do algoritmo da divisão de $n^2 + 1$ por $n + 1.$ Podemos escrever que $n^2 + 1 = (n+1)q + r,$ onde $q \in \mathbb{Z}$ e $r \in \{0, 1, \ldots, n \}.$ Vejamos agora as possibilidades para $q$ e $r.$  Para isso, observe que
+$$n^{2}+1=(n^2-1)+2=(n+1)(n-1)+2$$
+Ou seja, $q = (n-1)$ e $r = 2.$ Assim, $n+1$ divide $(n^2+1)$ se e somente se $n+1$ divide $2$ (já que claramente $n+1$ divide $(n+1)(n-1)$), e portanto, como $D(2) = \{ \pm 1, \pm 2 \},$ temos 4 possibilidades:
+\begin{itemize}
+    \item $n + 1 = 2 \Rightarrow n = 1;$
+    \item $n + 1 = -2 \Rightarrow n = -3;$ 
+    \item $n + 1 = 1 \Rightarrow n = 0;$ 
+    \item $n + 1 = -1 \Rightarrow n = -2.$ 
+\end{itemize}
+Assim, os valores de $n$ tais que $n^2+1$ é divisível por $n+1$ são $-2, -3, 0$ e $1.$
+\end{solution}
+\begin{exercicio}
+ Mostre que se $7\mid a^2+b^2$ então $7\mid a$ e $7\mid b$.
+\end{exercicio}
+\begin{solution}
+Vamos primeiramente observar quais são os possíveis restos da divisão de um número quadrado perfeito por $7.$
+
+Dado $n,$ queremos analisar o comportamento de 
+$n^2$ na divisão por $7.$ Pelo algoritmo da divisão, temos que $n=7p+r;p \in \Z$ e  $r \in  \left\{ 0, 1, 2, 3, 4, 5, 6 \right\}.$
+
+Dessa forma,
+\begin{itemize}
+	\item $n = 7p \Rightarrow n^2 = 49p^2 = 7 \left( 7p^{2} \right) =7k$;
+	\item $n = 7p + 1 \Rightarrow n^2 = 7 \left( 7p^{2}+2p \right) +1=7k+1$;
+	\item  $n = 7p + 2 \Rightarrow n^2 = 7 \left( 7p^{2}+4p \right) +4=7k+4$;
+	\item  $n = 7p + 3 \Rightarrow n^2 = 7 \left( 7p^{2}+6p+1 \right) +2=7k+2$;
+	\item  $n = 7p + 4 \Rightarrow n^2 = 7 \left( 7p^{2}+8p+2 \right) +2=7k+2$;
+	\item  $n = 7p + 5 \Rightarrow n^2 = 7 \left( 7p^{2}+10p+21 \right) +4=7k+4$;
+	\item  $n = 7p + 6 \Rightarrow n^2 = 7 \left( 7p^{2}+12p+35 \right) +1=7k+1$; 
+\end{itemize}
+
+Note que o quadrado de um número, quando dividido por $7$, deixa resto $0, 1, 2$ ou $4$. De todas combinações possíveis para a soma de dois quadrados, a única que deixa resto múltiplo de $7$ é se pegarmos dois números da forma $7k$. Assim:
+$$7\mid a^{2}+b^{2} \Leftrightarrow 7\mid a\ \mbox{ e } 7\mid b$$
+\end{solution}
+\begin{exercicio}
+ Prove que $a^3 + b^3 + 4$ não é um cubo perfeito quaisquer que sejam os números naturais $a$ e $b.$
+\end{exercicio}
+\begin{solution}
+Vamos analisar a equação pensando nos restos da divisão de $a$ e $b$ por $9.$ Pelo item (c) da questão 7, o cubo de todo inteiro é da forma $9k, 9k+1$ ou $9k+6.$ Assim, $a^3$ e $b^3$ devem ter alguma dessas formas. A tabela abaixo mostra a forma de $a^3 + b^3 + 4$ para cada caso:
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{$a^3$} & \textbf{$b^3$}          & \textbf{$a^3 + b^3 + 4$}                   \\ \hline
+$9k$         & $9k$            & $9k+9k+4 = 9(2k)+4$                    \\ \hline
+$9k$       & $9k+1$     & $9k+9k+1+4 = 9(2k)+5$ \\ \hline
+$9k$       & $9k+8$     & $9k+9k+8+4 = 9(2k+1)+3$ \\ \hline
+$9k+1$       & $9k$     & $9k+1+9k+4 = 9(2k)+5$ \\ \hline
+$9k+1$       & $9k+1$     & $9k+1+9k+1+4 = 9(2k)+6$ \\ \hline
+$9k+1$         & $9k+8$            & $9k+1+9k+8+4 = 9(2k+1)+4$                    \\ \hline
+$9k+8$         & $9k$            & $9k+8+9k+4 = 9(2k+1)+3$                    \\ \hline
+$9k+8$         & $9k+1$            & $9k+8+9k+1+4 = 9(2k+1)+4$                    \\ \hline
+$9k+8$         & $9k+8$            & $9k+8+9k+8+4 = 9(2k+2)+2$                    \\ \hline
+
+\end{tabular}
+\end{table}
+Logo, os possíveis restos da divisão de $a^3 + b^3 + 4$ por $9$ pertencem ao conjunto $\{ 2, 3,4,5,6\}.$ Como nenhum desses restos pode corresponder ao resto do cubo de um inteiro, concluímos que $a^3 + b^3 + 4$ não pode ser um cubo perfeito.
+\end{solution}
+\begin{exercicio}
+Sejam $a$ e $b$ dois números inteiros tais que $78a = 179b.$ Prove que $a + b$ possui mais do que 2 divisores positivos.
+\end{exercicio}
+\begin{solution}
+Adicionando $78b$ em ambos os lados, temos:
+\[
+    \textcolor{Red}{78b} + 78a = \textcolor{Red}{78a} + 179b \Rightarrow 78(a+b) = 257b
+    \]
+Como $\mdc(78, 257) = 1,$ concluímos então que $257 \mid a + b.$ Assim, os divisores de $a+b$ devem ser ao menos $1, 257$ e $a+b.$ Logo, $a + b$ possui mais do que 2 divisores positivos.
+\end{solution}
+%\newpage%parasoluções
+\begin{exercicio}
+Seja $a$ um número inteiro positivo tal que $a^{10} + 1$ é divisível por $10.$
+\itens{
+\task[\alt{a}] Mostre que $a$ pode assumir infinitos valores.
+\task[\alt{b}] Se $a_1, a_2, \ldots, a_{2021}$ são $2021$ inteiros positivos tais que $a_i^{10} + 1$ é divisível por $10$ para cada $i = 1, \ldots, 2021,$ prove que 
+\[
+10 \nmid a_1 + a_2 + \ldots + a_{2021}
+\]
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Pelo algoritmo da divisão, podemos escrever $a = 10q + r,$ onde $r \in \{0, 1,2,3,4,5,6,7,8,9 \}$ e $q \in \mathbb{Z}.$ O resto da divisão de um número por $10$ corresponde ao algarismo das unidades do número. Assim, $a^{10} + 1$ será divisível por 10 se, e somente se, $r^{10} + 1$ for divisível por 10. Para que isto ocorra, requere-se então que $r^{10}$ tenha 9 como algarismo das unidades. Observe que isto é impossível de ocorrer se $r$ for par ou igual a $5.$ Restam quatro casos a analisar:
+\begin{itemize}
+    \item[$\textcolor{Red}{\vardiamond}$] $r = 1:$ Nesse caso, $1^{10} + 1 = 2 \Rightarrow 10 \nmid 1^{10} + 1$.
+    \item[$\clubsuit$] $r = 3:$ Nesse caso, $3^{10} + 1 = 3^{8+2} + 1 = 3^8 \cdot 3^2 + 1 = (3^4)^2 \cdot 9 + 1.$
+    Como $3^4 = 81 = 10 \cdot 8 + 1,$ o resto de $3^8$ por $10$ é 1, então $\textcolor{Plum}{(3^4)^2} \cdot 9 + 1 = \textcolor{Plum}{10q + 1} \cdot 9 + 1 = 10 \cdot (9q) + 10 = 10(9q+1) \Rightarrow 10 \mid 3^{10} + 1$.
+    \item[$\textcolor{Red}{\varheart}$] $r = 7:$ Nesse caso, $7^{10} + 1 = 7^{8+2} + 1 = 7^8 \cdot 7^2 + 1 = (7^4)^2 \cdot 49 + 1.$
+    Como $7^4 = 2401 = 10 \cdot 240 + 1,$ o resto de $7^8$ por $10$ é 1, então $\textcolor{Plum}{(7^4)^2} \cdot 49 + 1 = \textcolor{Plum}{10q + 1} \cdot 49 + 1 = 10 \cdot (49q) + 50 = 10(49q+5) \Rightarrow 10 \mid 7^{10} + 1$.
+    \item[$\spadesuit$] $r = 9:$ Nesse caso, $9^{10} + 1 = 9^{8+2} + 1 = 9^8 \cdot 9^2 + 1 = (9^2)^4 \cdot 81 + 1.$
+    Como $9^2 = 81 = 10 \cdot 8 + 1,$ o resto de $9^8$ por $10$ é 1, então $\textcolor{Plum}{(9^2)^4} \cdot 81 + 1 = \textcolor{Plum}{10q + 1} \cdot 81 + 1 = 10 \cdot (81q) + 82 = 10(81q+8)+2 \Rightarrow 10 \nmid 9^{10} + 1$
+\end{itemize}
+Assim, $a$ pode ser qualquer número na forma $10k + 3$ ou $10k + 7.$
+
+\task[\alt{b}] Pelo item anterior, cada $a_i$ deixa resto $3$ ou $7$ na divisão por $10.$ Como temos um número ímpar de parcelas, a soma desses restos não pode ser um número par. Assim, não pode ser um número divisível por 10.
+}
+\end{solution}
+ 
+ \begin{exercicio}
+ \textsf{[Critério de divisibilidade por $7$]} Para verificar se um número é divisível por $7$, devemos duplicar o algarismo das unidades e subtrair o resto do número. Se o resultado dessa operação for divisível por $7,$ então o número é divisível por $7.$
+ \itens{
+ \task[\alt{a}] Verifique se os números $56735,$ $1563$ e $1057$ são divisíveis por $7$.
+\task[\alt{b}] Prove a validade desse critério de divisibilidade.
+}
+ \end{exercicio}
+ \begin{solution}
+ \itens{
+ \task[\alt{a}] Pelo critério do enunciado, temos:
+ \begin{itemize}
+     \item[$\textcolor{Red}{\varheart}$] $56735 \Rightarrow 5673-2 \cdot 5 = 5663 \Rightarrow 566 - 2 \cdot 3 = 560 \Rightarrow 56 - 2 \cdot 0 \Rightarrow 56 = 7 \cdot 8$
+     \item[$\clubsuit$] $1563 \Rightarrow 156 - 2 \cdot 3 = 150 \Rightarrow 15 - 2 \cdot 0 = 15 = 7 \cdot 2 + 1$
+     \item[$\textcolor{Red}{\vardiamond}$] $1057 \Rightarrow 105-2 \cdot 7 = 91 \Rightarrow 9 - 2 \cdot 1 = 7 = 7 \cdot 1.$
+ \end{itemize}
+ Assim, $56735$ e $1057$ são divisíveis por $7,$ e $1563$ não.
+ \task[\alt{b}] %Seja $d \in \mathbb{Z},$ tal que $\mdc(d, 10) = 1.$ Então, pelo Teorema de Bézout, existem inteiros $r$ e $s$ tais que $rd + 10s = 1.$ Logo,
+ Como $\mdc(7,10) = 1,$ pelo Teorema de Bézout, existem inteiros $r$ e $s$ tais que $7r + 10s = 1.$ Logo,
+ \[
+ 7r + 10s = 1 \Rightarrow 10s - 1 = - 7r \Rightarrow 10s - 1 = 7(-r) \Rightarrow 7 \mid 10s - 1 \Rightarrow 10s = 7k + 1, k \in \mathbb{Z}.
+ \]
+ %Como $\mdc(7,10) = 1,$ então podemos escrever $7r + 10s = 1,$ ou seja, pelo cálculo acima, temos $7 \mid 10s - 1,$ ou seja, $10s = 7k + 1,$ com $k \in \mathbb{Z}.$ 
+ 
+ Vamos agora mostrar que, tomando $n = \overline{n_kn_{k-1} \ldots n_1n_0},$ e $m = \overline{n_kn_{k-1} \ldots n_1} - s n_0$, $7 \mid n,$ se e somente se $7 \mid m.$
+ 
+ Como $7 \mid n,$ então existe um inteiro $q$ tal que $n = 7q.$ Assim:
+ \[ \overline{n_kn_{k-1} \ldots n_1} + n_0 = 7q\Leftrightarrow \]
+\[ 10 \cdot \overline{n_kn_{k-1} \ldots n_1} + n_0 = 10 \cdot 7q \Leftrightarrow\]
+\[ 10 \cdot \overline{n_kn_{k-1} \ldots n_1} + n_0 =  7(10)q \Leftrightarrow\]
+\[ \textcolor{Magenta}{10 \cdot s} \cdot \overline{n_kn_{k-1} \ldots n_1} + s \cdot n_0 = s \cdot 7(10q) \Leftrightarrow\]
+\[ \textcolor{Magenta}{7k+1} \cdot \overline{n_kn_{k-1} \ldots n_1} + s \cdot n_0 = s \cdot 7(10q)  \Leftrightarrow \]
+\[7k \cdot \overline{n_kn_{k-1} \ldots n_1} + \overline{n_kn_{k-1} \ldots n_1} + s \cdot n_0 = s \cdot 7(10q)  \Leftrightarrow \]
+\[ \overline{n_kn_{k-1} \ldots n_1} + s \cdot n_0 = s \cdot 7(10q) - 7k \cdot \overline{n_kn_{k-1} \ldots n_1}  \Leftrightarrow \]
+\[ \textcolor{RawSienna}{\overline{n_kn_{k-1} \ldots n_1} + s \cdot n_0} =  7(10sq - k \cdot \overline{n_kn_{k-1} \ldots n_1} )\Leftrightarrow \]
+\[ \textcolor{RawSienna}{m} = 7(10sq - k \cdot \overline{n_kn_{k-1} \ldots n_1} )\]
+
+ Logo, $7 \mid m.$
+ 
+ Para demonstrar o resultado agora, basta provar que $s = -2$ serve para o cálculo acima. De fato, $10 \cdot (-2) - 1 = -21 = 7 \cdot (-3).$ Assim, concluímos que $m = \overline{n_kn_{k-1} \ldots n_1} -2 \cdot n_0$ é um múltiplo de $7$ se, e somente se, $n$ o for.
+ }
+ \end{solution}
+ \begin{exercicio}\textsf{[Critérios de Divisibilidade por 3 e por 9]}
+ Seja $a$ um número inteiro.
+ \itens{
+ \task[\alt{a}] Prove que $a$ é divisível por $3$ se, e somente se, a soma de seus dígitos for divisível por $3.$  \task[\alt{b}] Prove que um inteiro é divisível por $9$ se, e somente se, a some de seus dígitos for divisível por $9.$
+  \task[\alt{c}] Mostre que o número
+  \[
+  n = 235711131719232931374143475359616771,
+  \]
+  formado pela concatenação dos números primos entre $2$ e $71,$ é um múltiplo de $9.$
+ %2+3+5+7+1+1+1+3+1+7+1+9+2+3+2+9+3+1+3+7+4+1+4+3+4+7+5+3+5+9+6+1+6+7+7+1 = 144
+ }
+ \end{exercicio}
+\begin{solution}
+Primeiramente, observe que, se 
+$$ n= \left( a_{n}a_{n-1} \cdots a_{1}a_{0} \right) _{10}=a_{n}10^{n}+a_{n-1}10^{n-1}+ \cdots +a_{1}10^{1}+a_{0}10^{0} $$ 
+então
+ $$ n=a_{n} \left( 10^{n}-1 \right) +a_{n-1} \left( 10^{n-1}-1 \right) +a_{1} \left( 10^{1}-1 \right) + \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right)  $$ 
+
+Agora, estamos aptos a resolver (a) e (b):
+\itens{
+ \task[\alt{a}] Temos que
+ $$ 10 \equiv 1 \pmod 3 \Rightarrow 10^{n} \equiv 1  \pmod 3 $$ 
+ Assim, $10^{n}-1 \equiv 0 \pmod{3}.$ Portanto,
+ \begin{align*}
+ n&=a_{n} \textcolor{Red}{\left( 10^{n}-1 \right)} +a_{n-1} \textcolor{Red}{\left( 10^{n-1}-1 \right)}+ \ldots  +a_{1} \textcolor{Red}{\left( 10^{1}-1 \right)} + \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right) \\&\equiv a_{n} \textcolor{Red}{(0)} +a_{n-1} \textcolor{Red}{(0)} + \ldots  +a_{1} \textcolor{Red}{(0)}  + \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right) \pmod{3} \\&\equiv a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \pmod{3}
+\end{align*}
+ \[
+ n \equiv a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \pmod{3}
+ \]
+ Logo, concluímos que $n$ será divisível por $9$ se, e somente se, $a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} $ o for, ou seja
+  $$ 3\mid n \Leftrightarrow 3\mid \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right)$$.
+  \task[\alt{b}] Temos que
+ $$ 10 \equiv 1 \pmod 9 \Rightarrow 10^{n} \equiv 1  \pmod 9 $$ 
+ Assim, $10^{n}-1 \equiv 0 \pmod{9}.$ Portanto,
+ \begin{align*}
+ n&=a_{n} \textcolor{Red}{\left( 10^{n}-1 \right)} +a_{n-1} \textcolor{Red}{\left( 10^{n-1}-1 \right)}+ \ldots  +a_{1} \textcolor{Red}{\left( 10^{1}-1 \right)} + \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right) \\&\equiv a_{n} \textcolor{Red}{(0)} +a_{n-1} \textcolor{Red}{(0)} + \ldots  +a_{1} \textcolor{Red}{(0)}  + \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right) \pmod{9} \\&\equiv a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \pmod{9}
+\end{align*}
+ Logo, concluímos que $n$ será divisível por $9$ se, e somente se, $a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} $ o for, ou seja
+  $$ 9\mid n \Leftrightarrow 9\mid \left( a_{n}+a_{n-1}+ \cdots +a_{1}+a_{0} \right)$$.
+  \task[\alt{c}] Pelo item (b), basta verificar se a soma dos algarismos de $n$ é divisível por $9.$ Como a soma dos algarismos de $235711131719232931374143475359616771$ é $144$ e $9 \mid 144,$ concluímos que $n$ é múltiplo de $9.$
+ }
+\end{solution}
+\begin{exercicio}\textsf{[Critério de Divisibilidade por 11]}
+Prove que um inteiro é divisível por 11 se, e somente se, a diferença entre a soma dos seus dígitos nas posições ímpares e a soma dos seus dígitos nas posições pares for divisível por 11.
+\end{exercicio}
+\begin{solution}
+Escrevendo
+$$ n= \left( a_{n}a_{n-1} \cdots a_{1}a_{0} \right) _{10}=a_{n}10^{n}+a_{n-1}10^{n-1}+ \cdots +a_{1}10^{1}+a_{0}10^{0},$$ 
+
+Observe que
+ $$10 \equiv -1 (\bmod 11)  \Rightarrow  \left\{ \begin{array}{ll}
+	10^{n} \equiv 1 (\bmod 11),&\textrm{se n é par}\\
+	10^{n} \equiv -1 (\bmod 11),&\textrm{se n é ímpar}\\
+	\end{array}\right.$$ 
+Assim, temos que
+\begin{align*}
+    n &\equiv a_ n \textcolor{Red}{10^{n}}+a_{n-1}\textcolor{Red}{10^{n-1}}+ \cdots +a_{1}\textcolor{Red}{10^{1}}+a_{0}\textcolor{Red}{10^{0}} \pmod{11}
+    \\&\equiv a_n \textcolor{Red}{(-1)^{n}}+a_{n-1}\textcolor{Red}{(-1)^{n-1}}+ \cdots +a_{1}\textcolor{Red}{(-1)}+a_{0} \cdot \textcolor{Red}{1} \pmod{11}\\
+    &\equiv a_{0}-a_{1}+a_{2}-a_{3}+ \cdots (\bmod 11)\\ 
+    &\equiv  \left( a_{0}+a_{2}+a_{4}+ \cdots  \right) - \left( a_{1}+a_{3}+a_{5}+ \cdots  \right) (\bmod 11)
+\end{align*} 
+ $$ 11\mid n \Leftrightarrow 11\mid \left( a_{0}+a_{2}+a_{4}+ \cdots  \right) - \left( a_{1}+a_{3}+a_{5}+ \cdots  \right)$$
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+A soma dos algarismos de $2021!$ foi escrita na representação decimal. A soma dos algarismos do número resultante foi escrita na representação decimal, e assim por diante. Finalmente, o resultado é um número de um único algarismo. Encontre esse número.
+\end{exercicio}
+\begin{solution}
+Um número será divisível por $9$ se e somente se a soma de seus algarismos o for. Logo, o último número obtido corresponderá ao resto da divisão de $2021!$ por $9.$ Como $9 \mid 2021!,$ e $2021! \neq 0,$ temos que o número procurado é o $9.$
+\end{solution}
+
+
+\section{Máximo divisor comum e mínimo múltiplo comum}
+\begin{exercicio}
+ Para $a$ não nulo, mostre (usando somente a definição de $\mdc$) que $\mdc(a,0)=\mdc(a,a)=|a|$ e $\mdc(a,1)=1$.
+\end{exercicio}
+\begin{solution}
+Seja $d=\mdc \left( a,0 \right)$. Por definição, $d\mid0$ e $d\mid a$. Vamos verificar que $d = \abs{a}.$ Para isso, note que $\vert a \vert \mid a $ e $\vert a \vert \mid 0, \forall a \in \Z$. Além disso, se $c\mid a $, $c \leq  \vert a \vert $. Assim, $d= \vert a \vert $.
+
+A prova que  $\mdc \left( a,a \right) = \vert a \vert$ é a mesma.
+
+Por último, vejamos que $\mdc(a,1)= 1.$ Seja $d'=\mdc \left( a,1 \right)$. Por definição, $d'\mid 1$, o que implica que $d'=1$, pois $d'>0$. 
+\end{solution}
+\begin{exercicio}
+ Mostre, usando somente a definição de $\mdc$, que $\mdc(a,b)=\mdc(|a|,|b|)$.
+\end{exercicio}
+\begin{solution}
+Sejam $d=\mdc \left( a,b \right)$ e $d'=\mdc \left(  \vert a \vert , \vert b \vert  \right)$. Vamos provar que $d \mid d'$ e $d' \mid d,$ acarretando $d = d'.$
+Temos que
+$$\begin{matrix}
+d=\mdc \left( a,b \right) \\
+d'=\mdc \left(  \vert a \vert , \vert b \vert  \right) \\
+\end{matrix}
+ \Rightarrow \begin{matrix}
+d\mid a\ \mbox{ e } \ d \vert b\\
+d'\mid \vert a \vert \ \mbox{ e } \ d'\mid \vert b \vert \\
+\end{matrix}
+ \Rightarrow \begin{matrix}
+d\mid \vert a \vert \ \mbox{ e } \ d \vert  \vert b \vert \\
+d'\mid a\ \mbox{ e } \ d'\mid b\\
+\end{matrix}
+ \Rightarrow \begin{matrix}
+d\mid d'\\
+d'\mid d\\
+\end{matrix}
+ \Rightarrow d=d',$$ 
+ o que termina a questão.
+\end{solution}
+
+\begin{exercicio}
+Prove que o máximo divisor comum é uma operação associativa, ou seja, que 
+\[
+\mdc(a, \mdc(b,c)) = \mdc(\mdc(a,b),c)
+\]
+para todos $a,b,c \in \mathbb{Z}.$
+\end{exercicio}
+\begin{solution}
+Pelo exercício 2, basta provar o resultado para $a,b,c \in \mathbb{N}.$
+
+Sejam
+\[
+e = \mdc(a, \mdc(b,c)) \quad \mbox{ e } \quad f = \mdc(\mdc(a,b),c).
+\]
+Precisamos então provar que $e = f.$ Para isso, vejamos que $e \mid f$ e $f \mid e.$
+\begin{itemize}
+    \item $e \mid f:$ Precisamos verificar que $e \mid \mdc(a,b)$ e $e \mid c,$ pois isso acarretará por definição de máximo divisor comum que $e \mid f.$ 
+    
+    Por definição, temos que $e \mid a$ e $e \mid \mdc(b,c).$ Como $\mdc(b,c) \mid b$ e $\mdc(b,c) \mid c,$ segue que $e \mid b$ e $e \mid c$.
+    
+    
+    Vejamos que $e \mid \mdc(a,b).$ Pelo Teorema de Bézout, temos que existem inteiros $r,s \in \mathbb{Z}$ tais $que ar + bs = \mdc(a,b).$
+    Como $e \mid a$ e $e \mid b,$ então $e \mid ar$ e $e \mid bs.$ Assim, $e \mid \mdc(a,b).$ Portanto, concluímos que $e \mid \mdc(\mdc(a,b),c) \Rightarrow e \mid f.$
+    
+    \item $f \mid e:$ Precisamos verificar que $f \mid a$ e $f \mid \mdc(b,c),$ pois isso acarretará por definição de máximo divisor comum que $f \mid e.$
+ 
+     Por definição, temos que $f \mid \mdc(a,b)$ e $f \mid c.$ Como $\mdc(a,b) \mid a$ e $\mdc(a,b) \mid b,$ segue que $f \mid b$ e $f \mid c.$   
+    
+    Vejamos que $f \mid \mdc(b,c).$ Pelo Teorema de Bézout, temos que existem inteiros $r',s' \in \mathbb{Z}$ tais que $br' + cs' = \mdc(b,c).$
+    Como $f \mid b$ e $f \mid c,$ então $f \mid br'$ e $f \mid cs'.$ Assim, $f \mid \mdc(b,c).$ Portanto, concluímos que $f \mid \mdc(a, \mdc(b,c)) \Rightarrow f \mid e.$
+\end{itemize}
+\end{solution}
+\begin{exercicio}
+ Sejam $a, b$ dois inteiros não-nulos. Mostre que $\mdc(na,nb)=n\mdc(a,b)$ e $\mmc(na,nb)=n\mmc(a,b)$ se $n$ é um inteiro positivo.
+\end{exercicio}
+\begin{solution}
+Sejam $d=\mdc \left( a,b \right)$ e $d'=\mdc \left( na,nb \right)$. Pelo Teorema de Bézout, como $d=\mdc \left( a,b \right)$, existem $x,y \in \Z$, tais que:
+$$ax+by=d \Rightarrow \textcolor{Plum}{n}ax+\textcolor{Plum}{n}by=\textcolor{Plum}{n}d.$$
+
+Como $d'\mid na$ e  $d'\mid nb$, então $d'\mid nd$.
+
+Além disso, como $d\mid a$ e $d\mid b$ pela definição de máximo divisor comum, então $nd\mid na$ e $nd\mid nb$, ou seja, $nd\mid d',$ pois $d' = \mdc(na,nb).$
+
+Portanto, $nd=d'$.
+
+Agora, para mostrar que $\mmc(na,nb)=n\mmc(a,b)$, usaremos que \[mmc(\alpha, \beta) \mdc(\alpha, \beta) = \alpha \beta,\] para $\alpha, \beta \in \mathbb{N}^{*}.$ Temos então:
+
+$$\mmc \left( na,nb \right)\cdot \textcolor{Cyan}{\mdc \left( na,nb \right)} = \left( na \right) \cdot \left( nb \right) \Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot \textcolor{Cyan}{n\cdot \mdc \left( a,b \right)} = \left( na \right) \cdot \left( nb \right)\Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot \cancel{n}\cdot \mdc \left( a,b \right) = \left( \cancel{n} a \right) \cdot \left( nb \right)\Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot \textcolor{PineGreen}{ \mdc \left( a,b \right)} = \left(  a \right) \cdot \left( nb \right)\Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot \textcolor{PineGreen}{\frac{a\cdot b}{\mmc \left( a,b \right) }}=a\cdot \left( nb \right) \Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot a \cdot b =a\cdot \left( nb \right) \cdot \mmc \left( a,b \right) \Rightarrow$$
+$$\mmc \left( na,nb \right) \cdot \cancel{a \cdot b} =\cancel{a \cdot b} \cdot n \cdot \mmc \left( a,b \right) \Rightarrow$$
+$$\mmc \left( na,nb \right) =n\cdot \mmc \left( a,b \right).$$
+\end{solution}
+\begin{exercicio}
+ Determine $\mdc(a, b)$ e $\mmc(a, b)$ para os inteiros $a$ e $b$ dados abaixo:
+\itens{
+    \task[\alt{a}] $a = 32$ e $b = 54$;
+   \task[\alt{b}] $a = 27$ e $b = 45$;
+    \task[\alt{c}] $a = 15$ e $b = 80$;
+    \task[\alt{d}] $a = 8798$ e $b = 2314$;
+\task[\alt{e}] $a=1583890$ e $b=3927$.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+    \task[\alt{a}] Usando o Algoritmo de Euclides, temos:
+    
+    \begin{align*}\mdc \left(32, 54 \right) &=\mdc \left( \textcolor{PineGreen}{32}, \textcolor{Magenta}{54-1\cdot 32} \right) =\mdc \left( \textcolor{PineGreen}{32}, \textcolor{Magenta}{22} \right) \\&=\mdc \left( \textcolor{Cyan}{32-1\cdot 22}, \textcolor{Magenta}{22} \right) =
+    \mdc \left(\textcolor{Cyan}{10}, \textcolor{Magenta}{22}\right) \\&=\mdc \left( \textcolor{Cyan}{10}, \textcolor{Orange}{22-2\cdot10} \right) =\mdc \left(\textcolor{Cyan}{10}, \textcolor{Orange}{2} \right) \\&=\mdc \left( \textcolor{Plum}{10-5\cdot2}, \textcolor{Orange}{2} \right) =\mdc \left( \textcolor{Plum}{0}, \textcolor{Orange}{2} \right) =2.
+    \end{align*}
+
+Agora, como $\mmc(32, 54) \cdot \mdc( 32, 54) = 32 \cdot 54,$ temos:
+    $$\mmc \left( 32, 54 \right) =\frac{32\cdot 54}{\mdc \left( 32, 54 \right)}=864.$$
+
+
+Portanto,
+\[
+\boxed{\mdc(32,54) = 2 \text{ e } \mmc(32,54) = 864}
+\]
+    \task[\alt{b}] Usando o Algoritmo de Euclides, temos:
+    
+    \begin{align*}
+    \mdc \left( 27, 45 \right) &=\mdc \left( \textcolor{PineGreen}{27}, \textcolor{Magenta}{45-1\cdot27} \right) =\mdc \left( \textcolor{PineGreen}{27}, \textcolor{Magenta}{18} \right) \\&=\mdc \left( \textcolor{Cyan}{27-1\cdot18}, \textcolor{Magenta}{18} \right) =
+    \mdc \left( \textcolor{Cyan}{9}, \textcolor{Magenta}{18} \right)\\& =\mdc \left( \textcolor{Cyan}{9}, \textcolor{Orange}{18-2\cdot9} \right) =\mdc \left( \textcolor{Cyan}{9}, \textcolor{Orange}{0} \right) =9.
+    \end{align*}
+    
+  Agora, como $\mmc(27, 45) \cdot \mdc( 27, 45) = 27 \cdot 45,$ temos:
+
+    $$\mmc \left( 27, 45 \right) =\frac{27\cdot 45}{\mdc \left(27, 45\right) }=135.$$
+
+Portanto,
+\[
+\boxed{\mdc(27,45) = 9 \text{ e } \mmc(27,45) = 135}
+\]
+
+    
+    \task[\alt{c}] Usando o Algoritmo de Euclides, temos:
+     \begin{align*}
+    \mdc \left( 15, 80 \right) &=\mdc \left( \textcolor{PineGreen}{15}, \textcolor{Magenta}{80-5\cdot15} \right) =\mdc \left( \textcolor{PineGreen}{15}, \textcolor{Magenta}{5} \right) \\&=\mdc \left( \textcolor{Cyan}{15-3\cdot5}, \textcolor{Magenta}{5} \right) =
+    \mdc \left( \textcolor{Cyan}{0}, \textcolor{Magenta}{5} \right)=5.
+    \end{align*}
+    
+  Agora, como $\mmc(15, 80) \cdot \mdc( 15, 80) = 15 \cdot 80,$ temos:
+
+    
+    $$\mmc \left(15, 80 \right) =\frac{15\cdot 80}{\mdc \left(15, 80 \right) }=240.$$
+
+Portanto,
+\[
+\boxed{\mdc(15,80) = 5 \text{ e } \mmc(15,80) = 240}
+\]    
+    
+    \task[\alt{d}] Usando o Algoritmo de Euclides, temos:
+
+    \begin{align*}
+    \mdc \left( \text{8798, 2314} \right)&=\mdc \left( \textcolor{Magenta}{8798-3\cdot2314}, \textcolor{PineGreen}{2314} \right) =\mdc \left( \textcolor{Magenta}{1856}, \textcolor{PineGreen}{2314} \right)\\& =\mdc \left( \textcolor{Magenta}{1856}, \textcolor{Cyan}{2314-1\cdot1856} \right) =
+    \mdc \left( \textcolor{Magenta}{1856}, \textcolor{Cyan}{458} \right)\\&=\mdc \left( \textcolor{Orange}{1856-4\cdot458}, \textcolor{Cyan}{458} \right) =\mdc \left( \textcolor{Orange}{24}, \textcolor{Cyan}{458} \right)\\& =\mdc \left( \textcolor{Orange}{24}, \textcolor{Plum}{458-19\cdot24} \right) =\mdc \left( \textcolor{Orange}{24}, \textcolor{Plum}{2} \right)\\& =
+    \mdc \left( \textcolor{Green}{24-12\cdot2} , \textcolor{Plum}{2} \right) =\mdc \left( \textcolor{Green}{0}, \textcolor{Plum}{2} \right) =2.
+    \end{align*}
+
+  Agora, como $\mmc(8798, 2314) \cdot \mdc( 8798, 2314) = 8798 \cdot 2314,$ temos:
+
+    
+    $$\mmc \left(8798, 2314 \right) =\frac{8798\cdot2314}{\mdc \left( 8798, 2314\right) }=10179286.$$
+Portanto,
+\[
+\boxed{\mdc(8798, 2314) = 2 \text{ e } \mmc(8798, 2314) = 10179286}
+\]  
+
+    \task[\alt{e}] Usando o Algoritmo de Euclides, temos:
+
+    \begin{align*}
+    \mdc \left( \text{1583890, 3927} \right)&=\mdc \left( \textcolor{Magenta}{1583890-403\cdot3927}, \textcolor{PineGreen}{3927} \right) =\mdc \left( \textcolor{Magenta}{1309}, \textcolor{PineGreen}{3927} \right)\\& =\mdc \left( \textcolor{Magenta}{1309}, \textcolor{Cyan}{3927-3\cdot1309} \right) =
+    \mdc \left( \textcolor{Magenta}{1309}, \textcolor{Cyan}{0} \right) =1309.
+    \end{align*}
+
+  Agora, como $\mmc(1583890, 3927) \cdot \mdc( 1583890, 3927) = 1583890 \cdot 3927,$ temos:
+
+    
+    $$\mmc \left(1583890, 3927 \right) =\frac{1583890\cdot3927}{\mdc \left( 1583890, 3927\right) }=4751670.$$
+Portanto,
+\[
+\boxed{\mdc(1583890, 3927) = 1309 \text{ e } \mmc(1583890, 3927) = 4751670}
+\]  
+    }
+\end{solution}
+\begin{exercicio}
+ Nos casos abaixo, utilize o Algoritmo de Euclides para determinar inteiros $r$ e $s$ tais que
+$\mdc(a, b) = a r + b  s$.
+\itensladoalado{2}{
+    \task[\alt{a}] $a = 56$ e $b = 72$;
+    \task[\alt{b}] $a = 24$ e $b = 138$;
+    \task[\alt{c}] $a = 119$ e $b = 272$;
+    \task[\alt{d}] $a = 1128$ e $b = 336$.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+    \task[\alt{a}] Pelo Algoritmo de Euclides,
+\[    \begin{array}{rcl}
+    72&=&1 \cdot \textcolor{Magenta}{56} + \textcolor{RawSienna}{16} \\
+    \textcolor{Magenta}{56}&=&3 \cdot \textcolor{RawSienna}{16} + \textcolor{Emerald}{8} \\
+    \textcolor{RawSienna}{16}&=&2 \cdot \textcolor{Emerald}{8}
+    \end{array}
+    \]
+Agora, como $\mdc(56, 72) = 8,$ vamos escrever $8$ em função de uma combinação linear de $56$ e $72$ registrando em cada passo o resto como sendo a diferença do dividendo com o produto do quociente pelo divisor. Assim
+\begin{align*}
+    8 &= 56 - 3\cdot \textcolor{Plum}{16}  \\ 
+    &= 56 - 3 \cdot \textcolor{Plum}{(72 - 1 \cdot 56)} \\
+    &= \textcolor{PineGreen}{4} \cdot 56 - \textcolor{Cyan}{3} \cdot 72 
+\end{align*}
+Assim, encontramos $\textcolor{PineGreen}{r = 4}$ e $\textcolor{Cyan}{s = -3}.$
+
+   \task[\alt{b}] Pelo Algoritmo de Euclides,
+\[    \begin{array}{rcl}
+    138&=&5 \cdot \textcolor{Magenta}{24} + \textcolor{RawSienna}{18} \\
+    \textcolor{Magenta}{24}&=&1 \cdot \textcolor{RawSienna}{18} + \textcolor{Emerald}{6} \\
+    \textcolor{RawSienna}{18}&=&3 \cdot \textcolor{Emerald}{6}
+    \end{array}
+    \]
+Agora, como $\mdc(24, 138) = 6,$ vamos escrever $6$ em função de uma combinação linear de $24$ e $138$ registrando em cada passo o resto como sendo a diferença do dividendo com o produto do quociente pelo divisor. Assim
+\begin{align*}
+    6 &= 24 - 1\cdot \textcolor{Plum}{18}  \\ 
+    &= 24 - 1 \cdot \textcolor{Plum}{(138 - 5 \cdot 24)} \\
+    &= \textcolor{PineGreen}{6} \cdot 24 - \textcolor{Cyan}{1} \cdot 138 
+\end{align*}
+Assim, encontramos $\textcolor{PineGreen}{r = 6}$ e $\textcolor{Cyan}{s = -1}.$
+
+   \task[\alt{c}] Pelo Algoritmo de Euclides,
+\[    \begin{array}{rcl}
+    272&=&2 \cdot \textcolor{Magenta}{119} + \textcolor{RawSienna}{34} \\
+    \textcolor{Magenta}{119}&=&3 \cdot \textcolor{RawSienna}{34} + \textcolor{Emerald}{17} \\
+    \textcolor{RawSienna}{34}&=&2 \cdot \textcolor{Emerald}{17}
+    \end{array}
+    \]
+Agora, como $\mdc(119, 272) = 17,$ vamos escrever $17$ em função de uma combinação linear de $119$ e $272$ registrando em cada passo o resto como sendo a diferença do dividendo com o produto do quociente pelo divisor. Assim
+\begin{align*}
+    17 &= 119 - 3\cdot \textcolor{Plum}{34}  \\ 
+    &= 119 - 3 \cdot \textcolor{Plum}{(272 - 2 \cdot 119)} \\
+    &= \textcolor{PineGreen}{7} \cdot 119 - \textcolor{Cyan}{3} \cdot 272 
+\end{align*}
+Assim, encontramos $\textcolor{PineGreen}{r = 7}$ e $\textcolor{Cyan}{s = -3}.$
+
+   \task[\alt{d}] Pelo Algoritmo de Euclides,
+\[    \begin{array}{rcl}
+    1128&=&3 \cdot \textcolor{Magenta}{336} + \textcolor{RawSienna}{120} \\
+    \textcolor{Magenta}{336}&=&2 \cdot \textcolor{RawSienna}{120} + \textcolor{Emerald}{96} \\
+    \textcolor{RawSienna}{120}&=&1 \cdot \textcolor{Emerald}{96} + \textcolor{Red}{24} 
+    \\
+    \textcolor{Emerald}{96} &=& 4 \cdot \textcolor{Red}{24} 
+    \end{array}
+    \]
+Agora, como $\mdc(1128, 336) = 24,$ vamos escrever $24$ em função de uma combinação linear de $1128$ e $336$ registrando em cada passo o resto como sendo a diferença do dividendo com o produto do quociente pelo divisor. Assim
+\begin{align*}
+    24 &= 120 - 1\cdot \textcolor{Plum}{96}  \\ 
+    &= 120 - 1 \cdot \textcolor{Plum}{(336 - 2 \cdot 120)} \\
+    &= 3 \cdot \textcolor{Brown}{120} - 1 \cdot 336 \\
+    &= 3 \cdot \textcolor{Brown}{(1128 - 3 \cdot 336)} - 1 \cdot 336 \\
+    &= \textcolor{PineGreen}{3} \cdot 1128 - \textcolor{Cyan}{10} \cdot 336
+\end{align*}
+Assim, encontramos $\textcolor{PineGreen}{r = 3}$ e $\textcolor{Cyan}{s = -10}.$
+}
+\end{solution}
+\begin{exercicio}
+ Para os inteiros não-nulos $a$ e $b$, mostre que as seguintes condições são equivalentes 
+\itensladoalado{3}{
+    \task[\alt{a}] $a \ | \ b;$
+\task[\alt{b}] $\mdc(a,b)=|a|;$
+\task[\alt{c}] $\mmc(a,b)=|b|.$
+}
+\end{exercicio}
+\begin{solution}
+Provemos cada uma das equivalências:
+
+$(\textcolor{Floresta}{(a)} \Rightarrow \textcolor{Floresta}{(b)} )$ Suponha que $a\mid b.$ Vamos mostrar que $\mdc\left( a,b \right) = \vert a \vert.$ 
+
+Se $a \mid b,$ iss o significa que existe um $k \in \mathbb{Z}$ tal que $b = k \cdot a.$ Assim, pela questão 4,
+\begin{align*}
+    \mdc(a,\textcolor{Rhodamine}{b}) &=\mdc(a,\textcolor{Rhodamine}{ka}) \\&= \mdc(a \cdot 1, a \cdot k) \\&= \abs{a} \textcolor{SeaGreen}{\mdc(1,k)} \\&= \abs{a} \cdot \textcolor{SeaGreen}{1} = \abs{a} 
+\end{align*}
+
+$(\textcolor{Floresta}{(b)} \Rightarrow \textcolor{Floresta}{(c)} )$ Suponha que $\mdc(a,b) = \abs{a}.$ Vejamos que $\mmc(a,b) = \abs{b}.$ Sabemos que, para $\alpha, \beta \in \Z$ temos
+\begin{equation}\label{rel}
+\mdc(\alpha, \beta) \cdot \mmc(\alpha, \beta) = \abs{\alpha} \cdot \abs{\beta}.
+\end{equation}
+Utilizando esse fato, ao isolarmos $\mmc(a,b),$ vem
+\begin{align*}
+    \mmc(a,b) &= \dfrac{\abs{a} \abs{b}}{\textcolor{BrickRed}{\mdc(a,b)}} \\
+    &= \dfrac{\abs{a} \abs{b}}{\textcolor{BrickRed}{\abs{a}}} \\
+    &= \dfrac{\cancel{\abs{a}} \abs{b}}{\cancel{\abs{a}}} \\
+    &= \abs{b}.
+\end{align*}
+
+$(\textcolor{Floresta}{(c)} \Rightarrow \textcolor{Floresta}{(a)} )$ Suponha que $\mmc(a,b) = \abs{b}.$ Com esta hipótese em mãos, provemos que $a \mid b.$ Novamente, pela relação (\ref{rel}), 
+\begin{align*}
+    \mdc(a,b) &= \dfrac{ \abs{a} \cdot \abs{b}}{\textcolor{Gray}{\mmc(a,b)}} \\&=\dfrac{ \abs{a} \cdot \abs{b}}{\textcolor{Gray}{\abs{b}}} 
+    \\&=\dfrac{ \abs{a} \cdot \cancel{\abs{b}}}{\cancel{\abs{b}}} 
+    \\&= \abs{a}.
+\end{align*}
+Como $\abs{a} = \mdc(a,b),$ pela definição de máximo divisor comum, isso significa que $\abs{a} \mid a$ e, em particular, que $\abs{a} \mid b.$ Logo, concluímos que $a \mid b,$ como queríamos.
+\end{solution}
+\begin{exercicio}
+ Mercúrio leva $2111$ horas para completar uma volta em torno do Sol, enquanto Vênus leva $5393$ horas. Com que frequência Sol, Mercúrio e Vênus se alinham?
+\end{exercicio}
+\begin{solution}
+Para saber quando o Sol se alinha com Mercúrio e Vênus, precisamos encontrar o momento no qual ambos deram uma quantidade exata de voltas em torno do Sol, ou seja, um múltiplo comum do período de translação de ambos os planetas. Consequentemente, a resposta será $\mmc( 5393, 2111).$ Para calcular esse valor, atenhamo-nos inicialmente ao $\mdc(5393, 2111).$ Pelo Algoritmo de Euclides,
+
+   \begin{align*}
+    \mdc \left( \text{5393, 2111} \right)&=\mdc \left( \textcolor{Magenta}{5393-2\cdot2111}, \textcolor{PineGreen}{2111} \right) =\mdc \left( \textcolor{Magenta}{1171}, \textcolor{PineGreen}{2111} \right)\\& =\mdc \left( \textcolor{Magenta}{1171}, \textcolor{Cyan}{2111-1\cdot1171} \right) =
+    \mdc \left( \textcolor{Magenta}{1171}, \textcolor{Cyan}{940} \right)\\&=\mdc \left( \textcolor{Orange}{1171-1\cdot940}, \textcolor{Cyan}{940} \right) =\mdc \left( \textcolor{Orange}{231}, \textcolor{Cyan}{940} \right)\\& =\mdc \left( \textcolor{Orange}{231}, \textcolor{Plum}{940-4\cdot231} \right) =\mdc \left( \textcolor{Orange}{231}, \textcolor{Plum}{16} \right)\\& =
+    \mdc \left( \textcolor{Green}{231-14\cdot16} , \textcolor{Plum}{16} \right) =\mdc \left( \textcolor{Green}{7}, \textcolor{Plum}{16} \right) \\&= \mdc \left( \textcolor{Brown}{16 - 2 \cdot 7}, \textcolor{Green}{7} \right) = \mdc \left( \textcolor{Brown}{2}, \textcolor{Green}{7} \right) \\&= \mdc \left( \textcolor{Gray}{7 - 3 \cdot 2}, \textcolor{Brown}{2} \right) = \mdc \left( \textcolor{Gray}{1}, \textcolor{Brown}{2} \right) \\&=
+    \mdc \left( \textcolor{Red}{2 - 2 \cdot 1}, \textcolor{Gray}{1} \right) = \mdc(  \textcolor{Red}{0}, \textcolor{Gray}{1} ) = 1.
+    \end{align*}
+    
+ Agora, como $\mmc(5393, 2111) \cdot \mdc( 5393, 2111) = 5393 \cdot 2111,$ temos:
+
+    
+    $$\mmc \left(5393, 2111 \right) =\frac{5393\cdot2111}{\mdc \left( 5393, 2111\right) }=11384623.$$
+
+Portanto, Sol, Mercúrio e Vênus se alinham a cada $11384623$ horas, ou seja, aproximadamente a cada $1300$ anos (considerando que um ano tem $24 \cdot 365 = 8760$ horas).
+
+\end{solution}
+\begin{exercicio}
+Mostre que se $a$ é um inteiro positivo então $a$ e $a+1$ são primos entre si. 
+\end{exercicio}
+\begin{solution}
+Para mostrar que dois números são primos entre si, basta mostrar que o $\mdc$ entre eles é $1$. Assim, pelo Algoritmo de Euclides:
+
+\begin{align*}\mdc \left( a+1,a \right) &=\mdc \left( \textcolor{Magenta}{a+1-1\cdot a},\textcolor{PineGreen}{a} \right) =\mdc \left( \textcolor{Magenta}{1},\textcolor{PineGreen}{a} \right) \\&=\mdc \left( \textcolor{Magenta}{1}, \textcolor{Cyan}{a-a\cdot1} \right) =\mdc \left( \textcolor{Magenta}{1},\textcolor{Cyan}{0} \right) =1.
+\end{align*}
+
+Assim, dois números consecutivos são sempre primos entre si.
+\end{solution}
+
+\begin{exercicio}
+Escolhendo-se 51 números dentre os números naturais de $1$ até $100,$ prove que existem ao menos $2$ que devem ser primos entre si.
+\end{exercicio}
+\begin{solution}
+Pelo exercício anterior, sabemos que $\mdc(a,a+1) = 1.$ Vamos organizar os números de 1 a 100 em 50 pares:
+\[
+\{1,2\}, \{3,4\}, \{5, 6 \}, \ldots, \{ 99, 100 \}.
+\]
+Em cada um desses pares, temos números primos entre si. Como estamos escolhendo 51 números, ao menos 2 deles devem pertencer ao mesmo par, e portanto esses números serão primos entre si.
+\end{solution}
+
+
+%\begin{exercicio}
+%Sejam $a$ e $b$ primos entre si não nulos. Determine $\mdc(a^2 + b^2, a + b)$.
+%\end{exercicio}
+%\begin{solution}
+
+%\end{solution}
+\newpage
+\begin{exercicio}
+Assumido que $\mdc(a,b)=1$, mostre o seguinte:
+\itens{
+\task[\alt{a}] $\mdc(a+b,a-b)=1$ ou $2$. (\textit{Dica:} Seja $d=\mdc(a+b,a-b)$ e mostre que $d\ | \ 2a$, $d\ | \ 2b$; assim, $d\leq \mdc(2a,2b)=2\mdc(a,b)$);
+\task[\alt{b}] $\mdc(2a+b,a+2b)=1$ ou $3$;
+\task[\alt{c}]  $\mdc(a+b,a^2+b^2)=1$ ou $2$. (\textsf{[Dica:]} $a^2+b^2=(a+b)(a-b)+2b^2$.)
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Seja $d=mdc \left( a+b,a-b \right)$. Pela definição de máximo divisor comum, temos que $d \mid a + b$ e $d \mid a - b.$ Portanto:
+\[
+d \mid \textcolor{Cyan}{(a-b)} \Rightarrow d \mid \textcolor{Cyan}{(a-b)} + \textcolor{Red}{(a+b)} \Rightarrow d \mid a - b + a + b \Rightarrow d \mid 2a.
+\]
+Analogamente,
+\[
+d \mid \textcolor{Red}{(a+b)} \Rightarrow d \mid \textcolor{Red}{(a+b)} - \textcolor{Cyan}{(a-b)} \Rightarrow d \mid a + b - a + b \Rightarrow d \mid 2b.
+\]
+Como $d \mid 2a$ e $d \mid 2b,$ então $d \mid \mdc(2a, 2b).$ Pelo exercício 4, $\mdc(2a,2b) = 2 \mdc(a,b).$ Assim:
+\[
+d \mid \mdc(2a,2b) \Rightarrow d \mid 2 \cdot \textcolor{Emerald}{\mdc(a,b)} \Rightarrow d \mid 2 \cdot \textcolor{Emerald}{1} \Rightarrow d \mid 2 \Rightarrow d = 2 \mbox{ ou } d = 1.
+\]
+Consequentemente, segue que $d = 2$ ou $d = 1.$
+
+\task[\alt{b}]  Seja $d=mdc \left( 2a+b,a+2b \right)$. Pela definição de máximo divisor comum, temos que $d \mid 2a + b$ e $d \mid a + 2b.$ Portanto:
+\[
+d \mid \textcolor{Cyan}{(2a+b)} \Rightarrow d \mid \textcolor{Cyan}{(2a+b)} - 2\textcolor{Red}{(a+2b)} \Rightarrow d \mid 2a +b - 2a - 4b \Rightarrow d \mid -3b \Rightarrow d \mid 3b
+\]
+Analogamente,
+\[
+d \mid \textcolor{Red}{(a+2b)} \Rightarrow d \mid \textcolor{Red}{(a+2b)} - 2\textcolor{Cyan}{(2a+b)} \Rightarrow d \mid a + 2b - 4a - 2b \Rightarrow d \mid -3a \Rightarrow d \mid 3a.
+\]
+Como $d \mid 3a$ e $d \mid 2b,$ então $d \mid \mdc(3a, 3b).$ Pelo exercício 4, $\mdc(3a,3b) = 3 \mdc(a,b).$ Assim:
+\[
+d \mid \mdc(3a,3b) \Rightarrow d \mid 3 \cdot \textcolor{Emerald}{\mdc(a,b)} \Rightarrow d \mid 3 \cdot \textcolor{Emerald}{1} \Rightarrow d \mid 3 \Rightarrow d = 3 \mbox{ ou } d = 1.
+\]
+Consequentemente, segue que $d = 3$ ou $d = 1.$
+
+\task[\alt{c}]  Seja $d=mdc \left(a^2 + b^2, a + b \right)$. Pelo Algoritmo de Euclides, temos
+
+\begin{align*}
+    d &= mdc\left( a^{2}+b^{2},a+b \right) \\&=
+    \mdc \left(  \left( a+b \right)  \left( a-b \right) +2b^{2},a+b \right) \\&= \mdc \left(  \left( a+b \right)  \left( a-b \right) +2b^{2}- \left( a-b \right)  \left( a+b \right) ,a+b \right) \\&= \mdc (2b^2, a +b ).
+\end{align*}
+
+Assim, por definição de máximo divisor comum, temos que $d \mid 2b^2$ e $d \mid a+b.$
+
+Analogamente,
+
+\begin{align*}
+    d &= mdc\left( a^{2}+b^{2},a+b \right) \\&=
+    \mdc \left(  \left( b+a \right)  \left( b-a \right) +2a^{2},a+b \right) \\&= \mdc \left(  \left( b+a \right)  \left( b-a \right) +2a^{2}- \left( b-a \right)  \left( a+b \right) ,a+b \right) \\&= \mdc (2a^2, a +b ).
+\end{align*}
+
+Assim, por definição de máximo divisor comum, temos que $d \mid 2a^2$ e $d \mid a+b.$
+
+Como $d \mid 2a^2$ e $d \mid 2b^2,$ então $d \mid \mdc(2a^2, 2b^2).$ Pelo exercício 4, $\mdc(2a^2,2b^2) = 2 \mdc(a^2,b^2).$ Assim:
+\[
+d \mid \mdc(2a^2,2b^2) \Rightarrow d \mid 2 \cdot \mdc(a^2,b^2) \Rightarrow d \mid 2 \cdot (\textcolor{Emerald}{\mdc(a,b)})^2 \Rightarrow d \mid 2 \cdot \textcolor{Emerald}{1}^2 \Rightarrow d = 2 \mbox{ ou } d = 1.
+\]
+
+Portanto, segue que $d = 2$ ou $d = 1.$
+}
+\end{solution}
+\begin{exercicio}
+Sejam $a,b,c\in \mathbb Z$ tais que $a\mid b$ e $\mdc(b,c)=1$. Mostre que $\mdc(a,c)=1$.
+\end{exercicio}
+\begin{solution}
+
+Como $a \mid b,$ então existe um $k \in \Z$ tal que $b = k \cdot a.$  Se $\mdc \left( b,c \right) =1$, então, pelo Teorema de Bézout, existem $x,y \in \Z$, tais que:
+$$\textcolor{Cerulean}{b}x+cy=1\Rightarrow \textcolor{Cerulean}{ka}x+cy=1.$$
+
+Seja $d=\mdc \left( a,c \right)$. Vejamos que $d = 1.$
+
+Como $d\mid a$, então $d\mid kax$; como $d\mid c$, então $d\mid cy$. Logo, \[d\mid kax + cy \Rightarrow d \mid 1.\] Portanto, $d=1$. 
+\end{solution}
+\begin{exercicio}
+Explique como definir o máximo divisor comum $\mdc(a, b, c)$ de três números inteiros
+$a, b, c$. Em seguida, generalize sua definição para aplicar a qualquer quantidade de números inteiros.
+\end{exercicio}
+
+\begin{solution}
+Sabemos como resolver o máximo divisor comum no caso de dois elementos. Então, podemos pensar em calcular o máximo divisor comum de 3 números agrupando de dois em dois:
+$$\mdc \left( a,b,c \right) =\mdc \left( a,\mdc \left( b,c \right)  \right)$$
+
+Observe que o valor de $\mdc \left( a,b,c \right)$ independe da ordem na qual fazemos os agrupamentos (para uma demonstração desse fato, veja o exercício 3).
+
+Generalizando com a mesma ideia, temos:
+$$\mdc \left( a_{1},a_{2}, \cdots ,a_{n-1},a_{n} \right) =\mdc \left( a_{1},a_{2}, \cdots ,\mdc \left( a_{n-1},a_{n} \right)  \right).$$  
+\end{solution}
+
+\begin{exercicio}
+Um empreiteiro deseja construir um prédio em um terreno retangular de dimensões $216$ m por $414$ m. Para isso deverá cercá-lo com estacas. Se ele colocar uma estaca em cada canto do terreno e utilizar sempre a mesma distância entre duas estacas consecutivas, qual será a quantidade mínima de estacas a serem utilizadas?
+\end{exercicio}
+\begin{solution}
+Precisamos dividir as estacas pelo terreno de modo que a distância entre elas seja sempre a mesma, independente de estar no lado que mede 216 m ou no lado que mede 414 m. Assim, essa distância corresponde a um divisor comum de $216$ e $414,$ coo como queremos a menor quantidade de estacas possível, devemos procurar pelo máximo divisor comum entre $414$ e $216.$ 
+
+Pelo Algoritmo de Euclides, temos:
+
+
+   \begin{align*}
+    \mdc \left( \text{414, 216} \right)&=\mdc \left( \textcolor{Magenta}{414-1\cdot216}, \textcolor{PineGreen}{216} \right) =\mdc \left( \textcolor{Magenta}{198}, \textcolor{PineGreen}{216} \right)\\& =\mdc \left( \textcolor{Magenta}{198}, \textcolor{Cyan}{216-1\cdot198} \right) =
+    \mdc \left( \textcolor{Magenta}{198}, \textcolor{Cyan}{18} \right)\\&=\mdc \left( \textcolor{Orange}{198-11\cdot18}, \textcolor{Cyan}{18} \right) =\mdc \left( \textcolor{Orange}{0}, \textcolor{Cyan}{18} \right) = 18.
+    \end{align*}
+    
+Portanto, como $\mdc(216, 414) = 18,$ isso significa que as estacas ficarão a uma distância de $18$ m uma das outras. 
+
+No total, o perímetro do terreno, por ser retangular, será de $2 \cdot 216 + 2 \cdot 414 = 1260$ m. Logo, serão necessárias no mínimo $\dfrac{1260}{18} = 70$ estacas para cercar o terreno.
+
+\end{solution}
+
+\begin{exercicio}
+Dona Antônia possui um enfeite pisca-pisca, para árvores de Natal, que tem lâmpadas amarelas, vermelhas e azuis. As lâmpadas amarelas se acendem de $4$ em $4$ minutos; as vermelhas, de $3$ em $3$ minutos; e as azuis, de $6$ em $6$ minutos. 
+\itens{
+\task[\alt{a}] Se às 20 horas e 15 minutos todas as lâmpadas se acenderem, a que horas elas voltarão a se acender novamente ao mesmo tempo?
+\task[\alt{b}] Dona Antônia quer deixar sua árvore de Natal mais colorida, e por isso vai comprar um pisca-pisca verde. De quanto em quanto tempo as lâmpadas verdes deverão acender para que todas as lâmpadas do ornamento decorativo de Dona Antônia acendam simultaneamente ao menos $87$ vezes por dia?
+} 
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Como $\mmc(4,3,6) = 12,$ a próxima ocasião em que as lâmpadas acenderão simultaneamente será às 20 horas e 27 minutos.
+\task[\alt{b}] Seja $m$ o tempo em que as lâmpadas verdes se acendem. Então, como o dia tem $24 \cdot 60 = 1440$ minutos, queremos que 
+\[
+\dfrac{1440}{\mmc(4,3,6, m)} > 87 \Rightarrow x < \left\lfloor \dfrac{1440}{87} \right \rfloor \Rightarrow \mmc(4,3,6, m) < 16 
+\]
+Como o máximo múltiplo comum é uma operação associativa, temos que
+\[
+\mmc(4,3,6,m) = \mmc(\mmc(4,3,6), m) = \mmc( 12, m). 
+\]
+Assim, devemos ter $\mmc(12, m) < 16.$ Como $16 < 2 \cdot 12,$ $m$ deve ser um divisor de $12.$ Assim, $m \in D(12).$ Logo, os possíveis valores para $m$ são
+\[
+D(12) = \{1,2,3,4,6,12 \}.
+\]
+}
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Prove que, se $a$ e $b$ são números inteiros primos entre si com $a > b,$ então para todo par de inteiros positivos $m,n,$ temos que
+\[
+\mdc(a^m - b^m,a^n - b^n) = a^{\mdc(m,n)} - b^{\mdc(m,n)}.
+\]
+\textsf{[Dica:]} Chamando $e = a^{\mdc(m,n)} - b^{\mdc(m,n)}$ e $f = \mdc(a^m - b^m,a^n - b^n),$ mostre que $e \mid f$ e $f \mid e,$ usando o Teorema de Bézout e o fato de que, se $\alpha \mid a^\beta - b^\beta,$ então $\alpha \mid a^{\beta \gamma} - b^{\beta \gamma},$ para $\alpha, \beta, \gamma \in \mathbb{N}.$
+%https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.193.8053&rep=rep1&type=pdf - pg 15
+\end{exercicio}
+\begin{solution}
+Sejam $d = \mdc(m,n), $ $e = a^d - b^d$ e  $f =\mdc(a^m - b^m,a^n - b^n).$ A afirmação do enunciado equivale a mostrar que $e = f.$
+Pela definição de máximo divisor comum, $d \mid m.$ Logo, $m = dq, q \in \mathbb{Z}.$ Assim, 
+\begin{align*}
+a^m - b^m &= a^{dq} - b^{dq} \\&=\left(a^d - b^d\right)\left(a^{(q-1)d} + a^{(q-2)d}b^d + a^{(q-3)d}b^{2d} + \ldots + a^{d}b^{ (q-2)d} + b^{(q-1)d}\right) \\&= \textcolor{JungleGreen}{\left(a^d - b^d\right)}\left(\sum\limits_{k=0}^{q-1} a^{kd}b^{((q-1)-k)d} \right) \\&= \textcolor{JungleGreen}{e}\left(\sum\limits_{k=0}^{q-1} a^{kd}b^{((q-1)-k)d} \right) 
+\end{align*}
+e portanto $e \mid a^m - b^m.$ Analogamente, como $d \mid n,$ temos que $e \mid a^n - b^n.$ Assim, $e \mid f.$ 
+
+Precisamos agora mostrar que $f \mid e.$ Para isso, utilizando o Teorema de Bézout, escolhemos inteiros $x,y > 0$ tais que $mx - ny = d.$ Então
+\[
+a^{\textcolor{Red}{mx}} = a^{\textcolor{Red}{d + ny}} = a^{ny} \cdot \textcolor{Orange}{a^d} = a^{ny} \cdot \textcolor{Orange}{(e + b^d)} 
+\]
+Desse modo,
+\[
+\textcolor{Cyan}{a^{mx}} - b^{\textcolor{Periwinkle}{mx}} = \textcolor{Cyan}{a^{ny}(e + b^d)} - b^{\textcolor{Periwinkle}{d + ny}} = a^{ny}e + a^{ny} \cdot b^d - b^d \cdot b^{ny} = b^d(a^{ny} - b^{ny}) + ea^{ny}
+\]
+Por definição de máximo divisor comum, $f \mid a^m - b^m$, então $f \mid a^{mx} - b^{mx}.$ Além disso, $f \mid a^n - b^n$, e portanto $f \mid a^{ny} - b^{ny}.$ Assim, da equação acima concluímos que $f \mid ea^{ny}.$ Mas $\mdc(f,a) = 1,$ pois qualquer divisor comum de $a$ e $f$ divide simultaneamente $a^m, a^m - b^m,$ e consequentemente, $b^m,$ mas $\mdc(a,b) = 1.$ 
+
+Como $f \mid ea^{ny}$ e $\mdc(a,f) = 1,$ segue que $f \mid e.$
+ %https://www.jstor.org/stable/2690443?refreqid=excelsior%3Aa77f2cee10339344e254bec53c1153c2&seq=4#metadata_info_tab_contents - problem 1091
+\end{solution}
+\begin{exercicio}
+Para cada item, encontre o menor valor positivo de $n$ para o qual a fração dada não é irredutível nem nula:
+\itensladoalado{2}{
+\task[\alt{a}] $\dfrac{n -11}{3n+8}$
+\task[\alt{b}] $\dfrac{4n+17}{n-5}$
+\task[\alt{c}] $\dfrac{2n + 5}{7n+1}$
+\task[\alt{d}] $\dfrac{n^3+2n^2-54n+34}{n^2 + 8n - 7}$
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+
+\task[\alt{a}] Para que a fração não seja irredutível, devemos ter $\mdc(n-11, 3n+8)  \neq 1.$ Seja $d$ um divisor comum de $n-11$ e $3n+8.$ Então, pelo Algoritmo de Euclides, $d$ deve ser um divisor de
+\[
+\textcolor{Cyan}{3n+8} - 3 \textcolor{PineGreen}{(n-11)} = 41
+\]
+Dessa forma, devemos ter
+\[
+\mdc(n-11,3n+8) = \mdc(n-11, 41).
+\]
+Então, para que $d > 1,$ $n-11$ deve ser múltiplo de $41,$ e devemos ter 
+\[
+n - 11 = 41q \Rightarrow n = 41q + 11
+\]
+Como $n - 11> 0,$ menor valor será obtido quando $q = 1,$ ao passo que $n = 52.$
+
+
+\task[\alt{b}] Para que a fração não seja irredutível, devemos ter $\mdc(4n+17, n-5)  \neq 1.$ Seja $d$ um divisor comum de $4n+17$ e $n-5.$ Então, pelo Algoritmo de Euclides, $d$ deve ser um divisor de
+\[
+\textcolor{Cyan}{4n+17} - 4 \textcolor{PineGreen}{(n-5)} = 37
+\]
+Dessa forma, devemos ter
+\[
+\mdc(n-5,4n+17) = \mdc(n-5, 37).
+\]
+Então, para que $d > 1,$ $n-5$ deve ser múltiplo de $37,$ e devemos ter 
+\[
+n - 5 = 37q \Rightarrow n = 37q + 5
+\]
+Como $n - 5 >0,$ o menor valor será obtido quando $q = 1,$ ao passo que $n = 42.$
+
+\task[\alt{c}] Para que a fração não seja irredutível, devemos ter $\mdc(2n + 5,7n+1)  \neq 1.$ Seja $d$ um divisor comum de $2n + 5$ e $7n+1.$ Então, pelo Algoritmo de Euclides, $d$ deve ser um divisor de
+\[
+\textcolor{Cyan}{7n+1} - 3 \textcolor{PineGreen}{(2n + 5)} = n - 14
+\]
+Dessa forma, devemos ter
+\[
+\mdc(2n + 5,7n+1) = \mdc(2n + 5, n-14).
+\]
+Aplicando novamente o Algoritmo de Euclides,
+\[
+\textcolor{Cyan}{2n+5} - 2 \textcolor{PineGreen}{(n-14)} = 33
+\]
+Logo, \[
+\mdc(2n + 5, n-14) = \mdc(n-14,33).
+\]
+Então, para que $d > 1,$ $n-14$ deve ser múltiplo de um divisor de $33.$ Como $33 = 3 \cdot 11,$ $n-14$ deve ser múltiplo de $3$, e assim 
+\[
+n - 14 = 3q \Rightarrow n = 3q + 14
+\]
+O menor valor será obtido quando $q = -4,$ ao passo que $n = 2.$
+
+\task[\alt{d}] Para que a fração não seja irredutível, devemos ter $\mdc(n^3+2n^2-54n+34, n^2 + 8n - 7)  \neq 1.$ Seja $d$ um divisor comum de $n^3+2n^2-54n+34$ e $n^2 + 8n - 7.$ Então, pelo Algoritmo de Euclides, $d$ deve ser um divisor de
+\[
+\textcolor{Cyan}{n^3+2n^2-54n+34} - (n-6) \textcolor{PineGreen}{(n^2 + 8n - 7)} = n-8
+\]
+Dessa forma, devemos ter
+\[
+\mdc(n^3+2n^2-54n+34,n^2 + 8n - 7) = \mdc(n-8, n^2 + 8n - 7).
+\]
+Aplicando novamente o Algoritmo de Euclides,
+\[
+\textcolor{Cyan}{n^2 + 8n - 7} - n \textcolor{PineGreen}{(n-8)} = 16n-7
+\]
+Logo, \[
+\mdc(n-8, n^2 + 8n - 7) = \mdc(n-8,16n-7).
+\]
+Mais uma vez, por Euclides,
+\[
+\textcolor{Cyan}{16n-7} - 16 \textcolor{PineGreen}{(n-8)} = 121
+\]
+Então, para que $d > 1,$ $n-8$ deve ser múltiplo de um divisor de $121.$ Como $121 = 11^2$, $n-8$ deve ser múltiplo de $11$, e assim 
+\[
+n - 8 = 11q \Rightarrow n = 11q + 8
+\]
+O menor valor será obtido quando $q = 0,$ ao passo que $n = 8.$
+%n^3+2n^2-55n+43 e n^2 + 8n-7 são primos entre si
+}
+\end{solution}
+
+\begin{exercicio}\textcolor{Blue}{*}
+Sabe-se que, se $F_m$ representa o $m$-ésimo número de Fibonacci, então
+\[
+\mdc(F_m, F_n) = F_{\mdc(m,n)}, \quad \forall m,n \in \mathbb{N}.
+\]
+Use este fato para provar que nenhum número de Fibonacci ímpar é divisível por $17.$
+%https://www.fmf.uni-lj.si/~lavric/Santos%20-%20Number%20Theory%20for%20Mathematical%20Contests.pdf - pg 41 - ex 252
+\end{exercicio}
+\begin{solution}
+Seja $F_n$ um número de Fibonacci ímpar, e considere $d = \mdc(17, F_n).$ Se $17 \mid F_n,$ e $F_n$ é ímpar, então $d$ deve ser ímpar. Mas
+\[
+d = \mdc(17, F_n) = \mdc(34, F_n) = \mdc(F_9, F_n) = F_{\mdc(9,n)}.
+\]
+Como $\mdc(9,n) \in \{1, 3, 9\},$ os possíveis valores para $d$ são $F_1 = 1,$ $F_3 = 2$ e $F_3 = 34.$ Como $d$ é ímpar, segue que $d = 1,$ ou seja, $17 \nmid F_n.$
+\end{solution}
+%http://www.its.caltech.edu/~kpilch/olympiad/NumberTheory-Complete.pdf - pg 6
+
+\begin{exercicio}\textcolor{Blue}{*}
+Sejam $a_n$ e $b_n$ inteiros satisfazendo a relação
+\[
+a_n + b_n \sqrt{2} = (1 + \sqrt{2})^n,
+\]
+para todo inteiro positivo $n.$ Prove que $\mdc(a_n, b_n) = 1.$
+
+
+\textsf{[Dica:]} Aplique indução em $n.$
+\end{exercicio}
+
+\begin{solution}
+Vamos usar indução em $n.$ Para o \textbf{caso base},  vamos considerar $n = 1.$ Note que 
+\[
+\left(1 + \sqrt{2} \right)^1 = 1 + \sqrt{2} \Rightarrow a_1 = 1 \mbox{ e } b_1 = 1.
+\]
+E claramente $\mdc(a_1, a_1) = \mdc(1,1) = 1.$
+Para a \textbf{hipótese de indução}, considere que, para algum $n = k \ge 1,$ tenhamos que, se
+\[
+a_k + b_k \sqrt{2} = \left( 1 + \sqrt{2} \right)^k,
+\]
+então $\mdc(a_k,b_k) = 1.$
+Para o \textbf{passo indutivo}, precisamos mostrar que se 
+\[
+a_{k+1} + b_{k+1} \sqrt{2} = \left( 1 + \sqrt{2} \right)^{k+1},
+\]
+então $\mdc(a_{k+1}, b_{k+1}).$
+Observe que
+\begin{align*}
+    a_{k+1} + b_{k+1} &= \left( 1 + \sqrt{2} \right)^{k+1}
+    \\&= \left( 1 + \sqrt{2} \right) \textcolor{PineGreen}{\left( 1 + \sqrt{2} \right)^{k}}
+    \\&= \left( 1 + \sqrt{2} \right) \textcolor{PineGreen}{\left( a_k + b_k \sqrt{2} \right)} 
+    \\&= (a_k + 2b_k) + (a_k + b_k) \sqrt{2}
+\end{align*}
+
+Portanto, $a_{k+1} = a_k + 2b_k$ e $b_{k+1} = a_k + b_k.$
+
+Vejamos agora que $\mdc(a_{k+1}, b_{k+1}) = 1.$ Pelo Algoritmo de Euclides,
+\[
+\mdc(a_{k+1}, b_{k+1}) = \mdc(a_k + 2b_k, a_k + b_k) = \mdc(b_k, a_k + b_k) = \mdc(b_k, a_k) = 1.
+\]
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Sejam $m$ e $n$ dois números inteiros positivos primos entre si. Encontre os possíveis valores de 
+\[
+\mdc(5^m + 7^m, 5^n + 7^n).
+\]
+\textsf{[Dica:]} Escreva $5^m + 7^m = (5^n + 7^n)(5^{m-n} + 7^{m-n}) - 5^n 7^{m-n} - 5^{m-n}7^n,$ e analise o que ocorre com esta expressão para $m <2n$ e $m > 2n$ para utilizá-la no Algoritmo de Euclides. Em seguida, verifique os possíveis valores de $\mdc(5^m + 7^m, 5^n + 7^n)$ conforme as paridades de $m$ e $n.$
+\end{exercicio}
+\begin{solution}
+Como $\mdc(m,n) = 1,$ então $m \neq n.$ Suponha sem perda de generalidade que $m > n.$ Observe que
+\[
+5^m + 7^m = (5^n + 7^n)(5^{m-n} + 7^{m-n}) - 5^n 7^{m-n} - 5^{m-n}7^n
+\]
+Vamos agora considerar dois casos:
+\begin{itemize}
+    \item Se $m < 2n,$ podemos escrever
+    \[
+    5^n 7^{m-n} + 5^{m-n}7^n = 5^{m-n} \cdot 7^{m-n} (5^{2n-m} + 7^{2n-m}).
+    \]
+    Assim,
+\begin{align*}
+5^m + 7^m &= (5^n + 7^n)(5^{m-n} + 7^{m-n}) - \textcolor{Emerald}{5^n 7^{m-n} - 5^{m-n}7^n} \\&= (5^n + 7^n)(5^{m-n} + 7^{m-n}) - \textcolor{Emerald}{5^{m-n} \cdot 7^{m-n} (5^{2n-m} + 7^{2n-m})}
+\end{align*}
+Portanto, pelo Algoritmo de Euclides
+\begin{align*}
+    \mdc(5^m + 7^m, 5^n + 7^n) &= \mdc(\textcolor{Mulberry}{5^{m-n} \cdot 7^{m-n}} (5^{2n-m} + 7^{2n-m}, 5^n + 7^n) \\&= \mdc( 5^{2n-m} + 7^{2n-m},5^n + 7^n),
+\end{align*}
+pois $5$ e $7$ não dividem $5^n + 7^n,$ acarretando $\textcolor{Mulberry}{5^{m-n} \cdot 7^{m-n}} \nmid 5^n + 7^n.$ 
+    \item Se $m > 2n,$ podemos escrever
+    \[ 5^n 7^{m-n} + 5^{m-n}7^n = 5^{n} \cdot 7^{n} (5^{m-2n} + 7^{m-2n}).\]
+    Assim,
+\begin{align*}
+5^m + 7^m &= (5^n + 7^n)(5^{m-n} + 7^{m-n}) - \textcolor{Emerald}{5^n 7^{m-n} - 5^{m-n}7^n} \\&= (5^n + 7^n)(5^{m-n} + 7^{m-n}) - \textcolor{Emerald}{5^{n} \cdot 7^{n} (5^{m-2n} + 7^{m-2n})}
+\end{align*}
+Portanto, pelo Algoritmo de Euclides
+\begin{align*}
+    \mdc(5^m + 7^m, 5^n + 7^n) &= \mdc(\textcolor{Mulberry}{5^{n} \cdot 7^{n}} (5^{m-2n} + 7^{m-2n}) \\&= \mdc( 5^{m-2n} + 7^{m-2n},5^n + 7^n),
+\end{align*}
+pois $5$ e $7$ não dividem $5^n + 7^n,$ acarretando $\textcolor{Mulberry}{5^{n} \cdot 7^{n}} \nmid 5^n + 7^n.$ 
+\end{itemize}
+
+Chamando $S(m,n)  = \mdc(5^m + 7^m, 5^n + 7^n),$ observe que, dos cálculos acima, temos
+\begin{equation}\label{S}
+S(m,n) = \begin{cases}
+S(n,2n-m), & \mbox{se } m < 2n \\
+S(n,m-2n), & \mbox{se } m > 2n
+\end{cases}
+\end{equation}
+
+Como o processo do Algoritmo de Euclides é finito, eventualmente obteremos $S(0, -).$ Vamos analisar o que ocorre com as paridades de $m$ e $n:$
+\begin{itemize}
+    \item Se $m$ e $n$ possuem paridades diferentes, isso significa que $m + n$ é ímpar. Em particular, $2n-m$ deverá ser $1$ em algum momento, e teremos ao final
+    \[S(m,n) = S(1,0) = \mdc(5^1 + 7^1, 5^0 + 7^0) = \mdc(12,2) = 2. \]
+    Vejamos alguns exemplos que corroboram a argumentação acima:
+    
+    \begin{itemize}
+        \item Se $m = 18$ e $n = 7,$ $m > 2n,$ então aplicando \ref{S} sucessivas vezes, obtemos
+        \begin{align*}
+            S(18,7) &= S(7, 18-2\cdot 7) \\&= S(7, 4) = S(4, 2\cdot4-7) \\&= S(4,1) = S(1, 4-2\cdot 1) \\&= S(1, 2) = S(1, 2 - 2\cdot1) \\&= S(1,0) = 2 
+        \end{align*}
+
+        \item Se $m = 11$ e $n = 8,$ $m < 2n,$então aplicando \ref{S} sucessivas vezes, obtemos
+        \begin{align*}
+            S(11,8) &= S(8, 2\cdot 8-11) \\&= S(8, 5) = S(5, 2\cdot5 -8) \\&= S(5,2) = S(2, 5-2\cdot 2) \\&= S(2, 1) = S(1,2-2\cdot1) \\&= S(1,0) = 2
+        \end{align*}
+    \end{itemize}
+    \item Se $m$ e $n$ têm a mesma paridade, isso significa que $m + n$ é par e, mais ainda, que $m$ e $n$ são ímpares, pois caso contrário, $\mdc(m,n) \neq 1$. Então ao final teremos 
+    \[S(m,n) = S(1,1) = \mdc(5^1 + 7^1, 5^1 + 7^1) = \mdc(12,12) = 12. \]
+    Vejamos um exemplo:
+    \begin{itemize}
+            \item Se $m = 11$ e $n = 7,$ então aplicando \ref{S} sucessivas vezes, obtemos
+        \begin{align*}
+            S(11,7) &= S(7, 2\cdot 7-11) \\&= S(7, 3) = S(3, 7-2\cdot3) \\&= S(3,1) = S(1, 3-2\cdot 1) \\&= S(1, 1) = S(0,0) = 12
+        \end{align*}
+        
+        \end{itemize}    
+\end{itemize}
+Assim, concluímos que
+\[
+\mdc(5^m+7^m,5^n+7^n) = \begin{cases}
+12, & \mbox{se } 2 \mid m+n\\
+2, & \mbox{se } 2 \nmid m+n
+\end{cases}.
+\]
+
+\end{solution}
+%\begin{exercicio}
+%(Japão) %https://s3.amazonaws.com/aops-cdn.artofproblemsolving.com/resources/articles/olympiad-number-theory.pdf - pg 14 
+%\end{exercicio}
+%\begin{solution}
+
+%\end{solution}
+Observação: Exercícios marcados com * são extras.
+
+\end{document}
+
+%https://www.math.cmu.edu/~cargue/arml/archive/18-19/numtheory-03-10-19.pdf
+%https://www.math.cmu.edu/~cargue/arml/archive/18-19/
