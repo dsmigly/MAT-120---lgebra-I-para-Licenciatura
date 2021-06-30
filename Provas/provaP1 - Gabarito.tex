@@ -1,0 +1,767 @@
+%http://www.math.uconn.edu/~kconrad/blurbs/
+\documentclass[oneside,a4paper,12pt]{article}
+\usepackage[english,brazilian]{babel}
+\usepackage[alf]{abntex2cite}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=20mm, bottom=20mm, left=20mm, right=20mm]{geometry}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pstricks}
+\graphicspath{{./Figuras/}}    
+\definecolor{shadecolor}{rgb}{0.8,0.8,0.8}
+
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtext}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{tasks}
+\usepackage{fancybox}
+\usepackage{amsthm}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx, color}
+\newcommand{\sen}{{\rm sen}}
+\newcommand{\tg}{{\rm tg}}
+\newcommand{\mdc}{{\rm mdc}}
+\newcommand{\cotg}{{\rm cotg}}
+\newcommand{\cossec}{{\rm cossec}}
+\newcommand{\arctg}{{\rm arctg}}
+\newcommand{\arcsen}{{\rm arcsen}}
+\newcommand{\negrito}[1]{\mbox{\boldmath{$#1$}}} 
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\diamonde}{\ensuremath\diamondsuit}
+\theoremstyle{Colorido}
+\newtheorem{questao}{\textcolor{Floresta}{\textit{\bf Questão}}}
+\newtheoremstyle{Colorido}{}{}{\color{Floresta}}{}{\color{Floresta}\bfseries}{}{ }{}
+\newtheorem{theorem}{Theorem}
+\newtheoremstyle{solu}{}{}{}{}{\color{red}\bfseries}{}{ }{}
+\theoremstyle{solu}
+\newtheorem*{resp}{Solução}
+\newtheoremstyle{dotlessP}{}{}{}{}{\color{Floresta}\bfseries}{}{ }{}
+\theoremstyle{dotlessP}
+\newcommand{\solucao}[1]{\textcolor{blue}{\textbf{Solução:} #1}}
+\newtheorem{sol}{Questão}
+%FAZ EDICOES AQUI (somente no conteudo que esta entre entre as ultimas  chaves de cada linha!!!)
+\newcommand{\universidade}{Universidade de São Paulo}
+\newcommand{\centro}{Instituto de Matemática e Estatísstica da USP}
+%\newcommand{\departamento}{Departamento}
+%\newcommand{\curso}{Curso}
+\newcommand{\professor}{Douglas de Araujo Smigly}
+\newcommand{\disciplina}{MAT0120 - Álgebra I para Licenciatura}
+\newcommand{\entrega}{ }
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+	\cornersize{.3} 
+	\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=gray!24!white}
+%ATE AQUI !!!
+
+\begin{document}
+\definecolor{Floresta}{rgb}{0.13,0.54,0.13}
+	\pagestyle{empty}
+	
+	\begin{center}
+	\includegraphics[width=\linewidth/8]{logoIME.png}%LOGOTIPO DA INSTITUICAO
+	 	\vspace{0pt}
+	 	
+		\universidade
+		\par
+		\centro
+		\par
+%		\departamento
+		\par
+%		\curso
+		\par
+		\vspace{24pt}
+		\LARGE \textbf{Prova P1 - \textcolor{blue}{Solu\c c\~oes}}
+		
+	\end{center}
+	
+	\vspace{24pt}
+	
+	%
+%	\begin{tabular}{ |l|p{12cm}| }
+%		
+%		\hline
+%		\multicolumn{2}{|c|}{\textbf{Dados de Identificação}} \\
+%			\hline
+%		Disciplina:        &    \disciplina          \\
+%		\hline
+%		Professor:         &    \professor           \\
+%	\hline
+%	Aluno(a):         &\\
+%		\hline
+%	Multiplicidade:  & \ \ \ \ \ \ \vline Nível: \vline\\
+%	
+%		\hline
+	%\end{tabular}
+	%
+	
+
+	\begin{tabular}{ |l|p{12cm}| }
+		
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Dados de Identificação}} \\
+			\hline
+		Curso:        &  \disciplina \\
+			\hline
+		Nome:        &  \\
+		\hline
+		NUSP:      &  \\
+		\hline
+				Assinatura:      &  \\
+		\hline
+				Data de entrega:      &  \entrega \\
+		\hline
+	\end{tabular}
+	
+	\vspace{24pt}
+	\vspace{40pt}
+	\tableofcontents
+	\begin{comment}	
+\begin{multicols*}{2}
+	\begin{center}
+		\begin{tabular}{ |c|p{1.9cm}| }
+		
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Tarefa Online}} \\
+			\hline
+		\centering\textbf{Questão}        &  \textbf{Resposta}\\
+		\hline
+		Questão 1        & (b)\\
+		\hline
+		Questão 2        & (c)\\
+		\hline
+		Questão 3        & (c)\\
+		\hline
+		Questão 4        &\\
+		\hline
+		Questão 5        &\\
+		\hline
+		Questão 6        &\\
+		\hline
+		\textbf{Total}        &\\
+		\hline
+	\end{tabular}
+	\end{center}
+\columnbreak
+		\begin{center}
+		\begin{tabular}{ |c|p{1.9cm}| }
+		
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Avaliação Online}} \\
+			\hline
+		\centering\textbf{Questão}        &  \textbf{Resposta}\\
+		\hline
+		Questão 1        &\\
+		\hline
+		Questão 2        &\\
+		\hline
+
+		\textbf{Total}        &\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\end{multicols*}
+	\vspace{24pt}
+	\end{comment}
+	%\begin{snugshade}
+	%	\section{O... aumento  }  
+	%\end{snugshade}
+	\newpage	
+
+	\textcolor{Floresta}{\section{Gabarito Modelo}}
+	\begin{sol}
+\textit{(2 pontos)}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Mostre que $15^{2n-1} + 1$ é múltiplo de $16$ para todos $n > 0.$
+\task[\textcolor{blue}{$\negrito{(b)} $}] Mostre que:
+\begin{small}
+\[\dfrac{1}{3 \cdot7} + \dfrac{1}{7 \cdot 11} + \dfrac{1}{11 \cdot 15} + \ldots +  \dfrac{1}{(4n + 3) \cdot (4n + 7)} = \dfrac{n+1}{3 \cdot (4n + 7)},\]
+\end{small}
+para todo $n > 1.$
+\task[\textcolor{blue}{$\negrito{(c)} $}] Mostre que
+\[
+F_1 + F_2 + F_3 + \ldots + F_n = F_{n+2} - 1,
+\]
+para todo $n > 1,$ onde $F_0 = 0, F_1 = 1, F_2 = 1, F_3 = 2, F_4 = 3, F_5 = 5, \ldots, F_{n+2} = F_{n+1} + F_{n}.$
+\end{tasks}
+\end{sol}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Vamos mostrar o resultado por indução. Lembrando que se um número inteiro $k$ é divisível por $16$, então existe um $t \in \mathbb{Z}$ tal que $k = 16t,$ estamos aptos a resolver a questão:\newline
+\textbf{Caso Base}: $n=1$
+Temos que
+$$15^{2\cdot1-1}+1=15^{1}+1=16=1\cdot16$$
+\textbf{Hipótese}: Assuma que $15^{2n-1} + 1$ é divisível por $16$ para certo $n=k>1,$ ou seja, que para certo $t \in \Z$, seja satisfeito
+$$15^{2n-1} + 1=16t$$
+\textbf{Passo Indutivo}: Provemos que $15^{2n-1} + 1$ é divisível por $16$ para $n=k+1:$
+\begin{align*}4^{2\cdot \left( k+1 \right) -1}+1&=15^{2k+2-1}-1\\&= 15^{\textcolor{Cyan}{2} + \textcolor{Plum}{(2k - 1)}} + 1\\&=\textcolor{Cyan}{15^2} \cdot \textcolor{Plum}{15^{2k-1}} + 1 \\&=225\cdot15^{2k-1}+1\\&=224 \cdot 15^{2k-1} + \textcolor{Magenta}{15^{2k-1} + 1}\\&=  224 \cdot 15^{2k-1} + \textcolor{Magenta}{16t}\\&= 16\textcolor{RawSienna}{(14 \cdot 15^{2k-1} + t)} =16\textcolor{RawSienna}{q};\quad  q \in \Z
+\end{align*}
+\textbf{Solução alternativa:} Observe que $15 \equiv -1 \pmod{16}.$ Logo, \[15^{2n-1} + 1 \equiv (-1)^{2n-1} + 1 \pmod{16} \Rightarrow 15^{2n-1} + 1 \equiv 0 \pmod{16}.\]
+\task[\textcolor{blue}{$\negrito{(b)} $}] Vamos provar a veracidade da expressão por indução:\newline
+\textbf{Caso Base}: Para $n=2,$ temos
+$$\frac{1}{3\cdot 7}+\frac{1}{7\cdot 11}+\frac{1}{11\cdot 15}+ =\frac{1}{15}=\frac{3}{45}=\frac{2+1}{3(4 \cdot 2 + 7)}$$
+\textbf{Hipótese}: Suponha a validade para $n=k>1:$
+$$\frac{1}{1\cdot2}+\frac{1}{2\cdot3}+ \cdots +\frac{1}{(4k+3) \left( 4k+7 \right) }=\frac{k+1}{3(4k+7)}$$
+\textbf{Passo Indutivo}: Provemos que a afirmação é válida para $n=k+1:$
+\begin{align*}
+\textcolor{Magenta}{\frac{1}{3\cdot7}+ \cdots +\frac{1}{(4k+3) \left( 4k+7 \right) }}+\frac{1}{ \left( 4k+7 \right)  \left( 4k+11 \right) }&=\textcolor{Magenta}{\frac{k+1}{3(4k+7)}}+\frac{1}{ \left( 4k+7 \right)  \left( 4k+11 \right) }\\&=\frac{1}{4k+7} \left(\frac{k+1}{3} + \frac{1}{4k+11} \right)\\&=\frac{1}{4k+7} \left(\frac{(k+1)(4k+11) + 3}{3(4k+11)} \right) \\&=\frac{1}{4k+7} \left(\frac{(k+1)(4k+7) + 4k+7}{3(4k+11)} \right)\\&=\frac{1}{4k+7} \left(\frac{(k+2)(4k+7)}{3(4k+11)} \right)\\&= \dfrac{k+2}{3\cdot (4k+11)}\\&= \dfrac{(k+1)+1}{3\cdot (4(k+1)+7)}
+\end{align*}
+\end{tasks}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(c)} $}]  Vamos utilizar a indução finita:\newline
+\textbf{Caso Base}: Para $n=2,$ temos \[F_1 + F_2 = 1 + 1 = 2 = \textcolor{PineGreen}{3} - 1 = \textcolor{PineGreen}{F_4} - 1\]
+\textbf{Hipótese}: Suponha que o resultado é válido para $n=k>1:$\[F_1 + F_2 + F_3 + \ldots + F_k = F_{k+2} - 1.\]
+\textbf{Passo Indutivo}: Provemos que a afirmação é válida para $n=k+1:$
+\begin{align*}
+    \textcolor{Magenta}{F_1 + F_2 + F_3 + \ldots + F_k}+ F_{k+1} &= \textcolor{Magenta}{F_{k+2} - 1}+ F_{k+1} \\&= \textcolor{Cyan}{F_{k+2} + F_{k+1}} - 1  \\&= \textcolor{Cyan}{F_{k+3}} - 1 \\&= F_{(k+1)+2} - 1
+\end{align*}
+\end{tasks}}
+\newpage
+\begin{sol}
+\textit{(2 pontos)} 
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}]  Encontre o resto da divisão de $22^{75}$ por $23.$ 
+\task[\textcolor{blue}{$\negrito{(b)} $}]  Encontre o resto da divisão de $2^{37}$ por $11.$
+\end{tasks}
+\end{sol}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Observe que $22 \equiv -1 \pmod{23}.$ Logo, temos que 
+\[
+22^{75} \equiv (-1)^{75} \pmod{23} \Rightarrow 22^{75} \equiv -1 \pmod{23}.
+\]
+Portanto, o resto da divisão de $22^{75}$ por $23$ é $22.$
+\task[\textcolor{blue}{$\negrito{(b)} $}] Note que $2^5 \equiv -1 \pmod{11}.$ Logo, temos que 
+\[
+2^{37} = (2^{5})^7 \cdot 2^2 \equiv (-1)^{7} \cdot 4 \pmod{11} \Rightarrow 2^{37} \equiv -4 \pmod{11}.
+\]
+Portanto, o resto da divisão de $2^{37}$ por $11$ é $11-4 = 7.$
+\end{tasks}}
+\begin{sol}
+\textit{(2 pontos)} Sejam $m$ e $n$ dois inteiros. Suponha que $\mdc(m,n) = 1.$ Mostre que
+\[\mdc(11 n -  m, n) = 1.\]
+\end{sol}
+\solucao{Utilizando o Algoritmo de Euclides, temos 
+   \begin{align*}
+    \mdc \left( 11 n - m, n \right)&=\mdc \left( \textcolor{Magenta}{11n - m -11 \cdot n}, \textcolor{PineGreen}{n} \right) \\&=\mdc \left( \textcolor{Magenta}{- m}, \textcolor{PineGreen}{n} \right)\\& =\mdc \left( m,n \right) = 1.
+    \end{align*}
+}
+\begin{sol}
+\textit{(2 pontos)}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Determine todos os múltiplos de $17$ e de $13$ cuja soma seja $120.$
+\task[\textcolor{blue}{$\negrito{(b)} $}] Resolva a congruência
+\[
+68 x \equiv 52 \pmod{76}
+\]
+\end{tasks}
+\end{sol}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}]
+Precisamos resolver a Equação Diofantina Linear
+\end{tasks}
+\[13x + 17y = 120,\] Observe que $\mdc(13,17) = 1.$Como $1 \mid 120,$ segue que a equação possui soluções inteiras e estas serão da forma 
+	\[(x_0 + 17k, y_0 - 13k), \quad k \in \mathbb{Z},\]onde $(x_0, y_0)$ é uma solução particular dessa equação. 
+	Procuremos inicialmente por $x_0$ e $y_0$ inteiros tais que $13 x_0 + 17 y_0 = 120.$ Observe que, se $r$ e $s$ são inteiros tais que $13 r + 17 s = 1,$ então $13 (120r) + 17 (120s) = 120,$ sendo portanto $x_0 = 120r$ e $y_0 = 120s$ as soluções que necessitamos.
+Observe que podemos escrever\begin{align*}13r + \textcolor{Emerald}{17}s &= 13r + \textcolor{Emerald}{(13+4)}s \\&= \textcolor{Cyan}{13}(r+s) + 4s \\&= \textcolor{Cyan}{(9+4)}(r+s) + 4s \\&= \textcolor{Plum}{9}(r+s) + 4(r+2s) \\&= \textcolor{Plum}{(4+5)}(r+s) + 4(r+2s) \\&= \textcolor{Gray}{5}(r+s) + 4(2r+3s) \\&= \textcolor{Gray}{(4+1)}(r+s) + 4(2r+3s) \\&= 4(3r+4s) + (r+s)
+	\end{align*}Assim, encontrar $r$ e $s$ tais que $13r+17s = 1$ equivale a encontrar $r'$ e $s'$ tais que $4r'+s' = 1,$ onde $r' = 3r+4s$ e $s' = r+s.$ Claramente temos que $4 \cdot 1 + 1 \cdot (-3) = 1.$ Portanto,
+	\[\begin{cases}3r+4s = 1 \\r+s = -3
+	\end{cases} \Rightarrow r = -13 \quad \mbox{e} \quad s = 10\]
+	Assim, $(x_0, y_0) = (120 \cdot (-13),120 \cdot 10) = (-2620, 1200),$ e as soluções de $13x + 17y = 120$ são da forma
+	\[
+	(-2620 + 20k, 1200 - 12k), \quad k \in \mathbb{Z}.
+	\]
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(b)} $}] Observe que $\mdc(68, 76) = 4,$ e $4 \mid 52.$ Logo, a congruência possui solução. Mais ainda, sabemos que esta congruência possui exatamente $4$ soluções dois a dois incongruentes, que serão exatamente da forma
+\[
+\begin{cases}
+x_0 = \dfrac{rb}{d} \\
+x_1 = x_0 + \dfrac{n}{d} = \dfrac{rb + n}{d} \\
+x_2 = x_1 + \dfrac{n}{d} = \dfrac{rb + 2n}{d} \\
+x_3 = x_2 + \dfrac{n}{d} = \dfrac{rb + 3n}{d}
+\end{cases},
+\]
+onde, dada a congruência $ax \equiv b \pmod{n},$ temos $n = 76, a = 68, b = 52, d = \mdc(a,n) = \mdc(68, 76) = 4,$ e $r$ é tal que $d = ar + ns.$ Para explicitar a solução, basta achar um valor possível para $r.$ Em nossa situação, devemos resolver a equação $68r + 76s = 4.$ Dividindo ambos os membros por $4,$ encontramos $17r + 19s = 1.$ Assim, precisamos encontrar inteiros $r$ e $s$ tais que $17r + 19s = 1.$ Observe que podemos escrever
+	\begin{align*}
+	17r + \textcolor{Emerald}{19}s &= 17r + \textcolor{Emerald}{(17 + 2)}s \\&= \textcolor{Cyan}{17}(r+s) + 2s \\&= \textcolor{Cyan}{(2 \cdot 8 + 1)}(r+s) + 2s \\&= 2(8r+9s) + (r+s) 
+	\end{align*}
+	Assim, encontrar $r$ e $s$ tais que $17r+19s = 1$ equivale a encontrar $r'$ e $s'$ tais que $2r'+1s' = 1,$ onde $r' = 8r+9s$ e $s' = r+s.$ Claramente temos que $2 \cdot 1 + 1 \cdot (-1) = 1.$ Portanto,
+	\[
+	\begin{cases}
+	8r+9s = 1 \\
+	r+s = -1
+	\end{cases} \Rightarrow r = -10 \quad \mbox{e} \quad s = 9
+	\]
+\end{tasks}
+Portanto,
+\[
+\begin{cases}
+x_0 = \dfrac{rb}{d} \\
+x_1 = x_0 + \dfrac{n}{d} = \dfrac{rb + n}{d} \\
+x_2 = x_1 + \dfrac{n}{d} = \dfrac{rb + 2n}{d} \\
+x_3 = x_2 + \dfrac{n}{d} = \dfrac{rb + 3n}{d}
+\end{cases} \Rightarrow \begin{cases}
+x_0 = \dfrac{(-10)\cdot 52}{4} = -130\\
+x_1  = \dfrac{(-10) \cdot 52 + 76}{4} = -111 \\
+x_2 = \dfrac{(-10) \cdot 52 + 2 \cdot 76}{4} = -92 \\
+x_3 = \dfrac{(-10) \cdot 52 + 3 \cdot 76}{4} = -73
+\end{cases} \Rightarrow \begin{cases}
+x_0 \equiv22 \pmod{76}\\
+x_1 \equiv41 \pmod{76}\\
+x_2 \equiv 60 \pmod{76}\\
+x_3 \equiv 3 \pmod{76}
+\end{cases}
+\]
+Logo, as soluções da congruência são $3, 22, 41$ e $60.$\\\textbf{Solução alternativa:} Como $\mdc(68,76) = 4,$ então a congruência em questão possui as mesmas soluções que $17x \equiv 13 \pmod{19}.$ Note que $17 \cdot 9 \equiv 1 \pmod{19}.$ Assim,\[\textcolor{Plum}{9} \cdot 17 x \equiv \textcolor{Plum}{9} \cdot 13 \pmod{19} \Rightarrow 153x \equiv 117 \pmod{19} \Rightarrow x \equiv 3 \pmod{19}.\]Assim, as soluções são da forma $19k + 3,$ com $0 \le k \le 3.$ Daí, obtemos os valores desejados $3,22,41$ e $60.$}
+
+\begin{sol}
+\textit{(2 pontos)}
+Encontre todos os primos $p$ tais que $p+2$ e $p+4$ são primos também.
+\end{sol}
+\solucao{
+Vamos analisar os possíveis restos da divisão de $p+2$ e $p+4$ por $3.$ Pelo Algoritmo da Divisão, sabemos que $p = 3k+r,$ onde $k \in \mathbb{Z}$ e $r \in \{0,1,2 \}.$ Analisemos cada caso:
+\begin{itemize}
+    \item Se $p = 3k,$ como $p$ é primo, então $p = 3,$ e $p + 2 = 5$ e $p + 4 = 7$ também são primos.
+    \item Se $p = 3k+1,$ então $p+2 = 3k+1+2 = 3k+3 = 3(k+1),$ ou seja, $3 \mid p+2,$ e portanto não pode ser primo;
+    \item Se $p = 3k+2,$ então $p+4 = 3k+2+4 = 3k+6 = 3(k+2),$ ou seja, $3 \mid p+4,$ e portanto não pode ser primo.
+\end{itemize} Concluímos portanto que o único valor de $p$ para o qual $p+2$ e $p+4$ são primos é $p = 3.$ \textbf{Observação:} Esta questão mostra que a única tripla de números primos trigêmeos é $(3,5,7).$
+}
+	\newpage
+\end{document}	
+	\textcolor{Floresta}{\section{Gabarito Geral}}
+	
+	Seja $\xi$ o seu número USP.\newline
+	\begin{sol}
+\textit{(2 pontos)}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Mostre que $(10 + \zeta)^{2n-1} + 1$ é múltiplo de $11 + \zeta$ para todos $n > 0,$ onde $0 \le \zeta \le 9$ é tal que $\eta \equiv \zeta \pmod{10},$ para $\xi \equiv \eta \pmod{27},$ com $0 \le \eta \le 26.$
+\task[\textcolor{blue}{$\negrito{(b)} $}] Mostre que:
+\begin{small}
+\[\dfrac{1}{\lambda \cdot (\mu + \lambda)} + \dfrac{1}{(\mu + \lambda) \cdot (2\mu + \lambda)} + \dfrac{1}{(2\mu + \lambda) \cdot (3 \mu + \lambda)} + \ldots +  \dfrac{1}{(\mu n + \lambda) \cdot (\mu n + (\lambda + \mu))} = \dfrac{n+1}{\lambda (\mu n + (\lambda + \mu))},\]
+\end{small}
+para todo $n > 1,$ onde
+\[
+\mu = \begin{cases}
+5 &\mbox{se } \xi \equiv 4 \pmod{21}\\
+5 &\mbox{se } \xi \not\equiv 4 \pmod{21} \mbox{ e } \xi+\left(2-\left\lfloor \dfrac{\xi + 17}{21} \right\rfloor \right) \equiv 0 \pmod{5}\\
+\eta &\mbox{se } \xi \not\equiv 4 \pmod{21} \mbox{ e } \xi+\left(2-\left\lfloor \dfrac{\xi + 17}{21} \right\rfloor \right) \equiv \eta \pmod{5}, 1 \le \eta \le 4\\
+\end{cases}
+\]
+\[
+\lambda = \begin{cases}
+1 &\mbox{se } \xi \equiv 0 \pmod{17}\\
+4 &\mbox{se } \xi \not\equiv 0 \pmod{17} \mbox{ e } \xi+\left(1-\left\lfloor \dfrac{\xi}{17} \right\rfloor \right) \equiv 0 \pmod{4}\\
+\eta &\mbox{se } \xi \not\equiv 0 \pmod{17} \mbox{ e } \xi+\left(1-\left\lfloor \dfrac{\xi}{17} \right\rfloor \right) \equiv \eta \pmod{4}, 1 \le \eta \le 3\\
+\end{cases}
+\]
+\task[\textcolor{blue}{$\negrito{(c)} $}] Mostre que
+\[
+F_1 + F_2 + F_3 + \ldots + F_n = F_{n+2} - 1,
+\]
+para todo $n > 1,$ onde $F_0 = 0, F_1 = 1, F_2 = 1, F_3 = 2, F_4 = 3, F_5 = 5, \ldots, F_{n+2} = F_{n+1} + F_{n}.$
+\end{tasks}
+\end{sol}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Vamos mostrar o resultado por indução. Lembrando que se um número inteiro $k$ é divisível por $11+\zeta$, então existe um $t \in \mathbb{Z}$ tal que $k = (11+\zeta)t,$ estamos aptos a resolver a questão:
+\textbf{Caso Base}: $n=1$
+Temos que
+$$(10+\zeta)^{2\cdot1-1}+1=(10+\zeta)^{1}+1=11+\zeta=1\cdot (11+\zeta)$$
+\textbf{Hipótese}: Assuma que $(10+\zeta)^{2n-1} + 1$ é divisível por $11+\zeta$ para certo $n=k>1,$ ou seja, que para certo $t \in \Z$, seja satisfeito
+$$(10+\zeta)^{2n-1} + 1=(11+\zeta)t$$
+\end{tasks}}
+\textcolor{blue}{\textbf{Passo Indutivo}: Provemos que $(10+\zeta)^{2n-1} + 1$ é divisível por $(11+\zeta)$ para $n=k+1:$
+\begin{align*}(10+\zeta)^{2\cdot \left( k+1 \right) -1}+1&=(10+\zeta)^{2k+2-1}-1\\&= (10+\zeta)^{\textcolor{Cyan}{2} + \textcolor{Plum}{(2k - 1)}} + 1\\&=\textcolor{Cyan}{(10+\zeta)^2} \cdot \textcolor{Plum}{(10+\zeta)^{2k-1}} + 1 \\&=(10+\zeta)^2 \cdot(10+\zeta)^{2k-1}+1\\&=((10+\zeta)^2 - 1) \cdot 4^{2k-1} + \textcolor{Magenta}{(10+\zeta)^{2k-1} + 1}\\&=  ((10+\zeta)^2 - 1) \cdot (10+\zeta)^{2k-1} + \textcolor{Magenta}{(11+\zeta)t}\\&=
+((10+\zeta) + 1)((10+\zeta) - 1) \cdot (10+\zeta)^{2k-1} + (11+\zeta)t\\&=
+(11+\zeta)(9+\zeta) \cdot (10+\zeta)^{2k-1} + (11+\zeta)t\\&=
+(11+\zeta)\textcolor{RawSienna}{((9+\zeta) \cdot (10+\zeta)^{2k-1} + t)} =(11+\zeta) \textcolor{RawSienna}{q};\quad  q \in \Z
+\end{align*}
+\textbf{Solução alternativa:} Observe que $10+\zeta \equiv -1 \pmod{11 + \zeta}.$ Logo, \[(10+\zeta)^{2n-1} + 1 \equiv (-1)^{2n-1} + 1 \pmod{11 + \zeta} \Rightarrow (10+\zeta)^{2n-1} + 1 \equiv 0 \pmod{11 + \zeta}.\]
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(b)} $}] Vamos provar a veracidade da expressão por indução:\newline
+\textbf{Caso Base}: Para $n=2,$ temos \[\dfrac{1}{\lambda \cdot (\mu + \lambda)} + \dfrac{1}{(\mu + \lambda) \cdot (2\mu + \lambda)} + \dfrac{1}{(2\mu + \lambda) \cdot (3 \mu + \lambda)} = \dfrac{3}{\lambda (\lambda + 3 \mu)} = \dfrac{2 + 1}{\lambda (2 \mu + (\lambda + \mu))}\]%$$\frac{1}{1\cdot \left( 1+1 \right) }=\frac{1}{2}=\frac{1}{1+1}$$
+\textbf{Hipótese}: Suponha a validade para $n=k>1:$
+\begin{small}
+\[\dfrac{1}{\lambda \cdot (\mu + \lambda)} + \dfrac{1}{(\mu + \lambda) \cdot (2\mu + \lambda)} + \dfrac{1}{(2\mu + \lambda) \cdot (3 \mu + \lambda)} + \ldots +  \dfrac{1}{(\mu k + \lambda) \cdot (\mu k + (\lambda + \mu))} = \dfrac{k+1}{\lambda (\mu k + (\lambda + \mu))},\]\end{small}
+\textbf{Passo Indutivo}: Provemos que a afirmação é válida para $n=k+1:$\[\textcolor{Magenta}{\dfrac{1}{\lambda \cdot (\mu + \lambda)} + \ldots +  \dfrac{1}{(\mu k + \lambda) \cdot (\mu k + (\lambda + \mu))} }+\dfrac{1}{(\mu (k+1) + \lambda) \cdot (\mu (k+1) + (\lambda + \mu))} =\]\[\textcolor{Magenta}{\dfrac{k+1}{\lambda (\mu k + (\lambda + \mu))}}+\dfrac{1}{(\mu (k+1) + \lambda) \cdot (\mu (k+1) + (\lambda + \mu))}=\]\[\dfrac{k+1}{\lambda (\mu k + (\lambda + \mu))}+\dfrac{1}{(\mu k+ \mu + \lambda) \cdot (\mu (k+1) + (\lambda + \mu))}=\]\[\dfrac{k+1}{\lambda (\mu k + (\lambda + \mu))}+\dfrac{1}{(\mu k+ (\lambda +\mu)) \cdot (\mu (k+1) + (\lambda + \mu))}=\]\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{k+1}{\lambda} + \dfrac{1}{\mu(k+1) + (\lambda + \mu)}  \right)=\]\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{(k+1)(\mu(k+1) + (\lambda + \mu)) + \lambda}{\lambda(\mu(k+1) + (\lambda + \mu))}  \right)=\]\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{\mu(k+1)^2 + (k+1)(\lambda + \mu) + \lambda}{\lambda\mu(k+1) + \lambda(\lambda + \mu)}  \right)=\]\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{\mu(k^2 + 2k + 1 + k + 1) + (k+2)\lambda}{\lambda\mu(k+1) + \lambda(\lambda + \mu)}  \right)=\]\end{tasks}\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{\mu (k^2 + 2k) + \mu(k + 2) + (k+2)\lambda}{\lambda\mu(k+1) + \lambda(\lambda + \mu)}  \right)=\]\[\dfrac{1}{\mu k + (\lambda + \mu)} \left( \dfrac{\mu k (k+2) + \mu(k + 2) + (k+2)\lambda}{\lambda\mu(k+1) + \lambda(\lambda + \mu)}  \right)=\]\[\dfrac{1}{\textcolor{Red}{\mu k + (\lambda + \mu)}} \left( \dfrac{(k+2)\textcolor{Red}{(\mu k + \mu + \lambda)}}{\lambda\mu(k+1) + \lambda(\lambda + \mu)}  \right)=\]\[ \dfrac{k+2}{\lambda\mu(k+1) + \lambda(\lambda + \mu)} = \dfrac{(k+1) + 1}{\lambda(\mu(k+1) + (\lambda + \mu))} \]
+%\[\frac{ \left( k^{2}+2k+1 \right) }{ \left( k+1 \right)  \left( k+2 \right) }=\]\[\frac{ \left( k+1 \right) ^{2}}{ \left( k+1 \right)  \left( k+2 \right) }=\frac{k+1}{k+2}.\]
+%\begin{align*}\textcolor{Magenta}{\frac{1}{1\cdot2}+\frac{1}{2\cdot3}+ \cdots +\frac{1}{k \left( k+1 \right) }}+\frac{1}{ \left( k+1 \right)  \left( k+2 \right) }&=\textcolor{Magenta}{\frac{k}{k+1}}+\frac{1}{ \left( k+1 \right)  \left( k+2 \right) }\\&=\frac{k \left( k+2 \right) +1}{ \left( k+1 \right)  \left( k+2 \right) }\\&=\frac{ \left( k^{2}+2k+1 \right) }{ \left( k+1 \right)  \left( k+2 \right) }\\&=\frac{ \left( k+1 \right) ^{2}}{ \left( k+1 \right)  \left( k+2 \right) }=\frac{k+1}{k+2}.\end{align*}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(c)} $}]  Vamos utilizar a indução finita:\newline
+\textbf{Caso Base}: Para $n=2,$ temos \[F_1 + F_2 = 1 + 1 = 2 = \textcolor{PineGreen}{3} - 1 = \textcolor{PineGreen}{F_4} - 1\]
+\textbf{Hipótese}: Suponha que o resultado é válido para $n=k>1:$\[F_1 + F_2 + F_3 + \ldots + F_k = F_{k+2} - 1.\]
+\textbf{Passo Indutivo}: Provemos que a afirmação é válida para $n=k+1:$
+\begin{align*}
+    \textcolor{Magenta}{F_1 + F_2 + F_3 + \ldots + F_k}+ F_{k+1} &= \textcolor{Magenta}{F_{k+2} - 1}+ F_{k+1} \\&= \textcolor{Cyan}{F_{k+2} + F_{k+1}} - 1  \\&= \textcolor{Cyan}{F_{k+3}} - 1 \\&= F_{(k+1)+2} - 1
+\end{align*}
+\end{tasks}}
+\begin{sol}
+\textit{(2 pontos)} 
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}]  Encontre o resto da divisão de $(\lambda(\zeta + 1) - 1)^{2\mu+43}$ por $\lambda,$ onde $0 \le \mu \le 19$ é tal que $\xi \equiv \mu \pmod{20},$ \[\lambda = \begin{cases}
+27, & \mbox{se } \xi \equiv 6 \pmod{7} \\
+p_{\eta + 4}, & \mbox{se } \xi \equiv \eta \pmod{7}
+\end{cases},\]
+onde $p_n$ denota o $n$-ésimo número primo, e $0 \le \zeta \le 2$ é tal que $\xi \equiv \zeta \pmod{3}.$
+\task[\textcolor{blue}{$\negrito{(b)} $}]  Encontre o resto da divisão de $(2+\eta)^{\nu+31}$ por $\kappa$,  onde $0 \le \eta \le 2$ é tal que $\xi -\left\lfloor \dfrac{\xi}{13} \right\rfloor  \equiv \eta \pmod{3},$ $0 \le \nu \le 2$ é tal que $\xi \equiv \nu \pmod{10}$ e
+\[\kappa = \begin{cases}
+7, & \mbox{se } \rho = 3, 6, 9, 10, 12, 13, 15, 17, 18, 20 \\
+11, & \mbox{se } \rho = 0, 2, 4, 5, 7, 14 \\
+13, & \mbox{se } \rho =1,8,11,19 \\
+17, & \mbox{se } \rho = 16 \\
+\end{cases},\]
+onde $0 \le \rho \le 20$ é tal que $\xi + 7 \left\lfloor \dfrac{\xi}{50} \right\rfloor \equiv \rho \pmod{21}.$
+\end{tasks}
+\end{sol}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Observe que 
+\[\lambda(\zeta + 1) - 1 \equiv -1 \pmod{\lambda}.\]
+Assim, como $2\mu + 43$ é ímpar, temos que
+\begin{align*}
+    \textcolor{Plum}{(\lambda(\zeta + 1) - 1)}^{2\mu+43} &\equiv \textcolor{Plum}{(-1)}^{2\mu + 43} \pmod{\lambda}  \\&\equiv -1 \pmod{\lambda} \\&\equiv \lambda-1 \pmod{\lambda}
+\end{align*}
+Portanto, o resto da divisão de $(\lambda(\zeta + 1) - 1)^{2\mu+43}$ por $\lambda$ é $\lambda - 1.$
+\end{tasks}}
+\textcolor{blue}{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(b)} $}] Veja que:
+\end{tasks}
+\begin{itemize}
+    \item[$\textcolor{Black}{\clubsuit}$] Se $\kappa = 7,$ como $2^3 \equiv 1 \pmod{7},$ $3^3 \equiv -1 \pmod{7}$ e $4^3 \equiv 1 \pmod{7},$ então $(2 + \nu)^{6} \equiv 1 \pmod{\kappa},$ e dessa forma, como $31 \le \nu+31 \le 40,$ $31 + \nu = 6q + r,$ com $q = 5, 6$ e $r \in \{0,1,2,3,4,5\}.$Assim,\begin{align*}(2+\eta)^{\nu+31} &\equiv (\textcolor{Brown}{(2 + \eta)^{6}})^q \cdot (2 + \eta)^r \pmod \kappa  \\&\equiv \textcolor{Brown}{1}^q \cdot (2 + \eta)^r \pmod \kappa \\&\equiv  (2 + \eta)^r \pmod \kappa\end{align*}
+\item[$\textcolor{Red}{\varheart}$] Se $\kappa = 11,$ como $2^5 \equiv -1 \pmod{11},$ $3^5 \equiv 1 \pmod{11}$ e $4^5 \equiv 1 \pmod{11},$ então $(2 + \nu)^{10} \equiv 1 \pmod{\kappa},$ e dessa forma, como $31 \le \nu+31 \le 40,$ $31 + \nu = 10q + r,$ com $q = 3, 4$ e $r \in \{0,1,2,3,4,5,6,7,8,9\}.$Assim,\begin{align*}(2+\eta)^{\nu+31} &\equiv (\textcolor{Brown}{(2 + \eta)^{10}})^q \cdot (2 + \eta)^r \pmod \kappa  \\&\equiv \textcolor{Brown}{1}^q \cdot (2 + \eta)^r \pmod \kappa \\&\equiv  (2 + \eta)^r \pmod \kappa\end{align*}
+\item[$\textcolor{Black}{\spadesuit}$] Se $\kappa = 13,$ como $2^6 \equiv -1 \pmod{13},$ $3^3 \equiv 1 \pmod{13}$ e $4^3 \equiv -1 \pmod{13},$ então $(2 + \nu)^{12} \equiv 1 \pmod{\kappa},$ e dessa forma, como $31 \le \nu+31 \le 40,$ $31 + \nu = 12q + r,$ com $q = 2, 3$ e $r \in \{0,1,2,3,4,5,6,7,8,9,10,11\}.$ Assim,\begin{align*}(2+\eta)^{\nu+31} &\equiv (\textcolor{Brown}{(2 + \eta)^{12}})^q \cdot (2 + \eta)^r \pmod \kappa  \\&\equiv \textcolor{Brown}{1}^q \cdot (2 + \eta)^r \pmod \kappa \\&\equiv  (2 + \eta)^r \pmod \kappa\end{align*}
+\item[$\textcolor{Red}{\vardiamond}$] Se $\kappa = 17,$ como $2^4 \equiv -1 \pmod{17},$ $3^8 \equiv -1 \pmod{17}$ e $4^2 \equiv -1 \pmod{17},$ então $(2 + \nu)^{16} \equiv 1 \pmod{\kappa},$ e dessa forma, como $31 \le \nu+31 \le 40,$ $31 + \nu = 16q + r,$ com $q = 1, 2$ e $r \in \{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15\}.$ Assim,\begin{align*}(2+\eta)^{\nu+31} &\equiv (\textcolor{Brown}{(2 + \eta)^{16}})^q \cdot (2 + \eta)^r \pmod \kappa  \\&\equiv \textcolor{Brown}{1}^q \cdot (2 + \eta)^r \pmod \kappa \\&\equiv  (2 + \eta)^r \pmod \kappa\end{align*}
+\end{itemize} Com base nos cálculos acima, temos os seguintes resultados possíveis:}
+\textcolor{blue}{\begin{center}
+\hfill
+\begin{tabular}{|c|c|c|}
+\multicolumn{3}{c}{\emph{$\kappa = 7$}}\\ \hline
+\emph{$2+ \eta$}&\emph{$\nu + 31$} &\emph{R}\\ \hline
+2 & 31 & \textbf{2} \\ \hline
+2 & 32 & \textbf{4} \\ \hline
+2 & 33 & \textbf{1} \\ \hline
+2 & 34 & \textbf{2} \\ \hline
+2 & 35 & \textbf{4} \\ \hline
+2 & 36 & \textbf{1} \\ \hline
+2 & 37 & \textbf{2} \\ \hline
+2 & 38 & \textbf{4} \\ \hline
+2 & 39 & \textbf{1} \\ \hline
+2 & 40 & \textbf{2} \\ \hline
+3 & 31 & \textbf{3} \\ \hline
+3 & 32 & \textbf{2} \\ \hline
+3 & 33 & \textbf{6} \\ \hline
+3 & 34 & \textbf{4} \\ \hline
+3 & 35 & \textbf{5} \\ \hline
+3 & 36 & \textbf{1} \\ \hline
+3 & 37 & \textbf{3} \\ \hline
+3 & 38 & \textbf{2} \\ \hline
+3 & 39 & \textbf{6} \\ \hline
+3 & 40 & \textbf{4} \\ \hline
+4 & 31 & \textbf{4} \\ \hline
+4 & 32 & \textbf{2} \\ \hline
+4 & 33 & \textbf{1} \\ \hline
+4 & 34 & \textbf{4} \\ \hline
+4 & 35 & \textbf{2} \\ \hline
+4 & 36 & \textbf{1} \\ \hline
+4 & 37 & \textbf{4} \\ \hline
+4 & 38 & \textbf{2} \\ \hline
+4 & 39 & \textbf{1} \\ \hline
+4 & 40 & \textbf{4} \\ \hline
+\end{tabular} \hfill
+\begin{tabular}{|c|c|c|}
+\multicolumn{3}{c}{\emph{$\kappa = 11$}}\\ \hline
+\emph{$2+ \eta$}&\emph{$\nu + 31$} &\emph{R}\\ \hline
+2 & 31 & \textbf{2} \\ \hline
+2 & 32 & \textbf{4} \\ \hline
+2 & 33 & \textbf{8} \\ \hline
+2 & 34 & \textbf{5} \\ \hline
+2 & 35 & \textbf{10} \\ \hline
+2 & 36 & \textbf{9} \\ \hline
+2 & 37 & \textbf{7} \\ \hline
+2 & 38 & \textbf{3} \\ \hline
+2 & 39 & \textbf{6} \\ \hline
+2 & 40 & \textbf{1} \\ \hline
+3 & 31 & \textbf{3} \\ \hline
+3 & 32 & \textbf{9} \\ \hline
+3 & 33 & \textbf{5} \\ \hline
+3 & 34 & \textbf{4} \\ \hline
+3 & 35 & \textbf{1} \\ \hline
+3 & 36 & \textbf{3} \\ \hline
+3 & 37 & \textbf{9} \\ \hline
+3 & 38 & \textbf{5} \\ \hline
+3 & 39 & \textbf{4} \\ \hline
+3 & 40 & \textbf{1} \\ \hline
+4 & 31 & \textbf{4} \\ \hline
+4 & 32 & \textbf{5} \\ \hline
+4 & 33 & \textbf{9} \\ \hline
+4 & 34 & \textbf{3} \\ \hline
+4 & 35 & \textbf{1} \\ \hline
+4 & 36 & \textbf{4} \\ \hline
+4 & 37 & \textbf{5} \\ \hline
+4 & 38 & \textbf{9} \\ \hline
+4 & 39 & \textbf{3} \\ \hline
+4 & 40 & \textbf{1} \\ \hline
+\end{tabular} \hfill
+\begin{tabular}{|c|c|c|}
+\multicolumn{3}{c}{\emph{$\kappa = 13$}}\\ \hline
+\emph{$2+ \eta$}&\emph{$\nu + 31$} &\emph{R}\\ \hline
+2 & 31 & \textbf{11} \\ \hline
+2 & 32 & \textbf{9} \\ \hline
+2 & 33 & \textbf{5} \\ \hline
+2 & 34 & \textbf{10} \\ \hline
+2 & 35 & \textbf{7} \\ \hline
+2 & 36 & \textbf{1} \\ \hline
+2 & 37 & \textbf{2} \\ \hline
+2 & 38 & \textbf{4} \\ \hline
+2 & 39 & \textbf{8} \\ \hline
+2 & 40 & \textbf{3} \\ \hline
+3 & 31 & \textbf{3} \\ \hline
+3 & 32 & \textbf{9} \\ \hline
+3 & 33 & \textbf{1} \\ \hline
+3 & 34 & \textbf{3} \\ \hline
+3 & 35 & \textbf{9} \\ \hline
+3 & 36 & \textbf{1} \\ \hline
+3 & 37 & \textbf{3} \\ \hline
+3 & 38 & \textbf{9} \\ \hline
+3 & 39 & \textbf{1} \\ \hline
+3 & 40 & \textbf{3} \\ \hline
+4 & 31 & \textbf{4} \\ \hline
+4 & 32 & \textbf{3} \\ \hline
+4 & 33 & \textbf{12} \\ \hline
+4 & 34 & \textbf{9} \\ \hline
+4 & 35 & \textbf{10} \\ \hline
+4 & 36 & \textbf{1} \\ \hline
+4 & 37 & \textbf{4} \\ \hline
+4 & 38 & \textbf{3} \\ \hline
+4 & 39 & \textbf{12} \\ \hline
+4 & 40 & \textbf{9} \\ \hline
+\end{tabular} \hfill
+\begin{tabular}{|c|c|c|}
+\multicolumn{3}{c}{\emph{$\kappa = 17$}}\\ \hline
+\emph{$2+ \eta$}&\emph{$\nu + 31$} &\emph{R}\\ \hline
+2 & 31 & \textbf{9} \\ \hline
+2 & 32 & \textbf{1} \\ \hline
+2 & 33 & \textbf{2} \\ \hline
+2 & 34 & \textbf{4} \\ \hline
+2 & 35 & \textbf{8} \\ \hline
+2 & 36 & \textbf{16} \\ \hline
+2 & 37 & \textbf{15} \\ \hline
+2 & 38 & \textbf{13} \\ \hline
+2 & 39 & \textbf{9} \\ \hline
+2 & 40 & \textbf{1} \\ \hline
+3 & 31 & \textbf{6} \\ \hline
+3 & 32 & \textbf{1} \\ \hline
+3 & 33 & \textbf{3} \\ \hline
+3 & 34 & \textbf{9} \\ \hline
+3 & 35 & \textbf{10} \\ \hline
+3 & 36 & \textbf{13} \\ \hline
+3 & 37 & \textbf{5} \\ \hline
+3 & 38 & \textbf{15} \\ \hline
+3 & 39 & \textbf{11} \\ \hline
+3 & 40 & \textbf{16} \\ \hline
+4 & 31 & \textbf{13} \\ \hline
+4 & 32 & \textbf{1} \\ \hline
+4 & 33 & \textbf{4} \\ \hline
+4 & 34 & \textbf{16} \\ \hline
+4 & 35 & \textbf{13} \\ \hline
+4 & 36 & \textbf{1} \\ \hline
+4 & 37 & \textbf{4} \\ \hline
+4 & 38 & \textbf{16} \\ \hline
+4 & 39 & \textbf{13} \\ \hline
+4 & 40 & \textbf{1} \\ \hline
+\end{tabular} \hfill~
+\end{center}}
+\begin{sol}
+\textit{(2 pontos)} Sejam $m$ e $n$ dois inteiros. Suponha que $\mdc(m,n) = 1.$ Mostre que
+\[\mdc(\kappa n - (-1)^\xi m, n) = 1,\]
+onde $\kappa$ é definido da mesma forma como no item b da Questão 2.
+\end{sol}
+\solucao{Utilizando o Algoritmo de Euclides, temos 
+   \begin{align*}
+    \mdc \left( \kappa n - (-1)^\xi m, n \right)&=\mdc \left( \textcolor{Magenta}{\kappa n - (-1)^\xi m -\kappa \cdot n}, \textcolor{PineGreen}{n} \right) \\&=\mdc \left( \textcolor{Magenta}{- (-1)^\xi m}, \textcolor{PineGreen}{n} \right)\\& =\mdc \left( m,n \right) = 1.
+    \end{align*}
+}
+\begin{sol}
+\textit{(2 pontos)}
+\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Determine todos os múltiplos de $\alpha$ e de $\beta$ cuja soma seja $30\gamma + 90,$ onde temos
+\[\alpha = \begin{cases}
+27, & \mbox{se } \theta= 6,19 \\
+p_{\eta + 4}, & \mbox{se } \theta \neq 6, 19, \mbox{para } 0 \le \eta \le 12 \mbox{tal que} \theta \equiv \eta \pmod{13}
+\end{cases},\]
+\[
+\beta = \begin{cases}
+27, & \mbox{se } \tau \le 30 \mbox{ e }  \tau \equiv 6 \pmod{13}\\
+p_{16 - \tau \pmod{13}}, & \mbox{se } \tau \le 30 \mbox{ e } \tau \not\equiv 6 \pmod{13}\\
+
+27, & \mbox{se } 31 \le \tau \le 123 \mbox{ e } \eta \equiv 6 \pmod{13}\\
+p_{\eta\pmod{13} + 4}, & \mbox{se } 31 \le \tau \le 123 \mbox{ e } \eta \not\equiv 6 \pmod{13}\\
+
+27, & \mbox{se } 124 \le \tau \le 147 \mbox{ e }  \tau \equiv 6 \pmod{13}\\
+p_{16 - (\tau+6) \pmod{13}}, & \mbox{se } 124 \le \tau \le 147 \mbox{ e } \tau \not\equiv 6 \pmod{13}\\
+
+27, & \mbox{se } 148 \le \tau \le 247 \mbox{ e } \eta \equiv 6 \pmod{13}\\
+p_{\eta\pmod{13} + 4}, & \mbox{se } 148 \le \tau \le 247 \mbox{ e } \eta \not\equiv 6 \pmod{13}\\
+
+27, & \mbox{se } 248 \le \tau \le 259 \mbox{ e }  \tau \equiv 6 \pmod{13}\\
+p_{16 - (\tau+12) \pmod{13}}, & \mbox{se } 248 \le \tau \le 259 \mbox{ e } \tau \not\equiv 6 \pmod{13}\\
+
+27, & \mbox{se } \tau > 259 \mbox{ e } \eta \equiv 6 \pmod{13}\\
+p_{\eta\pmod{13} + 4}, & \mbox{se } \tau > 259 \mbox{ e } \eta \not\equiv 6 \pmod{13}\\
+\end{cases}
+\]
+e $0 \le \gamma \le 3$ é tal que $\theta \equiv \gamma \pmod{4},$ para:
+
+\begin{itemize}
+    \item $0 \le \theta \le 30$ satisfaz $\xi \equiv \theta \pmod{31};$
+    \item $p_n$ denota o $n$-ésimo número primo;
+    \item  $0 \le \tau \le 1146$ satisfaz $\xi \equiv \tau \pmod{1147};$ 
+    \item $0 \le \eta \le 36$ é tal que $\tau \equiv \eta \pmod{37};$
+    %é tal que $\xi-\left(1-4\left\lfloor \dfrac{\xi}{37} \right\rfloor \right) \equiv \eta \pmod{13}$;
+%    \item $0 \le \iota \le 12$ é tal que $\xi+4\left\lfloor \dfrac{\xi}{37} \right\rfloor \equiv \iota \pmod{13}$;
+%    \item $0 \le \upsilon \le 12$ é tal que $\xi+2\left\lfloor \dfrac{\xi}{37} \right\rfloor \equiv \iota \pmod{13}$;
+    \end{itemize}
+\task[\textcolor{blue}{$\negrito{(b)} $}] Resolva a congruência
+\[
+\omega x \equiv \tau \pmod{\sigma}
+\]
+\end{tasks}
+\end{sol}
+\begin{comment}
+\solucao{\begin{tasks}[counter-format={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {20pt}](1)
+\task[\textcolor{blue}{$\negrito{(a)} $}] Precisamos resolver a Equação Diofantina Linear\[\alpha x + \beta y = 30 \gamma + 90.\] Observe que 925a929 7,11,13,17,19 \[\mdc(\alpha, \beta) = \begin{cases}
+\alpha, \mbox{se } \alpha = \beta;
+1, \mbox{se } \alpha \neq \beta.
+\end{cases}\] Na primeira situação, como $30\gamma + 90 = 30(\gamma + 3)$ e $9 \nmid \gamma,$ então $\alpha \nmid 30\gamma + 90,$ e nesse caso a Equação Diofantina Linear não terá solução. No segundo caso, temos que $1 \mid 30\gamma + 90,$ e segue que a equação possui soluções inteiras e estas serão da forma 
+	\[
+	(x_0 + \beta k, y_0 - \alpha k), \quad k \in \mathbb{Z},
+	\]
+	onde $(x_0, y_0)$ é uma solução particular dessa equação. 
+	
+	Procuremos inicialmente por $x_0$ e $y_0$ inteiros tais que $\alpha x_0 + \beta y_0 = 30\gamma + 90.$ Observe que, se $r$ e $s$ são inteiros tais que $\alpha r + \beta s = 1,$ então $\alpha ((30\gamma + 90)r) + \beta ((30\gamma + 90)s) = 30\gamma + 90,$ sendo portanto $x_0 = (30\gamma + 90)r$ e $y_0 = (30\gamma + 90)s$ as soluções que necessitamos. As tabelas abaixo mostram as possíveis soluções particulares para cada valor de $\alpha$ e $\beta:$	Assim, $(x_0, y_0) = (-17,17),$ e as soluções de $\alpha x + \beta y = 30\gamma + 90$ são da forma
+	\[
+	((30\gama + 90)r + \beta k, (30\gama + 90)s - \alpha k), \quad k \in \mathbb{Z},
+	\]
+	\end{tasks}}
+\end{comment}
+	\begin{sol}
+\textit{(2 pontos)} \newline \newline
+Seja $0 \le \zeta \le 4$ tal que $\xi \equiv \zeta \pmod{4}.$ Então:
+\begin{itemize}
+\item Se $ \zeta = 0:$ Encontre todos os primos $p$ tais que $p+2$ e $p+4$ são primos também.
+\item Se $ \zeta = 1:$ Encontre todos os $n$ tais que $2^{2n}-1$ é um primo.
+\item Se $ \zeta = 2:$ Encontre todos os inteiros $p$ tais que $p,p+2,p+6,p+8,p+12,p+14$ são todos primos.
+\item Se $ \zeta = 3:$ Encontre todos os primos $p$ tais que $p+4$ é quadrado de um inteiro (ou seja, existe $n$ tal que $n^2=p+4$).
+\end{itemize}
+\end{sol}
+\solucao{\begin{itemize}
+\item Se $ \zeta = 0:$ 
+Vamos analisar os possíveis restos da divisão de $p+2$ e $p+4$ por $3.$ Pelo Algoritmo da Divisão, sabemos que $p = 3k+r,$ onde $k \in \mathbb{Z}$ e $r \in \{0,1,2 \}.$ Analisemos cada caso:
+\begin{itemize}
+    \item Se $p = 3k,$ como $p$ é primo, então $p = 3,$ e $p + 2 = 5$ e $p + 4 = 7$ também são primos.
+    \item Se $p = 3k+1,$ então $p+2 = 3k+1+2 = 3k+3 = 3(k+1),$ ou seja, $3 \mid p+2,$ e portanto não pode ser primo;
+    \item Se $p = 3k+2,$ então $p+4 = 3k+2+4 = 3k+6 = 3(k+2),$ ou seja, $3 \mid p+4,$ e portanto não pode ser primo.
+\end{itemize} Concluímos portanto que o único valor de $p$ para o qual $p+2$ e $p+4$ são primos é $p = 3.$ \textbf{Observação:} Esta questão mostra que a única tripla de números primos trigêmeos é $(3,5,7).$\item Se $ \zeta = 1:$ Observe que \[2^{2n} - 1 = (2^n + 1)(2^n - 1). \]Assim, para que este valor seja primo, como $2^n - 1 < 2^n + 1,$ temos que $2^n - 1 = 1,$ e assim segue que \[2^n = 2 \Rightarrow n = 1.\]Portanto, $n = 1$ é o único valor de $n \in \mathbb{N}$ tal que $2^{2n}-1$ é primo.\item Se $ \zeta = 2:$ 
+Vamos analisar os possíveis restos da divisão de $p, p+2, p+6, p+8, p+12$ e $p+14$ por $5.$ Pelo Algoritmo da Divisão, sabemos que $p = 5k+r,$ onde $k \in \mathbb{Z}$ e $r \in \{0,1,2,3,4 \}.$ Analisemos cada caso:
+\begin{itemize}
+    \item Se $p = 5k,$ como $p$ é primo, então $p = 5,$ e $p + 2 = 7, p + 6 = 11, p+8 = 13, p+12 = 17$ e $p + 14 = 19$ também são todos primos.
+    \item Se $p = 5k+1,$ então $p+14 = 5k+1+14 = 5k+15 = 5(k+3),$ ou seja, $5 \mid p+14,$ e portanto não pode ser primo;
+    \item Se $p = 5k+2,$ então $p+8 = 5k+2+8 = 5k+10 = 5(k+2),$ ou seja, $5 \mid p+8,$ e portanto não pode ser primo;
+    \item Se $p = 5k+3,$ então $p+12 = 5k+3+12 = 5k+15 = 5(k+3),$ ou seja, $5 \mid p+12,$ e portanto não pode ser primo;
+    \item Se $p = 5k+4,$ então $p+6 = 5k+4+6 = 5k+10 = 5(k+2),$ ou seja, $5 \mid p+6,$ e portanto não pode ser primo.
+\end{itemize} Concluímos portanto que o único valor de $p$ para o qual $p, p+2, p+6, p+8, p+12$ e $p+14$ são primos é $p = 5.$ \item Se $ \zeta = 3:$ 
+Vamos analisar os possíveis restos da divisão de $n^2$ por $5.$ Pelo Algoritmo da Divisão, sabemos que $n = 5k+r,$ onde $k \in \mathbb{Z}$ e $r \in \{0,1,2,3,4 \}.$ Analisemos cada caso:
+\begin{itemize}
+    \item Se $n = 5k,$ então $(5k)^2 = 25k^2 = 5(5k^2) = 5q, q \in \mathbb{Z};$
+    \item Se $n = 5k+1,$ então $(5k+1)^2 = 25k^2+10k+1 = 5(5k^2+2k)+1 = 5q+1, q \in \mathbb{Z};$
+    \item Se $n = 5k+2,$ então $(5k+2)^2 = 25k^2+20k+4 = 5(5k^2+4k)+4 = 5q+4, q \in \mathbb{Z};$
+    \item Se $n = 5k+3,$ então $(5k+3)^2 = 25k^2+30k+9 = 5(5k^2+6k+1)+4 = 5q+4, q \in \mathbb{Z};$
+    \item Se $n = 5k+4,$ então $(5k+4)^2 = 25k^2+40k+16 = 5(5k^2+8k+3)+1 = 5q+1, q \in \mathbb{Z};$
+\end{itemize} Assim, os possíveis restos da divisão de $n^2$ por $5$ são $0, 1$ e $4.$ Vejamos agora o que ocorre com $p+4:$\begin{itemize}
+    \item Se $n \equiv 0 \pmod{5},$ então $p \equiv 1 \pmod{5}$
+\end{itemize}Concluímos portanto que o único valor de $p$ para o qual $p, p+2, p+6, p+8, p+12$ e $p+14$ são primos é $p = 5.$\end{itemize}}
+	\flushbottom
+	\flushright
+%	"Alguma frase bonita de fim de prova"\\(autor da frase bonita)
+
+\end{document}
+\begin{center}
+\includegraphics[scale=0.48]{paralelepipedo_p1}
+\end{center}
+	\begin{sol}
+\textit{(4 pontos)} \newline \newline
+\end{sol}
+\solucao{}
+\newpage
+
+
+Sejam $x$ a quantidade de netos que receberam valores de $R\$ 12,00$ e $y$ a quantidade de netos que receberam valores de $R\$ 20,00.$ Precisamos resolver a Equação Diofantina Linear
+\[
+12x + 20y = 136,
+\]
+Do item anterior, sabemos que $\mmc(12,20) = 60,$ ao passo que
+\[
+\mdc(12,20) = \dfrac{12 \cdot 20}{\mmc(12,20)} = \dfrac{240}{60} = 4.
+\]
+Como $4 \mid 136,$ segue que a equação possui soluções inteiras e estas serão da forma 
+	\[
+	(x_0 + 20k, y_0 - 12k), \quad k \in \mathbb{Z},
+	\]
+	onde $(x_0, y_0)$ é uma solução particular dessa equação. 
+	
+	Procuremos inicialmente por $r$ e $s$ inteiros tais que $12r + 20s = 136,$ ou seja, tais que $3r+5s = 34.$ 
+Observe que podemos escrever
+	\begin{align*}
+	3r + \textcolor{Emerald}{5}s &= 3r + \textcolor{Emerald}{(3+2)}s \\&= \textcolor{Cyan}{3}(r+s) + 2s \\&= \textcolor{Cyan}{(2+1)}(r+s) + 2s \\&= (r+s) + 2(r+2s)
+	\end{align*}
+	Assim, encontrar $r$ e $s$ tais que $12r+20s = 136$ equivale a encontrar $r'$ e $s'$ tais que $r'+2s' = 34,$ onde $r' = r+s$ e $s' = r+2s.$ Claramente temos que $1 \cdot 0 + 2 \cdot 17 = 34.$ Portanto,
+	\[
+	\begin{cases}
+	r+s = 0 \\
+	r+2s = 17
+	\end{cases} \Rightarrow r = -17 \quad \mbox{e} \quad s = 17
+	\]
+	Assim, $(x_0, y_0) = (-17,17),$ e as soluções de $12x + 20y = 136$ são da forma
+	\[
+	(-17 + 20k, 17 - 12k), \quad k \in \mathbb{Z}.
+	\]
+
+Como a quantidade de netos é um número natural positivo, devemos ter
+\[
+\begin{cases}
+-17 + 20k > 0 \\
+17 - 12k > 0
+\end{cases} \Rightarrow \begin{cases}
+k > \left\lfloor - \dfrac{17}{20} \right\rfloor \\
+k < \left\lceil \dfrac{17}{12} \right\rceil
+\end{cases} \Rightarrow \begin{cases}
+k > 0 \\
+k < 2
+\end{cases} \Rightarrow k = 1.
+\]
+Assim, $x = -17 + 20 = 3$ e $y = 17 - 12 = 5,$ e Vovô Pedro tem $3+5 = 8$ netos.
+
+

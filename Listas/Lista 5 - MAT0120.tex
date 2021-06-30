@@ -1,0 +1,612 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage{mathtext}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{tasks}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{tikz}
+\usepackage{tikz-cd}%Para diagramas 
+\usepackage[framemethod=Tikz]{mdframed}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{pifont}
+\usepackage{arydshln} %dashed line nas matrizes
+%\usepackage{lipsum}
+%\usepackage{CJKutf8} %Pacote para escrever em japonês \begin{CJK}{UTF8}{min} \end{CJK}
+\usepackage{multicol}
+% \usepackage{colorspace}
+\usepackage[arrow,matrix,curve]{xy}
+\usepackage{enumitem}
+\usepackage{graphicx, color}
+%\usepackage{eulervm} %Fonte de texto
+\usepackage{exsheets} %Mostrar soluções
+\usepackage{commath}
+\usepackage{mathpazo}
+\usepackage{cancel}
+%-------------------------------------------------------------
+%Comandos úteis
+\newcommand{\mdc}{{\rm mdc}}
+\newcommand{\mmc}{{\rm mmc}}
+\newcommand{\sen}{{\rm sen}}
+\newcommand{\tg}{{\rm tg}}
+\newcommand{\cotg}{{\rm cotg}}
+\newcommand{\cossec}{{\rm cossec}}
+\newcommand{\arctg}{{\rm arctg}}
+\newcommand{\arcsen}{{\rm arcsen}}
+\newcommand{\negrito}[1]{\mbox{\boldmath{$#1$}}} 
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\diamonde}{\ensuremath\diamondsuit}
+\newtheorem{defi}{Definição}
+\newtheorem{prop}{Proposição}
+\newtheorem{dem}{Demonstração}
+\newtheorem{coro}{Corolário}
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\setlength{\parindent}{0pt}
+\newcommand{\tn}[1]{\textnormal{#1}} 
+\newcommand{\Hom}{\tn{Hom}}
+\newcommand{\End}{\tn{End}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\rmdefault}{ptm} 
+\newcommand{\spec}{\textrm{Spec}}
+
+%-------------------------------------------------------------
+%Boxes para critérios de correção, caso seja necessário
+
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Criterios}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!75!green}
+    
+%Box padrão    
+\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!white}
+    
+%\mdfdefinestyle{Solução}{%
+%    linecolor=blue,
+%    outerlinewidth=1pt,
+%    roundcorner=8pt,
+%    innertopmargin=4pt%\baselineskip,
+%    innerbottommargin=0pt%\baselineskip,
+%    innerrightmargin=20pt,
+%    innerleftmargin=20pt,
+%    backgroundcolor=white!50!white}
+    
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Aviso}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!green}
+    
+%----------------------------------------------------------------
+%Cores do documento
+\definecolor{Floresta}{rgb}{0.13,0.54,0.13}    
+% \definespotcolor{mygreen}{PANTONE 7716 C}{.83, 0, .00, .51}
+% \definespotcolor{tuti}{}{0.6, 0, 1, .508}
+
+%----------------------------------------------------------------
+%Uso de counters para numeração automática dos exercícios 
+%Para mais infos: https://www.overleaf.com/learn/latex/Counters
+
+\newcounter{exercicio}[section]
+\newenvironment{exercicio}[1][]{\refstepcounter{exercicio}\par\medskip
+ \textcolor{blue}{\bf(\theexercicio)} \rmfamily}{\medskip }
+   
+ \usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+ 
+ \makeatletter 
+ \newcommand{\isempty}[1]{%
+  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+
+% \newcommand{\isempty}[1]{%
+%  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+  
+    
+ 
+ 
+\newenvironment{solucao}[1][]{\textbf{\\ \\ \textcolor{red}{Solução:}}#1 \rmfamily}{\medskip }
+
+
+\newenvironment{criterios}[1][]{
+ \textcolor{blue}{\bf Critérios de Correção:} \rmfamily \par\medskip #1 }{\medskip }
+ 
+\newcommand{\itens}[1]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](1) #1\end{tasks}}
+
+\newcommand{\itensladoalado}[2]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](#1) #2 \end{tasks}}
+
+\newcommand{\alt}[1]{\textcolor{Floresta}{$\negrito{(#1)} $}}
+
+%\newcommand{\alt}[1]{\task[\pers{#1}]}
+
+%\newcommand{\solucao}[1]{
+%\textbf{\\ \\ \textcolor{red}{Solução:}} #1}
+
+%----------------------------------------------------------------
+%Dados da lista:
+
+\newcommand{\titulo}{MAT0120 - Álgebra I para Licenciatura}
+\newcommand{\lista}{Lista 5}
+\newcommand{\professor}{Kostiantyn Iusenko}
+\newcommand{\monitor}{Douglas de Araujo Smigly}
+\newcommand{\semestre}{1º Semestre de 2021}
+%----------------------------------------------------------------
+
+%Mostrar ou não as soluções
+%\SetupExSheets{solution/print=true} %Se print=false, este arquivo Não imprime as soluções.
+\SetupExSheets{solution/print=false}
+
+
+%Solução sem numeração (pois vem logo depois da questão) - se quiser com números, basta comentar os comandos abaixo:
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+  attach = {
+    main[l,vc]title[l,vc](0pt,0pt) ;
+    main[r,vc]points[l,vc](\marginparsep,0pt)
+  }
+}
+
+%  {question}[headings=block-subtitle] - por bloco
+\RenewQuSolPair
+  {question}[headings=block-no-nr]
+  {solution}[headings=block-no-nr]
+
+%Personalização de Questão/ Solução
+\SetupExSheets{
+  counter-format=se.qu.,
+  question/name= ,
+  solution/name=\textcolor{red}{Solução}
+}
+
+%Cabeçalho
+%----------------------------------------------------------------
+\title{\vspace{-15mm}\fontsize{16pt}{10pt}\selectfont\textbf{\titulo} \\ \vspace{5mm} \textbf{\textcolor{Floresta}{\lista}} \PrintSolutionsT{ - \textcolor{blue}{Soluções}}} % Article title
+%\title{\fontsize{16pt}{10pt}{\textbf{MAT0501/MAT6680 - Tópicos de Anéis e Módulos}}
+\author{Professor: \professor \\ Monitor: \monitor}
+\date{\semestre}
+\begin{document}
+\maketitle
+%------------------------------------------------------------
+%Caso queira multicols, só descomentar as linhas abaixo 
+%e lembrar de colocar \end{multicols*} no final do documento
+%e columnbreak se quiser criar uma nova coluna
+
+%\begin{multicols*}{2}
+%\setlength{\columnseprule}{0.78pt}
+%\raggedcolumns
+%\columnbreak
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%
+% Exemplos de exercícios:
+%
+%------------------------------------------------------------
+\section{Inteiros módulo $m$}
+%Questão simples
+\begin{exercicio}
+Construa as tabelas de adição e de multiplicação de $\mathbb Z_7$ e $\mathbb Z_{12}$.
+\end{exercicio}
+\begin{solution}
+Para $\mathbb{Z}_7,$ temos as seguintes tabelas:
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{ccccccccccccccccc}
+\textbf{$+$}             & $0$                      & $1$                      & $2$                      & $3$                      & $4$                      & $5$                      & $6$                      &  & \textbf{$\cdot$}         & $0$                      & $1$                      & $2$                      & $3$                      & $4$                      & $5$                      & $6$                      \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} &  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} &  & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} &  & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$5$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} &  & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$4$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} &  & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$3$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} &  & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$2$} \\ \cline{2-8} \cline{11-17} 
+\multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$} &  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$5$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$2$} & \multicolumn{1}{c|}{$1$} \\ \cline{2-8} \cline{11-17} 
+\end{tabular}
+\end{table}
+\end{center}
+Para $\mathbb{Z}_{12},$ temos as seguintes tabelas:
+\begin{center}
+    \begin{table}[h]
+\begin{tabular}{ccccccccccccc}
+\textbf{$+$}              & $0$                       & $1$                       & $2$                       & $3$                       & $4$                       & $5$                       & $6$                       & \multicolumn{1}{l}{$7$}   & \multicolumn{1}{l}{$8$}   & \multicolumn{1}{l}{$9$}   & \multicolumn{1}{l}{$10$}  & \multicolumn{1}{l}{$11$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} \\ \cline{2-13} 
+\multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  \\ \cline{2-13} 
+\multicolumn{1}{l|}{$7$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  \\ \cline{2-13} 
+\multicolumn{1}{l|}{$8$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  \\ \cline{2-13} 
+\multicolumn{1}{l|}{$9$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  \\ \cline{2-13} 
+\multicolumn{1}{l|}{$10$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  \\ \cline{2-13} 
+\multicolumn{1}{l|}{$11$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$10$} \\ \cline{2-13} 
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ccccccccccccc}
+\textbf{$\cdot$}          & $0$                      & $1$                       & $2$                       & $3$                      & $4$                      & $5$                       & $6$                      & $7$                       & $8$                      & $9$                      & $10$                      & $11$                      \\ \cline{2-13} 
+\multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$0$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$11$} \\ \cline{2-13} 
+\multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$10$} \\ \cline{2-13} 
+\multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$9$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$8$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$7$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$0$}  & \multicolumn{1}{c|}{$6$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$1$}  & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$5$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$4$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$9$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$3$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$6$}  & \multicolumn{1}{c|}{$3$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$8$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$4$}  & \multicolumn{1}{c|}{$2$}  \\ \cline{2-13} 
+\multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$0$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$10$} & \multicolumn{1}{c|}{$9$} & \multicolumn{1}{c|}{$8$} & \multicolumn{1}{c|}{$7$}  & \multicolumn{1}{c|}{$6$} & \multicolumn{1}{c|}{$5$}  & \multicolumn{1}{c|}{$4$} & \multicolumn{1}{c|}{$3$} & \multicolumn{1}{c|}{$2$}  & \multicolumn{1}{c|}{$1$}  \\ \cline{2-13} 
+\end{tabular}
+\end{table}
+\end{center}
+\end{solution}
+%\newpage
+ \begin{exercicio}
+ Busque os inversos dos seguintes elementos:
+\itensladoalado{4}{
+	\task[\alt{a}] $\overline{14}$ em $\mathbb Z_{15}$;
+	\task[\alt{b}] $\overline{38}$ em $\mathbb Z_{83}$;
+\task[\alt{c}] $\overline{351}$ em $\mathbb Z_{6669}$;
+\task[\alt{d}] $\overline{91}$ em $\mathbb Z_{2565}$.
+}
+ \end{exercicio}
+ \begin{solution}
+ \itens{
+ \task[\alt{a}] Temos que
+      $$\begin{array}{rcl}
+          \textcolor{JungleGreen}{14}x&\equiv&1 \pmod{15}\\
+     \textcolor{JungleGreen}{-1} \cdot x&\equiv&1 \pmod{15}\\
+     x&\equiv&\textcolor{Plum}{-1} \pmod{15}\\
+     x&\equiv&\textcolor{Plum}{14} \pmod{15}\\
+     \overline{14}^{-1}&=&\overline{14}.
+     \end{array}$$
+ \task[\alt{b}] Temos que
+      $$\begin{array}{rcl}
+        38x&\equiv&1 \pmod{83}\\
+       \textcolor{Cyan}{2} \cdot 38x&\equiv& \textcolor{Cyan}{2} \cdot 1 \pmod{83}\\
+     \textcolor{JungleGreen}{76}x&\equiv&2 \pmod{83}\\
+     \textcolor{JungleGreen}{-7}x&\equiv&2  \pmod{83}\\
+         \textcolor{Magenta}{12} \cdot (-7)x&\equiv& \textcolor{Magenta}{12} \cdot 2  \pmod{83}\\
+     12\cdot(-7)x&\equiv&24  \pmod{83}\\
+     \textcolor{Plum}{-84}x&\equiv&24  \pmod{83}\\
+     \textcolor{Plum}{-1} \cdot x&\equiv&24  \pmod{83}\\
+     x&\equiv&\textcolor{Orange}{-24}  \pmod{83}\\
+     x&\equiv&\textcolor{Orange}{59}  \pmod{83}\\
+     \overline{38}^{-1}&=&\overline{59}
+     \end{array}
+     $$
+      \task[\alt{c}] Como $\mdc(351,6669)=3\neq 1$, então nesse caso não existe $\overline{351}^{-1}.$
+     \task[\alt{d}] Temos que
+      $$\begin{array}{rcl}
+        91x&\equiv&1 \pmod{2565}\\
+ \textcolor{Cyan}{28} \cdot 91x &\equiv& \textcolor{Cyan}{28} \cdot1 \pmod{2565} \\
+ \textcolor{JungleGreen}{2548}x &\equiv& 28 \pmod{2565} \\
+  \textcolor{JungleGreen}{-17}x &\equiv& 28 \pmod{2565} \\
+  17x &\equiv & -28 \pmod{2565} \\
+   \textcolor{Magenta}{151} \cdot 17x &\equiv & \textcolor{Magenta}{151} \cdot(-28) \pmod{2565} \\
+   \textcolor{Plum}{2567}x &\equiv& -4228 \pmod{2565} \\
+   \textcolor{Plum}{2}x &\equiv& \textcolor{Orange}{-4228} \pmod{2565} \\
+2x &\equiv& \textcolor{Orange}{902} \pmod{2565} \\
+\textcolor{Emerald}{1283} \cdot 2x &\equiv& \textcolor{Emerald}{1283} \cdot 902 \pmod{2565} \\
+\textcolor{Brown}{2566}x &\equiv & 1157266 \pmod{2565} \\
+\textcolor{Brown}{1}x &\equiv & \textcolor{NavyBlue}{1157266} \pmod{2565} \\
+x &\equiv & \textcolor{NavyBlue}{451} \pmod{2565} \\
+     \overline{91}^{-1}&=&\overline{451}.
+    \end{array}$$
+    \textcolor{Red}{Solução Alternativa:} Pelo algoritmo de Euclides, temos:
+     $$1=451\cdot91-16\cdot2565$$
+     $$\overline{1}=\overline{451}\cdot\overline{91}$$
+     $$\overline{91}^{-1}=\overline{451}$$
+ }
+ 
+ \end{solution}
+ \begin{exercicio}
+ Mostre que
+ \itensladoalado{4}{
+ 	\task[\alt{a}] $\overline{73}=\overline{-92}$ em $\mathbb Z_{5}$;
+	\task[\alt{b}] $\overline{99}=\overline{-87}$ em $\mathbb Z_{6}$;
+	\task[\alt{c}] $\overline{3!}=\overline{-2!}$ em $\mathbb Z_{8}$;
+	\task[\alt{d}] $\overline{12!}=\overline{15!}$ em $\mathbb Z_{9}$.
+ 
+ }
+ \end{exercicio}
+ \begin{solution}
+ 
+ \end{solution}
+ 
+ \begin{exercicio}
+ Em $\mathbb Z_{20}$, determine
+\itens{
+	\task[\alt{a}] os menores representantes positivos de $\overline{-10}$ e $\overline{-6}$;
+	\task[\alt{b}]todos os divisores de zero;
+	\task[\alt{c}] todos os elementos inversos com seus inversos;
+	\task[\alt{d}] repita os itens (b) e (c) para $\mathbb Z_{10}$ e $\mathbb Z_{12}$.
+	}
+ \end{exercicio}
+ \begin{solution}
+ 
+ \end{solution}
+ \begin{exercicio}
+ Determine os inversos multiplicativos de $\overline{a}$ em $\mathbb Z_n$ e, em seguida, resolva as equações de congruências reduzidas:
+\itens{
+\task[\alt{a}] $a = 3, \mathbb Z_n = \mathbb Z_{10}$ e $3x\equiv 7 \pmod{10}$;
+\task[\alt{b}] $a = 6, \mathbb Z_n = \mathbb Z_{35}$ e $6x-2\equiv 11 \pmod{35}$.
+}
+ \end{exercicio}
+  \begin{solution}
+ 
+ \end{solution}
+ 
+ \begin{exercicio}
+ Sejam $\overline{a},\overline{b},\overline{c} \in \mathbb Z_m$ com $\mdc(c,m)=1$. Prove que $\overline{a} \cdot \overline{c}=\overline{b} \cdot \overline{c}$ implica que $\overline{a}=\overline{b}$.
+ \end{exercicio}
+ \begin{solution}
+  
+ \end{solution}
+ \begin{exercicio}
+ Sejam $p$ um primo e $\overline{a},\overline{b} \in \mathbb Z_p$. Prove que
+\itens{
+	\task[\alt{a}] $\overline{a}^p=\overline{a}$;
+\task[\alt{b}]  $(\overline{a}+\overline{b})^p=\overline{a}+\overline{b}$.}
+ \end{exercicio}
+ 
+ \begin{solution}
+  
+ \end{solution}
+ \newpage
+\begin{exercicio}
+O elemento $\overline{a} \in \mathbb Z_m$ chama-se \textbf{idempotente} se $\overline{a}\cdot \overline{a}=\overline{a}$.
+\itens{
+	\task[\alt{a}] Busque todos idempotentes em $\mathbb Z_6$ e $\mathbb Z_{12}$.
+	\task[\alt{a}] Busque todos idempotentes em $\mathbb Z_{10}$ e $\mathbb Z_{30}$.
+	\task[\alt{c}] Seja $p$ um primo. Mostre que $\overline{0}, \overline{1}$ são os únicos idempotentes em $\mathbb Z_p$.
+	}
+\end{exercicio} 
+ \begin{solution}
+  
+ \end{solution}
+ \begin{exercicio}
+ O elemento $\overline{a} \in \mathbb Z_m$ chama-se \textbf{nilpotente} se $\overline{a}^{k}=\overline{0}$ para algum $k$. Mostre que $\mathbb Z_m$ não tem não-nulos nilpotentes se e só se $m$ não tem fator primo em quadrado. 
+ \end{exercicio}
+ \begin{solution}
+  
+ \end{solution}
+
+\begin{exercicio}
+Em $\mathbb Z_{7}$, busque os quadrados de todos elementos. \label{ex1}
+\end{exercicio} 
+\begin{solution}
+ Temos que
+  $$\overline{0}\cdot\overline{0}=\overline{0}$$
+ $$\overline{1}\cdot\overline{1}=\overline{1}$$
+ $$\overline{2}\cdot\overline{2}=\overline{4}$$
+ $$\overline{3}\cdot\overline{3}=\overline{2}$$
+ $$\overline{4}\cdot\overline{4}=\overline{2}$$
+ $$\overline{5}\cdot\overline{5}=\overline{4}$$
+ $$\overline{6}\cdot\overline{6}=\overline{1}$$
+\end{solution}
+
+
+\begin{exercicio}
+Encontre as raízes em $\mathbb Z_{7}$ de 
+\itensladoalado{2}{
+
+\task[\alt{a}] $x^2 + x+ \overline{1}$ 
+\task[\alt{b}] $\overline{3}x^2 + \overline{4}x+ \overline{3}$
+}
+por completar o quadrado e usando Exercício \ref{ex1}.
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Por inspeção, usando o Exercício 10, temos $S=\left\{\overline{2},\overline{4}\right\}$, pois $(\overline{2}+\overline{1})\cdot(\overline{2}+\overline{1})=\overline{2}$ e $(\overline{4}+\overline{1})\cdot(\overline{4}+\overline{1})=\overline{4}$.
+ \task[\alt{b}] Novamente, utilizando o Exercício 10,
+$$\begin{array}{rcl}
+    \overline{3}x^2 + \overline{4}x+ \overline{3}&=&\overline{0}\\
+    \overline{5}\cdot\left(\overline{3}x^2 + \overline{4}x+ \overline{3}\right)&=&\overline{5}\cdot\overline{0}\\
+    x^2 + \overline{6}x+ \overline{1}&=&\overline{0}\\
+    \left(x+ \overline{3}\right)^2&=&\overline{1} 
+ \end{array}$$
+Por inspeção, $S=\left\{\overline{3},\overline{5}\right\}$, pois, pelo Exercício 10, temos $(\overline{x}+\overline{3})=\overline{1}$ ou $(\overline{x}+\overline{3})=\overline{6}$.
+ }
+\end{solution}
+
+\begin{exercicio}
+Encontre os quadrados de todos elementos em $\mathbb{Z}_{11}.$ \label{ex2}
+\end{exercicio}
+\begin{solution}
+Temos
+ $$\overline{0}\cdot\overline{0}=\overline{0}$$
+ $$\overline{1}\cdot\overline{1}=\overline{1}$$
+ $$\overline{2}\cdot\overline{2}=\overline{4}$$
+ $$\overline{3}\cdot\overline{3}=\overline{9}$$
+ $$\overline{4}\cdot\overline{4}=\overline{5}$$
+ $$\overline{5}\cdot\overline{5}=\overline{3}$$
+ $$\overline{6}\cdot\overline{6}=\overline{3}$$
+ $$\overline{7}\cdot\overline{7}=\overline{5}$$
+ $$\overline{8}\cdot\overline{8}=\overline{9}$$
+ $$\overline{9}\cdot\overline{9}=\overline{4}$$
+ $$\overline{10}\cdot\overline{10}=\overline{1}$$
+\end{solution}
+\begin{exercicio}
+Encontre as raízes em $\mathbb Z_{11}$ de 
+\itensladoalado{2}{
+\task[\alt{a}] $\overline{4}x^2 + \overline{6}x+ \overline{1}$
+\task[\alt{b}] $\overline{4}x^2 + \overline{6}x+ \overline{8}$
+}
+por completar o quadrado e usando Exercício \ref{ex2}.
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Observe que
+$$\begin{array}{rcl}
+    \overline{4}x^2 + \overline{6}x+ \overline{1}&=&\overline{0}\\
+    \overline{3}\cdot\left(\overline{4}x^2 + \overline{6}x+ \overline{1}\right)&=&\overline{3}\cdot\overline{0}\\
+    x^2 + \overline{7}x+ \overline{3}&=&\overline{0}\\
+    x^2 + \overline{6}x+ \overline{9}&=&-x+\overline{6}\\
+    \left(x+ \overline{3}\right)^2&=&-x+\overline{6} 
+\end{array}$$
+Por inspeção, concluímos que $S=\left\{\overline{1},\overline{3}\right\}$.
+\task[\alt{b}] Temos 
+    $$\begin{array}{rcl}
+    \overline{4}x^2 + \overline{6}x+ \overline{8}&=&\overline{0}\\
+    \overline{3}\cdot\left(\overline{4}x^2 + \overline{6}x+ \overline{8}\right)&=&\overline{3}\cdot\overline{0}\\
+    x^2 + \overline{7}x+ \overline{2}&=&\overline{0}\\
+    x^2 + \overline{6}x+ \overline{9}&=&-x+\overline{7}\\
+    \left(x+ \overline{3}\right)^2&=&-x+\overline{7} 
+\end{array}$$
+Por inspeção, $S=\emptyset$, ou seja, a equação não possui soluções em $\mathbb{Z}_{11}.$ 
+}
+\end{solution}
+
+\begin{exercicio}
+Determine os divisores de zero, em $\mathbb Z_m$, e resolva as equações para cada caso:
+\itensladoalado{2}{
+    \task[\alt{a}] $\overline{7}x=\overline{0}$, $m=21$;
+   \task[\alt{b}] $\overline{4}x=\overline{10}$, $m=22$;  
+      \task[\alt{c}]     
+    $\overline{3}x=\overline{6}$, $m=24$;  
+   \task[\alt{d}]   
+    $\overline{5}x=\overline{0}$, $m=25$;.}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Encontre os divisores de zero, em $\mathbb Z_m$, para $m=8,9,10,14,15,26,28$.
+\end{exercicio}
+\begin{solution}
+ Em $\mathbb{Z}_8: \overline{2}, \overline{4}, \overline{6}$.
+ 
+ Em $\mathbb{Z}_9: \overline{3}, \overline{6}$.
+ 
+ Em $\mathbb{Z}_{10}: \overline{2},\overline{4}, \overline{5}, \overline{6}, \overline{8}$.
+ 
+ Em $\mathbb{Z}_{14}: \overline{2},\overline{4}, \overline{6}, \overline{7}, \overline{8}, \overline{10}, \overline{12}$.
+ 
+ Em $\mathbb{Z}_{15}: \overline{3},\overline{5},\overline{6}, \overline{9}, \overline{10}, \overline{12}$.
+ 
+ Em $\mathbb{Z}_{26}: \overline{2},\overline{4}, \overline{6}, \overline{8}, \overline{10}, \overline{12}, \overline{13}, \overline{14}, \overline{16}, \overline{18}, \overline{20}, \overline{22},\overline{24}$.
+ 
+ Em $\mathbb{Z}_{28}: \overline{2},\overline{4}, \overline{6},\overline{7}, \overline{8}, \overline{10}, \overline{12}, \overline{13}, \overline{14}, \overline{16}, \overline{18}, \overline{20},\overline{21}, \overline{22}, \overline{24}, \overline{26}$.
+\end{solution}
+
+\begin{exercicio}
+Ache os divisores de zero e os elementos que tem inversos em $\mathbb Z_5$, $\mathbb Z_8$, $\mathbb Z_{17}$, $\mathbb Z_{21}$  e $\mathbb Z_{89}$.
+\end{exercicio}
+\begin{solution}
+ Em $\mathbb{Z}_{5}, \mathbb{Z}_{17}$ e $\mathbb{Z}_{89}$ não há divisores de zero e todos os elementos são inversíveis.
+ 
+ Em $\mathbb{Z}_{8}$ os divisores de zero são $ \overline{2}, \overline{4}, \overline{6}$ e os elementos inversíveis são $ \overline{1}, \overline{3}, \overline{5}$ e $\overline{7}$.
+ 
+ Em $\mathbb{Z}_{21}$ os divisores de zero são $ \overline{3}, \overline{6}, \overline{7},\overline{9}, \overline{12}, \overline{14},\overline{15}$ e $ \overline{18}$ e os elementos inversíveis são $ \overline{1}, \overline{2}, \overline{4},\overline{5}, \overline{8}, \overline{10},\overline{11}, \overline{13}, \overline{16}, \overline{17}, \overline{19}$ e  $\overline{20}$.
+\end{solution}
+
+\begin{exercicio}
+Resolva, em $\mathbb Z_m$, as equações abaixo:
+\itensladoalado{2}{
+\task[\alt{a}] $\overline{3}x+\overline{2}=\overline{6}x+\overline{7}$, $m=8$;
+\task[\alt{b}] $(\overline{2}x+\overline{3})^2+(\overline{3}x+\overline{2})^2+\overline{5}x=\overline{0}$, $m=5$;
+\task[\alt{c}] $\overline{4}x-\overline{7}+\overline{6}x+\overline{2}=\overline{3}x+\overline{5}x$, $m=12$;
+\task[\alt{d}] $x^{21}-x=\overline{0}$, $m=5$;
+\task[\alt{e}] $x^{12}-\overline{1}=\overline{0}$, $m=5$;
+\task[\alt{f}] $x^{7}-x=\overline{0}$, $m=4$.
+}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+ Resolva em $\mathbb Z_m$ cada um dos sistemas abaixo:
+ \itensladoalado{2}{
+\task[\alt{a}] $
+\left \{ \begin{array}{r c l}
+	\overline{4}x+y&=&\overline{1}\\
+	x-\overline{2}y&=&\overline{4}.
+	\end{array} \right. , m = 5$
+\task[\alt{b}] 	$\left \{ \begin{array}{r c l}
+	x+y+z&=&\overline{0}\\
+	\overline{2}x+\overline{3}y+\overline{3}z&=&\overline{3}\\
+	x+y+\overline{3}z&=&\overline{0}.	
+	\end{array} \right. , m = 4$
+	}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\newpage
+\begin{exercicio}
+ Verifique se os elementos abaixo são inversíveis. Em caso afirmativo, determine o inverso.
+\itensladoalado{2}{
+	\task[\alt{a}] $\overline{97}$ em $\mathbb Z_{307}$;
+	\task[\alt{b}] $\overline{22}$ em $\mathbb Z_{105}$.
+	}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+ Seja $p$ um número primo. Prove que $\overline{2}, \overline{3}, \ldots, \overline{p-1}$ são soluções em $\mathbb{Z}_p$ da equação
+ \[
+ x^{p-2} + x^{p-3} + \ldots + x + \overline{1} = \overline{0}.
+ \]
+ \textsf{[Dica:]} Utilize a fatoração $x^{p-1} - 1 = (x-1)(x^{p-2} + x^{p-3} + \ldots + x + 1).$
+\end{exercicio}
+\begin{solution}
+ Observe que 
+ \[(x^{p-1} - 1) = (x-1)(x^{p-2} + x^{p-3} + \ldots + x + 1)\] 
+ Considerando essa identidade em $\mathbb{Z}_p,$ como $p$ é primo, existe um $\overline{x-1}^{-1} \in \mathb{Z}_p$ tal que $\overline{x-1} \cdot \overline{x-1}^{-1} = \overline{1}.$ Pelo Pequeno Teorema de Fermat, sabemos que $x^{p-1} \equiv 1 \pmod p,$ para todo $x$ tal que $\mdc(x, p) = 1,$ ou seja, em $\mathbb{Z}_p,$ $x= \overline{2}, \ldots, \overline{p-1}$. Além disso, $\overline{x^{p-1} - 1} = \overline{1 - 1} = \overline{0}.$ Logo,
+ \[\textcolor{Green}{\overline{(x^{p-1} - 1)}} = \overline{(x-1)}\overline{(x^{p-2} + x^{p-3} + \ldots + x + 1)} \Rightarrow \overline{(x-1)}^{-1}\textcolor{Green}{\overline{0}} = \overline{(x^{p-2} + x^{p-3} + \ldots + x + 1)} \Rightarrow  x^{p-2} + x^{p-3} + \ldots + x + \overline{1} = \overline{0}
+ \]
+ para todo $x= \overline{2}, \ldots, \overline{p-1}.$
+\end{solution}
+\begin{exercicio}
+ A \textbf{ordem} de um elemento $\overline{a}$ em $\mathbb{Z}_p$ é definida como o menor inteiro positivo $m$ tal que $\overline{a}^m = \overline{1}.$
+ \itens{
+ \task[\alt{a}] Prove que $m \le p-1.$
+ \task[\alt{b}] Encontre as ordens de todos os elementos de $\mathbb{Z}_{11}$ e $\mathbb{Z}_{13}.$
+ }
+\end{exercicio}
+\begin{solution}
+ \itens{
+ \task[\alt{a}] Pelo Pequeno Teorema de Fermat, temos que
+ \[a^{p-1} \equiv 1 \pmod p,\]
+ ou seja, $\overline{a}^{p-1} = \overline{1}.$ Assim, $m \le p-1.$
+
+ \task[\alt{b}] Seguem as tabelas:%https://web.evanchen.cc/handouts/ORPR/ORPR.pdf
+ }
+\end{solution}
+ \end{document}

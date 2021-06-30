@@ -156,7 +156,7 @@
 %Dados da lista:
 
 \newcommand{\titulo}{MAT0120 - Álgebra I para Licenciatura}
-\newcommand{\lista}{Lista 1}
+\newcommand{\lista}{Lista 3}
 \newcommand{\professor}{Kostiantyn Iusenko}
 \newcommand{\monitor}{Douglas de Araujo Smigly}
 \newcommand{\semestre}{1º Semestre de 2021}
@@ -767,7 +767,9 @@ Mostre que existem infinitos primos da forma $3n+2$, com $n\in \mathbb Z$.
 \end{exercicio}
 
 \begin{solution}
-
+%Suponha que exista apenas uma quantidade finita de primos da forma $3n+2$, digamos, $p_1, p_2, \ldots, p_k.$ Considere $n = p_1 \cdot p_2 \cdot \ldots \cdot p_k - 1.$ Sabemos então que $n > p_k.$ Observe que $n$ possui ao menos um fator primo da $3n+2,$ pois se todos fossem da forma $3n+1,$ 
+\textbf{Observação:} O Teorema de Dirichlet afirma que existem infinitos números primos na forma $an + d,$ onde $\mdc(a,d) = 1.$ Uma demonstração similar à feita acima funciona para $an +d $ se e somente se $a \mid d^2 - 1.$
+%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.225.9834&rep=rep1&type=pdf
 \end{solution}
 \begin{exercicio}
 Mostre que se $2^m+1$ é primo para algum $m>0$ então $m$ é uma potência de 2.
@@ -775,7 +777,7 @@ Mostre que se $2^m+1$ é primo para algum $m>0$ então $m$ é uma potência de 2
 \begin{solution}
 
 \end{solution}
-
+%Friedlander–Iwaniec theorem
 \begin{exercicio}
 Seja $p_1=2, p_2=3, p_3=5, \ldots, p_n,\ldots$ a sequência dos números primos positivos em sua ordem natural.
 \itens{
@@ -790,6 +792,16 @@ Seja $p_1=2, p_2=3, p_3=5, \ldots, p_n,\ldots$ a sequência dos números primos 
 
 \end{solution}
 
+\begin{exercicio}
+O valor numérico de cada expressão a seguir é primo?
+
+\itensladoalado{2}{
+\task[\alt{a}] $2^6 + 3$
+\task[\alt{b}] $4^2 + 5^2$
+\task[\alt{c}] $47^2 - 37^2 - 23^2$
+\task[\alt{d}] $1 + 2^2 + 3^3 + 4^4 + 5^5$
+}
+\end{exercicio}
 \begin{comment}
 \begin{exercicio}\textsf{[Teorema de Clement]} 
 Prove que se $n$ é tal que $n(n+2)$ divide $4((n-1)!+1) + n$ então $n$ e $n+2$ são números primos gêmeos.
@@ -873,16 +885,78 @@ n(n+1)(n-1)!+n^2 + 1 + n - 1 = kn^2(n+1) \Rightarrow
 \]
 \end{solution}
 \end{comment}
-\begin{exercicio}\textsf{[Primos de Chen]} 
-
-
-
+\begin{exercicio} 
+Encontre todos os primos $p$ tais que $7p^2 + 8$ é também um primo.
 \end{exercicio}
 \begin{solution}
-
+Vamos analisar os possíveis restos da divisão de $7p^2 + 8$ por $3.$ Pelo Algoritmo da Divisão, sabemos que $p = 3k+r,$ onde $k \in \mathbb{Z}$ e $r \in \{0,1,2 \}.$ Analisemos cada caso:
+\begin{itemize}
+    \item 
+\end{itemize}
 \end{solution}
 
 
+
+\begin{exercicio}
+Prove que o resto da divisão de qualquer número primo por $30$ é igual a $1$ ou igual a um número primo.
+\end{exercicio}
+\begin{solution}
+Seja $p$ um número primo tal que $p = 30n + r,$ onde $r \in \{0,1, \ldots, 29 \}.$
+Como $30 = 2 \cdot 3 \cdot 5,$ então $r$ não pode ser nem  múltiplo de $2$ nem múltiplo de $3$ e nem  múltiplo de $5$. Assim, $r = 1$ ou $r$ é primo.
+%https://math.stackexchange.com/questions/398399/about-the-property-of-m-if-n-m-is-co-prime-to-m-then-n-is-prime/398525#398525
+\end{solution}
+
+\begin{exercicio}\textcolor{Blue}{*}
+Sejam $p$ e $q$ dois números primos, com $q > p.$ 
+\itens{
+\task[\alt{a}] Se $p$ e $q$ são gêmeos e sua média aritmética é um número quadrado perfeito, prove que $p = 3$ e $q = 5.$
+
+\task[\alt{b}] Prove que a diferença entre $p$ e $q$ e a soma entre $p$ e $q$ não podem ser simultaneamente números quadrados perfeitos.
+
+\task[\alt{c}] Se $p$ e $q$ são dois números primos consecutivos, encontre o menor valor de $p$ para o qual a diferença entre ambos é um número triangular e a soma é um quadrado perfeito.
+ 
+ }
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Neste caso, $q = p + 2.$ Assim:
+\[\begin{array}{rcl}
+    \dfrac{p+(p+2)}{2} &=& n^2 \\
+    p+1 &=&n^2 \\
+    p &=& n^2 - 1 \\
+    p &=& (n-1)(n+1)
+\end{array}\]
+Assim, como $p$ é primo, então $n - 1 = 1,$ e $n = 2.$ Consequentemente, $p = 2^2 - 1 = 3$ e $q = p + 2 = 5.$
+\task[\alt{b}] 
+Escreva $q - p = n^2$ e $p + q = h^2$. Como $q = p + n^2,$ então $$p+\textcolor{Red}{q} = h^2 \Rightarrow p+\textcolor{Red}{p+n^2} = h 2 \Rightarrow 2 p= h^2 - n^2 \Rightarrow 2p = (n-h)(n+h).$$
+Assim, se $p \neq 2,$ então $n - h = 2$ e $n+h = p.$ Como nesse caso ambos $p$ e $q$ são ímpares, então $n^2$ e $h^2$ devem ser pares, ou seja, $n$ e $h$ são pares, e portanto $n+h = p$ é par, o que é um absurdo.
+
+Se $p = 2,$ então $4 = (n-h)(n+h),$ e temos as seguintes possibilidades:
+\[
+\begin{cases}
+n+h = 4 \\ n - h = 1
+\end{cases} \quad \mbox{e} \quad \begin{cases}
+n+h = 2 \\ n - h = 2
+\end{cases}
+\]
+Em ambos os casos, não temos soluções inteiras.
+
+Portanto, $p$ e $q$ não podem ter soma e diferença sendo números quadrados perfeitos simultaneamente.
+\task[\alt{c}] Como $3+2 = 5,$ se a diferença entre $p$ e $q$ é um número triangular, então esta deve ser par. O menor número triangular par é $6.$ Suponhamos então que $q - p = 6.$ Vejamos os primeiros pares que satisfazem essa condição:
+\[
+29 - 23 = 6 \mbox{ e } 29 + 23 = 52; \quad 37 - 31 = 6 \mbox{ e } 37 + 31 = 68; \quad 53 - 47 = 6 \mbox{ e } 53 + 47 = 100.
+\]
+Assim, $47$ e $53$ é um par de números primos consecutivos que satisfaz o enunciado. Como para $p < 47,$ as diferenças são menores ou iguais a $4,$ concluímos que este é o valor desejado.
+}
+
+\end{solution}
+
+\begin{exercicio}\textcolor{Blue}{*}
+O \textbf{Postulado de Bertrand} afirma que para todo inteiro $n \ge 1,$ existe um número primo entre $n$ e $2n.$ Use este resultado para provar que existem infinitos números primos que começam com o dígito $1.$ 
+\end{exercicio}
+\begin{solution}
+Observe que, se $p$ é um número primo iniciado em $1,$ então $1 \cdot 10^k < p < 1 \cdot 2 \cdot 10^{k}.$ Assim, tomando $n = 10^k,$ pelo Postulado de Bertrand, para cada $k \ge 1$ existe um número primo entre $1 \cdot 10^k < p < 1 \cdot 2 \cdot 10^{k}.$
+\end{solution}
 \begin{exercicio}
 Prove que não existem três números primos $p,q$ e $r$ tais que $p^2 + q^2 = r^2.$
 %https://homepages.dcc.ufmg.br/~loureiro/md/md_LE3_Solucao.pdf - ex 14 pg 3
@@ -891,7 +965,7 @@ Prove que não existem três números primos $p,q$ e $r$ tais que $p^2 + q^2 = r
 
 \end{solution}
 \begin{exercicio}\textcolor{Blue}{*}
-Seja $S_n$ a soma dos $n$ primeiros números primos. Por exemplos, $S_4 = 2 + 3 + 5 + 7 = 17$ e $S_7 = 2 + 3 + 5 + 7 + 11 + 13 + 17 = 58.$ Prove que existe ao menos um número quadrado perfeito entre $S_n$ e $S_{n+1}.$
+Seja $S_n$ a soma dos $n$ primeiros números primos. Por exemplo, $$S_4 = 2 + 3 + 5 + 7 = 17$$ e $$S_7 = 2 + 3 + 5 + 7 + 11 + 13 + 17 = 58.$$ Prove que existe ao menos um número quadrado perfeito entre $S_n$ e $S_{n+1}.$
 \end{exercicio}
 \begin{solution}
 Seja $m$ um número natural tal que $m^2 \le S_n.$ Vamos provar que $(m+1)^2 - m^2 <S_{n+1} - S_n = p_{n+1}.$
@@ -903,10 +977,66 @@ Mostremos que $p_{n+1} > 2\sqrt{S_n} + 1.$
 %https://i.stack.imgur.com/X9mxx.png
 %https://math.stackexchange.com/questions/1811331/is-the-sum-of-the-first-n-primes-a-prime-infinitely-many-times?rq=1
 \end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Sejam $p$ e $q$ dois números primos. Prove que $pq + 1$ é um número quadrado perfeito se e somente se $p$ e $q$ forem números primos gêmeos.
+\end{exercicio}
+\begin{solution}
+$(\Rightarrow)$ Se $pq+1$ é um número quadrado perfeito, então existe um $n$ tal que $pq + 1 = n^2,$ e assim
+$$pq+1=n^2\Rightarrow pq=(n-1)(n+1).$$
+Como $p$ e $q$ são números primos, temos que $p = n - 1$ e $q = n + 1,$ e portanto $q - p = (n+1) - (n-1) = 2.$ Assim, $p$ e $q$ são números primos gêmeos.
 
+$(\Leftarrow)$
+Se $p$ e $q$ são números primos gêmeos, então podemos escrever que $p=q+2,$ e então
+$$pq+1=(q+2)q = q^2+2q+1=(q+1)^2.$$ 
+\end{solution}
 \begin{exercicio}
+Dizemos que um número primo $p > 2$ é \textit{pitagórico} se existem $a, b \in \mathbb{N}$ tais que $p = a^2 + b^2.$ 
+\itens{
+\task[\alt{a}] Prove que $p$ é da forma $4n+1,$ e conclua que existem infinitos números primos pitagóricos.
+\task[\alt{b}] Prove que todos números primos pitagóricos menores do que 100 podem ser obtidos tomando $a,b \in \{1,2,3,4,5,6,7,8,9\}.$
+}
 %https://math.stackexchange.com/questions/1502062/primes-written-as-the-sum-of-two-squares?rq=1
 \end{exercicio}
+\begin{solution}
+
+Os números primos da forma $4n+1$ menores do que $100$ são
+\[
+5, 13, 17, 29, 37, 41, 53, 61, 73, 89, 97\]
+A tabela abaixo mostra que é possível escrever cada um dos números primos acima onde $a,b \in \{1,2,3,4,5,6,7,8,9\}:$
+\begin{tabular}{|c|c|c|}
+    p & a & b \\
+    5 & 1 & 6 \\
+    13 & 2 & 3\\
+    17 & 1 & 4 \\
+    29 & 2 & 5 \\
+    37 & 1 & 6 \\
+    41 & 4 & 5 \\
+    53 & 2 & 7 \\
+    61 & 5 & 6 \\
+    73 & 3 & 8 \\
+    89 & 5 & 8 \\
+    97 & 4 & 9 
+\end{tabular}
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}\textsf{[Crivo de Atkin]}
+O Crivo de Eratóstenes, embora seja relativamente simples de ser utilizado para encontrar os números primos entre $1$ e $n$, pode ser demorado quando $n$ é muito grande. Por esse motivo, computacionalmente outros métodos são utilizados, e um destes é o chamado \textbf{Crivo de Atkin}, que será explorado nessa questão.
+
+\begin{itemize}
+    \item Primeiro se escrevem todos os inteiros positivos menores ou iguais a $n;$
+    \item Inicialmente circulamos $2,$ $3$ e $5,$ que são primos;
+    \item Observa-se o primeiro número $k$ da lista que não está riscado nem circulado, e calcula-se o resto $r$ da divisão de $k$ por $60.$ Então:
+    \begin{itemize}
+        \item se $r$ for $1, 13, 17, 29, 37, 41, 49$ ou $53$ e a quantidade de soluções positivas de $4x^2 +y^2 = k$ for ímpar, circula-se o número na lista e todos os múltiplos de $k^2$ são riscados;
+        \item se $r$ for $7, 19, 31$ ou $43$ e a quantidade de soluções positivas de $3x^2 +y^2 = k$ for ímpar, circula-se o número na lista e todos os múltiplos de $k^2$  são riscados;
+        \item se $r$ for $11, 23, 47$ ou $59$ e a quantidade de soluções positivas de $3x^2 -y^2 = k,$ com $x > y,$ for ímpar, circula-se o número na lista e todos os múltiplos de $k^2$  são riscados;
+    \end{itemize}
+    \item Se $k \ge \sqrt{n},$ então o processo está terminado, e os números circulados são primos.
+\end{itemize}
+Utilize o Crivo de Atkin para encontrar todos os números primos entre $1$ e $150.$
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
 \section{  Congruências }
 
 

@@ -1,0 +1,1497 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[bottom=2cm,top=3cm,left=2cm,right=2cm]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage{mathtext}
+\usepackage{wrapfig}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{tasks}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{tikz}
+\usepackage{tikz-cd}%Para diagramas 
+\usepackage[framemethod=Tikz]{mdframed}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{pifont}
+\usepackage{arydshln} %dashed line nas matrizes
+%\usepackage{lipsum}
+%\usepackage{CJKutf8} %Pacote para escrever em japonês \begin{CJK}{UTF8}{min} \end{CJK}
+\usepackage{multicol}
+% \usepackage{colorspace}
+\usepackage[arrow,matrix,curve]{xy}
+\usepackage{enumitem}
+\usepackage{graphicx, color}
+%\usepackage{eulervm} %Fonte de texto
+\usepackage{exsheets} %Mostrar soluções
+\usepackage{commath}
+\usepackage{mathpazo}
+\usepackage{cancel}
+%-------------------------------------------------------------
+%Comandos úteis
+\newcommand{\mdc}{{\rm mdc}}
+\newcommand{\mmc}{{\rm mmc}}
+\newcommand{\sen}{{\rm sen}}
+\newcommand{\tg}{{\rm tg}}
+\newcommand{\cotg}{{\rm cotg}}
+\newcommand{\cossec}{{\rm cossec}}
+\newcommand{\arctg}{{\rm arctg}}
+\newcommand{\arcsen}{{\rm arcsen}}
+\newcommand{\negrito}[1]{\mbox{\boldmath{$#1$}}} 
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\diamonde}{\ensuremath\diamondsuit}
+\newtheorem{defi}{Definição}
+\newtheorem{prop}{Proposição}
+\newtheorem{dem}{Demonstração}
+\newtheorem{coro}{Corolário}
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\setlength{\parindent}{0pt}
+\newcommand{\tn}[1]{\textnormal{#1}} 
+\newcommand{\Hom}{\tn{Hom}}
+\newcommand{\End}{\tn{End}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\rmdefault}{ptm} 
+\newcommand{\spec}{\textrm{Spec}}
+
+%-------------------------------------------------------------
+%Boxes para critérios de correção, caso seja necessário
+
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Criterios}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!75!green}
+    
+%Box padrão    
+\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!white}
+    
+%\mdfdefinestyle{Solução}{%
+%    linecolor=blue,
+%    outerlinewidth=1pt,
+%    roundcorner=8pt,
+%    innertopmargin=4pt%\baselineskip,
+%    innerbottommargin=0pt%\baselineskip,
+%    innerrightmargin=20pt,
+%    innerleftmargin=20pt,
+%    backgroundcolor=white!50!white}
+    
+%Alternativa Verde e azul para avisos    
+    \mdfdefinestyle{Aviso}{%
+    linecolor=blue,
+    outerlinewidth=2pt,
+    roundcorner=20pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=white!50!green}
+    
+%----------------------------------------------------------------
+%Cores do documento
+\definecolor{Floresta}{rgb}{0.13,0.54,0.13}    
+% \definespotcolor{mygreen}{PANTONE 7716 C}{.83, 0, .00, .51}
+% \definespotcolor{tuti}{}{0.6, 0, 1, .508}
+
+%----------------------------------------------------------------
+%Uso de counters para numeração automática dos exercícios 
+%Para mais infos: https://www.overleaf.com/learn/latex/Counters
+
+\newcounter{exercicio}[section]
+\newenvironment{exercicio}[1][]{\refstepcounter{exercicio}\par\medskip
+ \textcolor{blue}{\bf(\theexercicio)} \rmfamily}{\medskip }
+   
+ \usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+ 
+ \makeatletter 
+ \newcommand{\isempty}[1]{%
+  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+
+% \newcommand{\isempty}[1]{%
+%  \@ifmtarg{#1}{\begin{question}}{\begin{question}[topic=#1]}}
+  
+    
+ 
+ 
+\newenvironment{solucao}[1][]{\textbf{\\ \\ \textcolor{red}{Solução:}}#1 \rmfamily}{\medskip }
+
+
+\newenvironment{criterios}[1][]{
+ \textcolor{blue}{\bf Critérios de Correção:} \rmfamily \par\medskip #1 }{\medskip }
+ 
+\newcommand{\itens}[1]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](1) #1\end{tasks}}
+
+\newcommand{\itensladoalado}[2]{\begin{tasks}[label={(tsk[a])},label-width=3.6ex, label-format = {\bfseries}, column-sep = {0pt}](#1) #2 \end{tasks}}
+
+\newcommand{\alt}[1]{\textcolor{Floresta}{$\negrito{(#1)} $}}
+
+%\newcommand{\alt}[1]{\task[\pers{#1}]}
+
+%\newcommand{\solucao}[1]{
+%\textbf{\\ \\ \textcolor{red}{Solução:}} #1}
+
+%----------------------------------------------------------------
+%Dados da lista:
+
+\newcommand{\titulo}{MAT0120 - Álgebra I para Licenciatura}
+\newcommand{\lista}{Lista 4}
+\newcommand{\professor}{Kostiantyn Iusenko}
+\newcommand{\monitor}{Douglas de Araujo Smigly}
+\newcommand{\semestre}{1º Semestre de 2021}
+%----------------------------------------------------------------
+
+%Mostrar ou não as soluções
+%\SetupExSheets{solution/print=true} %Se print=false, este arquivo Não imprime as soluções.
+\SetupExSheets{solution/print=false}
+
+
+%Solução sem numeração (pois vem logo depois da questão) - se quiser com números, basta comentar os comandos abaixo:
+\DeclareInstance{exsheets-heading}{block-no-nr}{default}{
+  attach = {
+    main[l,vc]title[l,vc](0pt,0pt) ;
+    main[r,vc]points[l,vc](\marginparsep,0pt)
+  }
+}
+
+%  {question}[headings=block-subtitle] - por bloco
+\RenewQuSolPair
+  {question}[headings=block-no-nr]
+  {solution}[headings=block-no-nr]
+
+%Personalização de Questão/ Solução
+\SetupExSheets{
+  counter-format=se.qu.,
+  question/name= ,
+  solution/name=\textcolor{red}{Solução}
+}
+
+%Cabeçalho
+%----------------------------------------------------------------
+\title{\vspace{-15mm}\fontsize{16pt}{10pt}\selectfont\textbf{\titulo} \\ \vspace{5mm} \textbf{\textcolor{Floresta}{\lista}} \PrintSolutionsT{ - \textcolor{blue}{Soluções}}} % Article title
+%\title{\fontsize{16pt}{10pt}{\textbf{MAT0501/MAT6680 - Tópicos de Anéis e Módulos}}
+\author{Professor: \professor \\ Monitor: \monitor}
+\date{\semestre}
+\begin{document}
+\maketitle
+%------------------------------------------------------------
+%Caso queira multicols, só descomentar as linhas abaixo 
+%e lembrar de colocar \end{multicols*} no final do documento
+%e columnbreak se quiser criar uma nova coluna
+
+%\begin{multicols*}{2}
+%\setlength{\columnseprule}{0.78pt}
+%\raggedcolumns
+%\columnbreak
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%
+% Exemplos de exercícios:
+%
+%------------------------------------------------------------
+\section{Sistemas de Congruências Lineares}
+%Questão simples
+\begin{exercicio}
+Resolva os seguintes sistemas de congruências lineares:
+\itensladoalado{3}{
+	\task[\alt{a}] $\left\{ \begin{array}{c} x \equiv 1\ \pmod 3\\ x \equiv 2\ \pmod 5\\ x \equiv 3\ \pmod 7 \end{array} \right.$,
+	\task[\alt{b}] $\left\{ \begin{array}{c} x \equiv 5\ \pmod 6\\ x \equiv 4\ \pmod{11}\\ x \equiv 3\ \pmod 7 \end{array} \right.$,
+	\task[\alt{c}] $\left\{ \begin{array}{c} x \equiv 1\ \pmod 2\\ x \equiv 2\ \pmod 3\\ x \equiv 4\ \pmod 5\\ x \equiv 0\ \pmod 7 \end{array} \right.$.
+}
+\end{exercicio}
+\begin{solution}
+Para resolver essa questão vamos utilizar o Teorema Chinês dos Restos. Dado um sistema com $k$ equações da forma
+\[
+\begin{cases}
+x \equiv c_1 \pmod{n_1} \\
+x \equiv c_2 \pmod{n_2} \\
+\vdots \\
+x \equiv c_k \pmod{n_k} \\
+\end{cases},
+\]
+com $\mdc(n_i, n_j) = 1$ se $i \neq j,$ então 
+\[
+x \equiv \sum\limits_{i=1}^k N_ir_ic_i \pmod{n_1 \cdot \ldots \cdot n_k},
+\]
+onde, para $i = 1, \ldots, k,$
+\[N_i = \prod\limits_{j \neq i} n_j \mbox{ e } r_i \mbox{é tal que } N_ir_i \equiv 1 \pmod{n_i}\]
+ \itens{   \task[\alt{a}] Como $\mdc(3,5)=\mdc(3,7)=\mdc(5,7)=1$, o sistema tem solução. Podemos então utilizar o Teorema Chinês dos Restos. Assim, como temos 3 equações,
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3} \pmod{n_1 \cdot n_2 \cdot n_3},\]
+Vamos calcular cada um dos valores:
+        $$\left\{ \begin{array}{l}
+             N_1 = n_2 \cdot n_3 = 5\cdot7=35\\
+             N_2 = n_1 \cdot n_3 = 3\cdot7=21\\
+             N_3 = n_1 \cdot n_2 = 3\cdot5=15
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             35r_1 \equiv 1 \pmod{3}\\
+             21r_2 \equiv 1 \pmod{5}\\
+             15r_3 \equiv 1 \pmod{7}
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 2\pmod 3\\
+             r_2 \equiv 1\pmod 5\\
+             r_3 \equiv 1\pmod 7
+        \end{array}\right.$$
+        }
+    Portanto,
+        $$x\equiv\textcolor{Cyan}{35}\cdot\textcolor{Emerald}{2}\cdot\textcolor{Red}{1}+\textcolor{Cyan}{21}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{2}+\textcolor{Cyan}{15}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{3} \pmod{3\cdot5\cdot7} \Rightarrow$$
+        $$x\equiv157 \pmod{105} \Rightarrow \boxed{ x \equiv 52 \pmod{105}}$$
+\itens{  \task[\alt{b}] Como $\mdc(6,11)=\mdc(6,7)=\mdc(11,7)=1$, o sistema tem solução. Podemos então utilizar o Teorema Chinês dos Restos. Assim, como temos 3 equações,
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3} \pmod{n_1 \cdot n_2 \cdot n_3},\]
+Vamos calcular cada um dos valores:
+      $$\left\{ \begin{array}{l}
+             N_1 = 11\cdot7=77\\
+             N_2 = 6\cdot7=42\\
+             N_3 = 6\cdot11=66
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             77r_1 \equiv 1\pmod 6\\
+             42r_2 \equiv 1\pmod{11}\\
+             66r_3 \equiv 1\pmod 7
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 5\pmod 6\\
+             r_2 \equiv 5\pmod{11}\\
+             r_3 \equiv 5\pmod 7
+        \end{array}\right.$$
+Portanto,
+        $$x \equiv \textcolor{Cyan}{77}\cdot\textcolor{Emerald}{5}\cdot\textcolor{Red}{5}+\textcolor{Cyan}{42}\cdot\textcolor{Emerald}{5}\cdot\textcolor{Red}{4}+\textcolor{Cyan}{66}\cdot\textcolor{Emerald}{5}\cdot\textcolor{Red}{3} \pmod{ 6\cdot11\cdot7} \Rightarrow$$
+        $$x \equiv 3755 \pmod{462} \Rightarrow \boxed{x \equiv 59 \pmod{462}}$$
+  \task[\alt{c}] Como $\mdc(2,3)=\mdc(2,5)=\mdc(2,7)=\mdc(3,5)=\mdc(3,7)=\mdc(5,7)=1,$ o sistema tem solução. Podemos então utilizar o Teorema Chinês dos Restos. Assim, como temos 4 equações,
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3} + \textcolor{Cyan}{N_4}\textcolor{Emerald}{r_4}\textcolor{Red}{c_4} \pmod{n_1 \cdot n_2 \cdot n_3 \cdot n_4},\]
+Vamos calcular cada um dos valores:
+      $$\left\{ \begin{array}{l}
+             N_1 = 3\cdot5 \cdot7=105\\
+             N_2 = 2\cdot5\cdot 7=70\\
+             N_3 = 2\cdot3\cdot7=42\\
+             N_4 = 2\cdot3\cdot5=30
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             105r_1 \equiv 1\pmod{2}\\
+             70r_2 \equiv 1\pmod{3}\\
+             42r_3 \equiv 1\pmod 5\\
+             30r_4 \equiv 1\pmod 7\\
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 1\pmod 2\\
+             r_2 \equiv 1\pmod{3}\\
+             r_3 \equiv 3\pmod 5\\
+             r_4 \equiv 4\pmod 5\\
+        \end{array}\right.$$
+Portanto,
+        $$x \equiv \textcolor{Cyan}{105}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{1}+\textcolor{Cyan}{70}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{2}+\textcolor{Cyan}{42}\cdot\textcolor{Emerald}{3}\cdot\textcolor{Red}{4} +\textcolor{Cyan}{30}\cdot\textcolor{Emerald}{4}\cdot\textcolor{Red}{0}  \pmod{ 2\cdot3\cdot5\cdot7} \Rightarrow$$
+        $$x \equiv 749 \pmod{210} \Rightarrow \boxed{x \equiv 119 \pmod{210}}$$}
+\textcolor{Red}{Solução Alternativa:} Note que         $$\left\{ \begin{array}{l} x \equiv 1\ \pmod 2\\ x \equiv 2\ \pmod 3\\ x \equiv 4\ \pmod 5\\ x \equiv 0\ \pmod 7 \end{array} \right. \Rightarrow
+        \left\{ \begin{array}{l} x \equiv -1\ \pmod 2\\ x \equiv -1\ \pmod 3\\ x \equiv -1\ \pmod 5\\ x \equiv 0\ \pmod 7 \end{array} \right.\Rightarrow
+        \left\{ \begin{array}{l} x \equiv -1\ \pmod{2\cdot3\cdot5}\\ x =7k\end{array} \right.$$
+        Assim,
+        $$7k\equiv -1\pmod{30}\Rightarrow k\equiv-13 \pmod{30}\Rightarrow k\equiv 17 \pmod{30} \Rightarrow k=17+30p$$
+        $$x=7k=119+210p\Rightarrow x\equiv 119 \pmod{210}.$$
+    
+\end{solution}
+\begin{exercicio}
+Resolva os seguintes sistemas de congruências lineares:
+\itensladoalado{2}{
+	\task[\alt{a}] $\left\{ \begin{array}{l} 4x \equiv 3\ \pmod{7}\\ 5x \equiv 4\ \pmod{11}\\ 11x \equiv 8\ \pmod{13} \end{array} \right.$,
+	\task[\alt{b}] $\left\{ \begin{array}{l} 3x \equiv 5\ \pmod 2\\ x \equiv -3\ \pmod 5\\ 4x \equiv 7\ \pmod 9 \end{array} \right.$.
+	}
+\end{exercicio}
+
+\begin{solution}
+Vamos aplicar o Teorema Chinês dos Restos. Para isso, precisamos escrever cada uma das equações na forma $x \equiv c \pmod{n}.$ Dada uma equação da forma $a_i x \equiv b_i \pmod{m_i},$ temos que esta é equivalente à equação $x \equiv \dfrac{r_i \cdot b_i}{d_i} \pmod{\dfrac{m_i}{d_i}},$ onde $r_i$ é tal que $a_ir_i \equiv 1 \pmod{m_i}.$ 
+\itens{
+	\task[\alt{a}] Temos que
+	\[
+	\begin{cases}
+	4x \equiv 3 \pmod{7} \\
+	5x \equiv 4 \pmod{11} \\
+	11x \equiv 8 \pmod{13} 
+	\end{cases} \Rightarrow 	\begin{cases}
+	\textcolor{Plum}{2} \cdot 4x \equiv \textcolor{Plum}{2} \cdot 3 \pmod{7} \\
+	\textcolor{Plum}{9} \cdot 5x \equiv \textcolor{Plum}{9} \cdot 4 \pmod{11} \\
+	\textcolor{Plum}{6} \cdot 11x \equiv \textcolor{Plum}{6} \cdot 8 \pmod{13} 
+	\end{cases} \Rightarrow \]\[	\begin{cases}
+	8x \equiv 6 \pmod{7} \\
+	45x \equiv 36 \pmod{11} \\
+	66x \equiv 48 \pmod{13} 
+	\end{cases} \Rightarrow 	\begin{cases}
+	x \equiv 6 \pmod{7} \\
+	x \equiv 3 \pmod{11} \\
+	x \equiv 9 \pmod{13} 
+	\end{cases}
+	\]
+   Como $\mdc(7,11)=\mdc(7,13)=\mdc(11,13)=1$, o sistema tem solução.
+   Podemos então utilizar o Teorema Chinês dos Restos. Assim, como temos 3 equações,
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3} \pmod{n_1 \cdot n_2 \cdot n_3},\]
+Vamos calcular cada um dos valores:
+        $$\left\{ \begin{array}{l}
+             N_1 = 11\cdot13=143\\
+             N_2 = 7\cdot13=91\\
+             N_3 = 7\cdot11=77
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             143r_1 \equiv 1\pmod 7\\
+             91r_2 \equiv 1\pmod{11}\\
+             77r_3 \equiv 1\pmod{13}
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 5\pmod{7}\\
+             r_2 \equiv 4\pmod{11}\\
+             r_3 \equiv 12\pmod{13}
+        \end{array}\right.$$
+Portanto,
+        $$x \equiv \textcolor{Cyan}{143}\cdot\textcolor{Emerald}{5}\cdot\textcolor{Red}{6}+\textcolor{Cyan}{91}\cdot\textcolor{Emerald}{4}\cdot\textcolor{Red}{3}+\textcolor{Cyan}{77}\cdot\textcolor{Emerald}{12}\cdot\textcolor{Red}{9}  \pmod{ 7\cdot11\cdot13} \Rightarrow$$
+        $$x \equiv  13698 \pmod{1001} \Rightarrow \boxed{x \equiv 685 \pmod{1001}}$$
+	\task[\alt{b}] Temos que
+	\[
+	\begin{cases}
+	3x \equiv 5 \pmod{2} \\
+	x \equiv -3 \pmod{5} \\
+	4x \equiv 7 \pmod{9} 
+	\end{cases} \Rightarrow 	\begin{cases}
+	\textcolor{Plum}{1} \cdot 3x \equiv \textcolor{Plum}{1} \cdot 5 \pmod{2} \\
+	\textcolor{Plum}{1} \cdot 1x \equiv \textcolor{Plum}{1} \cdot -3 \pmod{5} \\
+	\textcolor{Plum}{7} \cdot 4x \equiv \textcolor{Plum}{7} \cdot 7 \pmod{9} 
+	\end{cases} \Rightarrow \]\[	\begin{cases}
+	3x \equiv 5 \pmod{2} \\
+	x \equiv -3 \pmod{5} \\
+	28x \equiv 49 \pmod{9} 
+	\end{cases} \Rightarrow 	\begin{cases}
+	x \equiv 1 \pmod{2} \\
+	x \equiv 2 \pmod{5} \\
+	x \equiv 4 \pmod{9} 
+	\end{cases}
+	\]
+   Como $\mdc(2,5)=\mdc(5,9)=\mdc(2,9)=1$, o sistema tem solução.
+   Podemos então utilizar o Teorema Chinês dos Restos. Assim, como temos 3 equações,
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3} \pmod{n_1 \cdot n_2 \cdot n_3},\]
+Vamos calcular cada um dos valores:
+   $$\left\{ \begin{array}{l}
+             N_1 = 5\cdot9=45\\
+             N_2 = 2\cdot9=18\\
+             N_3 = 2\cdot5=10
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             45r_1 \equiv 1\pmod 2\\
+             18r_2 \equiv 1\pmod 5\\
+             10r_3 \equiv 1\pmod 9
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 1\pmod 2\\
+             r_2 \equiv 2\pmod 5\\
+             r_3 \equiv 1\pmod 9
+        \end{array}\right.$$
+Portanto,
+        $$x \equiv \textcolor{Cyan}{45}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{5}+\textcolor{Cyan}{18}\cdot\textcolor{Emerald}{2}\cdot\textcolor{Red}{2}+\textcolor{Cyan}{10}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{4}  \pmod{ 2\cdot5\cdot9} \Rightarrow$$
+        $$x \equiv 337 \pmod{90} \Rightarrow \boxed{x \equiv 67 \pmod{90}}$$
+	}
+
+\end{solution}
+	\begin{exercicio}
+Determine o menor inteiro $a$, maior que $100$, tal que:
+$$
+	2\mid a; \ 3\mid (a+1);\ 4 \mid (a+2);\ 5\mid (a+3);\ 6\mid (a+4).
+$$
+	\end{exercicio}
+	
+	\begin{solution}
+	Vamos descrever as informações do enunciado em forma de congruências:
+\[\left\{\begin{array}{lcr}
+     2&\mid&a\\
+     3&\mid& a+1\\
+     4&\mid& a+2\\
+     5&\mid&a+3\\
+     6&\mid& a+4
+\end{array}\right.\Rightarrow \left\{\begin{array}{lcr}
+     a&\equiv&0 \pmod 2\\
+     a+1&\equiv&0\pmod 3\\
+     a+2&\equiv& 0\pmod 4\\
+     a+3&\equiv&0\pmod 5\\
+     a+4&\equiv& 0\pmod 6
+\end{array}\right.\Rightarrow\left\{\begin{array}{lcr}
+     a&\equiv&0 \pmod 2\\
+     a&\equiv& -1 \pmod 3\\
+     a&\equiv& -2 \pmod 4\\
+     a&\equiv&-3 \pmod 5\\
+     a&\equiv& -4 \pmod 6
+\end{array}\right.\Rightarrow\]\[
+\left\{\begin{array}{lcr}
+     a&\equiv&0  \pmod 2\\
+     a&\equiv&2  \pmod 3\\
+     a&\equiv&2  \pmod 4\\
+     a&\equiv&2 \pmod 5\\
+     a&\equiv&2 \pmod 6
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{lcl}
+    a&\equiv&0 \pmod 2\\
+    a&\equiv&2 \pmod{\mmc(3,4,5,6)}
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{lcl}
+    a&\equiv&0 \pmod 2\\
+    a&\equiv&2\pmod{60}
+\end{array}\right.\]
+Da primeira equação, observe que $a = 2k,$ para $k \in \mathbb{Z}.$ Assim, $2k \equiv 2 \pmod{60} \Rightarrow 2k = 60q+2,$ para $q \in \mathbb{Z}.$ Assim, $a = 60q+2.$ Para $a > 100,$ basta tomar $q = 2,$ e obtemos 
+\[a = 60 \cdot 2 + 2 = 122.\]
+	\end{solution}
+
+\begin{exercicio}
+Se de uma cesta com ovos retiramos duas unidades por vez, sobra $1$ ovo. O mesmo acontece se os ovos são retirados de $3$ em $3$, de $4$ em $4$, de $5$ em $5$, de $6$ em $6$. Mas não resta nenhum resto se retiramos $7$ unidades cada vez. Qual é menor numero possível de ovos na cesta?
+\end{exercicio}
+\begin{solution}
+Seja $x$ o número de ovos. Então, pelas informações do enunciado, 
+$$\left\{\begin{array}{lcr}
+    x&\equiv&1\pmod2\\
+    x&\equiv&1\pmod3\\
+    x&\equiv&1\pmod4\\
+    x&\equiv&1\pmod5\\
+    x&\equiv&1\pmod6\\
+    x&\equiv&0\pmod7 
+\end{array}\right.\Rightarrow
+\left\{\begin{array}{lcl}
+    x&\equiv&1 \pmod{\mmc(2,3,4,5,6)}\\
+    x&\equiv&0\pmod7
+\end{array}\right.\Rightarrow 
+\left\{\begin{array}{lcl}
+    x&\equiv&1\pmod{60}\\
+    x&\equiv&0\pmod7
+\end{array}\right.$$
+Da segunda equação, observe que $x = 7k,$ para $k \in \mathbb{Z}.$ Assim, $7k \equiv 1 \pmod{60}.$ Logo, $k \equiv 43 \pmod 60,$ e $x = 7 \cdot 43 = 301.$
+Portanto, concluímos que a menor quantidade de ovos que a cesta pode ter é $301$ ovos.\\
+\textbf{Observação:} Esta questão é uma adaptação de um problema proposto por Brahmagupta no livro Brāhmasphutasiddhānta, escrito por volta de 628, inteiramente em versos, no qual o problema, na sua versão traduzida em inglês, é o seguinte:
+
+An old woman goes to market and a horse steps on her basket and crashes the eggs. The rider offers to pay for the damages and asks her how many eggs she had brought. She does not remember the exact number, but when she had taken them out two at a time, there was one egg left. The same happened when she picked them out three, four, five, and six at a time, but when she took them seven at a time they came out even. What is the smallest number of eggs she could have had?
+\end{solution}
+
+\begin{exercicio}
+William resolveu fazer uma tabela, onde cada elemento corresponde exatamente ao menor número natural que deixa o resto equivalente na coluna na divisão por 7 e o resto equivalente à linha na divisão por 3. Por exemplo, $19$ pertence à linha assinalada com 1 e à coluna assinalada com 5, pois deixa restos 1 e 5 na divisão por 3 e 7, respectivamente.
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+  & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} \\ \hline
+\textbf{0} &   &   &   &   &   &   &   \\ \hline
+\textbf{1} &   &   &   &   &   & 19  &   \\ \hline
+\textbf{2} &   &   &   &   &   &   &   \\ \hline
+\end{tabular}
+\end{center}
+\itens{
+\task[\alt{a}] Ajude William, completando a tabela.
+\task[\alt{b}] Observe que todos os números de 0 a 20 apareceram na tabela uma única vez. Porquê isso ocorreu? O mesmo acontece se fizermos uma tabela semelhante para os restos por 4 e 6?
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}]Temos
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+           & 0  & 1  & 2  & 3  & 4  & 5  &  6  \\ \hline
+\textbf{0} & 0  & 15 & 9  & 3  & 18  & 12 & 6   \\ \hline
+\textbf{1} & 7  & 1  & 16 & 10 & 4   & 19 & 13  \\ \hline
+\textbf{2} & 14 & 8  & 2  & 17 & 11  & 5  & 20  \\ \hline
+\end{tabular}
+\end{center}
+\task[\alt{b}] Aparecem exatamente os números de 0 a 20, pois como consequência do Teorema Chinês dos Restos, para $\mdc(m,n)= 1,$ dados inteiros $i$ e $j$ com $0 \le i < m$ e $0 \le j < n,$ existe exatamente um inteiro $a,$ com $0 \le a < mn,$ tal que o resto da divisão de $a$ por $m$ é igual a $i$ e o resto da divisão de $a$ por $n$ é igual a $j.$ 
+
+Se tentarmos fazer uma tabela semelhante para 4 e 6, como $\mdc(4,6) = 2 \neq 1,$ não teremos todos o números de 0 a 23. Inclusive, algumas das casas não poderão ser preenchidas pela ausência de soluções:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+           & 0  & 1  & 2  & 3  & 4  & 5  \\ \hline
+\textbf{0} & 0  &    & 8  &    & 4  &    \\ \hline
+\textbf{1} &    & 1  &    & 9  &    & 5  \\ \hline
+\textbf{2} & 6  &    & 2  &    & 10 &    \\ \hline
+\textbf{3} &    & 7  &    & 3  &    & 11 \\ \hline
+\end{tabular}
+\end{center}
+}
+\end{solution}
+
+\begin{exercicio}
+Resolva a equação $x^2 \equiv 11 \pmod{35}.$
+\end{exercicio}
+\begin{solution}
+Observe que $35 = 5 \cdot 7,$ e $\mdc(5,7) = 1.$ Assim, pelo Teorema Chinês dos Restos, podemos escrever esta equação como um sistema:
+\[
+\begin{cases}
+x^2 \equiv 11 \pmod 5 \\
+x^2 \equiv 11 \pmod 7
+\end{cases} \Rightarrow \begin{cases}
+x^2 \equiv 11 \pmod 5 \\
+x^2 \equiv 4 \pmod 7
+\end{cases} \Rightarrow  \begin{cases}
+x \equiv \pm 1 \pmod 5 \\
+x \equiv \pm 2 \pmod 7
+\end{cases} 
+\]
+Assim, temos $4$ possíveis sistemas:
+\begin{itemize}
+    \item[$\clubsuit$] $\begin{cases}
+x \equiv  1 \pmod 5 \\
+x \equiv  2 \pmod 7
+\end{cases} $
+    \item[$\textcolor{Red}{\varheart}$] $\begin{cases}
+x \equiv  -1 \pmod 5 \\
+x \equiv  2 \pmod 7
+\end{cases} $
+    \item[$\spadesuit$] $\begin{cases}
+x \equiv  1 \pmod 5 \\
+x \equiv  -2 \pmod 7
+\end{cases} $
+    \item[$\textcolor{Red}{\vardiamond}$] $\begin{cases}
+x \equiv  -1 \pmod 5 \\
+x \equiv  -2 \pmod 7
+\end{cases} $
+\end{itemize}
+Resolvendo os casos, obtemos as soluções $x \equiv \pm 9 \pmod{35}$ e $x \equiv \pm 16 \pmod{35}.$
+\end{solution}
+
+\begin{exercicio}\textcolor{Blue}{*}
+Sabemos que quando um sistema de congruências satisfaz as condições do Teorema Chinês dos Restos, então ele de fato possui uma única solução para certo módulo. Nesta questão, veremos um critério para determinar se um sistema arbitrário de congruências possui solução.
+\itens{
+\task[\alt{a}] Mostre que o sistema de congruências
+\[
+\begin{cases}
+x \equiv c_1 \pmod{n_1} \\
+x \equiv c_2 \pmod{n_2}
+\end{cases}
+\]
+possui solução apenas se $c_1 \equiv c_2 \pmod{\mdc(n_1,n_2)}.$ Mostre também que a solução é única $\pmod{\mmc(n_1,n_2)}.$
+
+\task[\alt{b}] Utilizando o item anterior, pode-se provar por indução que o sistema de congruências
+\[
+\begin{cases}
+x \equiv c_1 \pmod{n_1} \\
+x \equiv c_2 \pmod{n_2} \\
+\vdots \\
+x \equiv c_k \pmod{n_k}
+\end{cases}
+\]
+possui solução apenas se $c_i \equiv c_j \pmod{\mdc(n_i,n_j)}$ para todos $i,j,$ com $i \neq j,$ sendo que, caso exista, a solução é única $\pmod{\mmc(n_1,n_2, \ldots, n_k)}.$ Verifique se o sistema de congruências
+\[
+\begin{cases}
+x \equiv 15 \pmod{26} \\
+x \equiv 25 \pmod{37} \\
+x \equiv 48 \pmod{59} \\
+x \equiv 57 \pmod{77} \\
+x \equiv 78 \pmod{87} \\
+x \equiv 15 \pmod{111} \\
+x \equiv 49 \pmod{127}
+\end{cases}
+\]
+possui solução.
+}
+\end{exercicio}
+\begin{solution}
+%https://www.cut-the-knot.org/blue/chinese.shtml
+\end{solution}
+
+\begin{exercicio}
+Seja $N = 1234567 \ldots 20202021$ o número obtido escrevendo os inteiros de 1 até 2021 concatenados. Qual é o resto que $N$ deixa quando dividido por 40?
+
+\textsf{[Dica:]} Note que $N \equiv 1 \pmod 5$ e $N \equiv 5 \pmod 8$ para, então, usar o Teorema Chinês dos Restos.
+\end{exercicio}
+
+
+\begin{exercicio}\textcolor{Blue}{*}
+Gabriel, ao resolver o sistema com $n>1$ congruências
+\[\begin{cases}
+x \equiv 1 \pmod{3} \\
+x \equiv 4 \pmod{5} \\
+\vdots \\
+x \equiv 3n - 2 \pmod{F_{n+3}}
+\end{cases},\]
+onde $F_n$ denota o $n$-ésimo número de Fibonacci, percebeu que a menor solução inteira positiva era exatamente a soma dos produtos de cada resto por seu respectivo módulo. Qual foi o sistema de congruências que Gabriel resolveu?
+\end{exercicio}
+\begin{solution}
+\end{solution}
+
+
+\begin{exercicio}\textcolor{Blue}{*}
+Encontre uma lista de 17 inteiros positivos consecutivos tais que cada um é divisível por um ou mais primos $p$ do intervalo $ 2 \le p \le 13.$\\
+\textsf{[Dica:]} Enumere as possibilidades de divisores para cada elemento da lista para avaliar uma possível composição, montando um sistema de congruências e usando o Teorema Chinês dos Restos para resolvê-lo e descobrir os elementos da lista.
+\end{exercicio}
+\begin{solution}
+Seja $\{a_1, \ldots, a_{17} \}$ a lista desejada. Iniciando com $a_1$ par, sabemos que todos os números pares serão divisíveis por 2, logo podemos desconsiderá-los, e focar apenas na divisibilidade dos 8 números ímpares restantes. Destes, temos que
+\begin{itemize}
+    \item 2 ou 3 devem ser divisíveis por 3;
+    \item 1 ou 2 devem ser divisíveis por 5;
+    \item 0 ou 1 devem ser divisíveis por 7;
+    \item 0 ou 1 devem ser divisíveis por 11;
+    \item 0 ou 1 devem ser divisíveis por 13.
+\end{itemize}
+Para que todos os membros ímpares da lista sejam divisíveis por 3,5,7,11 ou 13, precisamos ter exatamente 3 divisíveis por 3, 2 divisíveis por 5, 1 divisível por 7, 1 divisível por 11 e 1 divisível por 13, e nenhum número pode ser simultaneamente divisível por 2 dos primos ímpares entre 3 e 13. Sendo $a_2, a_4 \ldots, a_{16}$ os números, devemos ter por exemplo $a_2, a_8$ e $a_{14}$ divisíveis por 3, e estes não podem ser múltiplos de 5,7, 11 ou 13. Tomemos $a_6$ e $a_{16}$ para serem múltiplos de 5. Então os números $a_4,$ $a_{10}$ e $a_{12}$ podem por exemplo ser múltiplos de $7, 11$ e 13, respectivamente. 
+
+Assim, sendo $n \in \mathbb{N},$ podemos compor a lista com $\{n-8, n-7, \ldots, n+7, n+8\},$ ou seja, devemos ter as seguintes condições satisfeitas:
+
+\[\begin{cases}
+a_2 \equiv 0 \pmod 3 \\
+a_6 \equiv 0 \pmod 5 \\
+a_4 \equiv 0 \pmod 7  \\
+a_{10} \equiv 0 \pmod{11} \\
+a_{12} \equiv 0 \pmod{13} \\
+\end{cases} \Rightarrow \begin{cases}
+  n-7 \equiv 0 \pmod 3\\
+n-3 \equiv 0 \pmod 5\\
+n-5 \equiv 0 \pmod 7\\
+ n+1 \equiv 0 \pmod{11}\\
+n+3 \equiv 0 \pmod{13}
+\end{cases} \Rightarrow \begin{cases}
+  n \equiv 7 \pmod 3\\
+n \equiv 3 \pmod 5\\
+n \equiv 5 \pmod 7\\
+ n \equiv 10 \pmod{11}\\
+n \equiv 10 \pmod{13}
+\end{cases} \Rightarrow \begin{cases}
+  n \equiv 1 \pmod 3\\
+n \equiv 3 \pmod 5\\
+n \equiv 5 \pmod 7\\
+ n \equiv 10 \pmod{143}
+\end{cases}\]
+Podemos então resolver o sistema acima pelo Teorema Chinês dos Restos. A solução será da forma
+ \[x \equiv \textcolor{Cyan}{N_1}\textcolor{Emerald}{r_1}\textcolor{Red}{c_1} + \textcolor{Cyan}{N_2}\textcolor{Emerald}{r_2}\textcolor{Red}{c_2} + \textcolor{Cyan}{N_3}\textcolor{Emerald}{r_3}\textcolor{Red}{c_3}  + \textcolor{Cyan}{N_4}\textcolor{Emerald}{r_4}\textcolor{Red}{c_4} \pmod{n_1 \cdot n_2 \cdot n_3 \cdot n_4},\]
+Vamos calcular cada um dos valores:
+   $$\left\{ \begin{array}{l}
+             N_1 = 5\cdot7 \cdot 143=5005\\
+             N_2 = 3\cdot 7 \cdot 143=3003\\
+             N_3 = 3 \cdot 5 \cdot 143=2145\\
+             N_4 = 3 \cdot 5 \cdot 7=105
+        \end{array}\right.\Rightarrow
+        \left\{ \begin{array}{l}
+             5005r_1 \equiv 1\pmod 3\\
+             3003r_2 \equiv 1\pmod 5\\
+             2145r_3 \equiv 1\pmod 7\\
+             105r_4  \equiv 1\pmod{143}
+        \end{array}\right. \Rightarrow 
+        \left\{ \begin{array}{l}
+             r_1 \equiv 1\pmod 3\\
+             r_2 \equiv 2\pmod 5\\
+             r_3 \equiv 5\pmod 7\\
+             r_4 \equiv 79\pmod{143}
+        \end{array}\right.$$
+Portanto,
+        $$x \equiv \textcolor{Cyan}{5005}\cdot\textcolor{Emerald}{1}\cdot\textcolor{Red}{1}
+        +\textcolor{Cyan}{3003}\cdot\textcolor{Emerald}{2}\cdot\textcolor{Red}{3}
+        +\textcolor{Cyan}{2145}\cdot\textcolor{Emerald}{5}\cdot\textcolor{Red}{5} +\textcolor{Cyan}{105}\cdot\textcolor{Emerald}{79}\cdot\textcolor{Red}{10} \pmod{ 3\cdot5\cdot7\cdot143} \Rightarrow$$
+        $$x \equiv 159598 \pmod{15015} \Rightarrow \boxed{x \equiv 9448 \pmod{15015}}$$
+Logo, tomando $n = 9448,$ temos que a lista $\{9440, 9441, \ldots, 9455, 9456 \}$ satisfaz as condições do enunciado.
+\end{solution}
+\section{Teoremas de Euler, Fermat e Wilson}
+
+\begin{exercicio}
+Seja $a$ um inteiro. Demonstre as afirmações abaixo.
+\itens{
+	\task[\alt{a}] $a^{21}\equiv a \pmod{15}$;
+	\task[\alt{b}] Se $\mdc(a,35)=1$ então $a^{12}=1  \pmod{35}$;
+	\task[\alt{c}] Se $\mdc(a,42)=1$ então $168 \mid a^{6}-1$;
+	\task[\alt{d}] $a^{25}\equiv a \pmod{26}$.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}]  Observe que $a^{21}\equiv a\ \pmod{15}$ se e somente se $a^{21}\equiv a \pmod 3$ e $a^{21}\equiv a \pmod 5$. Assim, basta provar que $a^{21}\equiv a \pmod 3$ e $a^{21}\equiv a \pmod 5.$ 
+    
+    Pelo Pequeno Teorema de Fermat, sabemos que $a^3 \equiv a \pmod 3.$ Assim, temos:
+    \begin{align*}a^{21}=(\textcolor{PineGreen}{a^3})^7&\equiv \textcolor{PineGreen}{a}^7 \pmod 3 \\
+    &\equiv  \textcolor{PineGreen}{a^3} \cdot \textcolor{PineGreen}{a^3} \cdot a \pmod{3} \\
+   &\equiv  \textcolor{PineGreen}{a} \cdot \textcolor{PineGreen}{a} \cdot a \pmod{3} \\    
+    &\equiv  \textcolor{PineGreen}{a^3} \pmod 3 \\
+    &\equiv \textcolor{PineGreen}{a} \pmod 3.
+   \end{align*}
+    Novamente, pelo Pequeno Teorema de Fermat, sabemos que $a^5 \equiv a \pmod 5.$ Assim, temos:
+    \begin{align*}a^{21}=(\textcolor{Mahogany}{a^5})^4 \cdot a &\equiv \textcolor{Mahogany}{a}^4\cdot a \pmod 5 \\
+    &\equiv  \textcolor{Mahogany}{a^5} \pmod{5} \\
+    &\equiv \textcolor{Mahogany}{a} \pmod 5.
+   \end{align*}
+	\task[\alt{b}] Note que $\mdc(a,35)=1$ se e somente se $\mdc(a,5)=\mdc(a,7)=1$.
+    
+    Como $7\nmid a$, pelo Pequeno Teorema de Fermat, 
+    $$a^{7-1}\equiv 1\pmod7.$$
+    Assim,
+    \begin{align*}a^{12}=(\textcolor{PineGreen}{a^6})^2&\equiv \textcolor{PineGreen}{1}^2 \pmod 7 
+    \\&\equiv 1 \pmod 7.\end{align*}
+    Como $5\nmid a$, pelo Pequeno Teorema de Fermat, 
+    Assim,
+    \begin{align*}a^{12}=(\textcolor{Mahogany}{a^4})^3&\equiv \textcolor{Mahogany}{1}^3 \pmod 7 
+    \\&\equiv 1 \pmod 7.\end{align*}
+    	\task[\alt{c}] Como $\mdc(a,42)=1,$ então $\mdc(a,2)=\mdc(a,3)=\mdc(a,7)=1$, pois $2,3$ e $7$ são primos entre si. Sendo $168 = 3 \cdot 7 \cdot 8,$ como $\mdc(3,7) = \mdc(3,8) = \mdc(7,8) = 1,$ basta verificarmos que $3 \mid a^6 - 1$, $7 \mid a^6 - 1$ e $8 \mid a^6 - 1.$ 
+    	\begin{itemize}
+    	    \item[$\clubsuit$] Como $3 \nmid a,$ pelo Pequeno Teorema de Fermat, temos que
+    	    \[
+    	    a^{3-1} \equiv 1 \pmod 3.
+    	    \]
+    	    Assim,
+    \begin{align*}a^{6}=(\textcolor{PineGreen}{a^2})^3&\equiv \textcolor{PineGreen}{1}^3 \pmod 3 
+    \\&\equiv 1 \pmod 3.\end{align*}
+    Em outras palavras, $3 \mid a^6 - 1.$
+    	    \item[$\textcolor{red}{\varheart}$] Como $7 \nmid a,$ pelo Pequeno Teorema de Fermat, temos que
+    	    \[
+    	    a^6 = a^{7-1} \equiv 1 \pmod 7.
+    	    \]
+    Em outras palavras, $7 \mid a^6 - 1.$
+    	    \item[$\spadesuit$] 
+    Vejamos que $8\mid a^6-1$. Para isso, note que $$a^6-1=(a+1)(a-1)(a^2-a+1)(a^2+a+1)$$. Como $\mdc(a,2)=1$, então $a$ é ímpar. Tomando $a=2k+1$, temos:
+    \begin{align*}a^6-1&= ((2k+1)+1)((2k+1)-1)((2k+1)^2-(2k+1)+1)((2k+1)^2 + (2k+1)+1)\\
+    &=4k(k+1)(4k^2+2k+1)(4k^2+6k+3).\end{align*}
+    No entanto, $k$ e $k+1$ tem paridades distintas, ou seja, um deles é par. Assim, $8\mid a^6-1$.
+    	\end{itemize}
+    Logo, $3\cdot7\cdot8\mid a^6-1.$
+	}
+\end{solution}
+
+\begin{exercicio}
+\itens{
+	\task[\alt{a}]  Sejam $a$, $b$ inteiros e seja $p$ um primo positivo tal que $\mdc(a,p)=1$. Mostre que $x=a^{p-2}b$ é solução da congruência $ax\equiv b\ \pmod p$.
+	\task[\alt{b}]  Resolva as congruências $6x \equiv 5  \pmod{11}$ e $3x \equiv 17 \pmod{29}.$
+	}
+\end{exercicio}
+\begin{solution}
+\itens{
+	\task[\alt{a}] Como $p\nmid a$,pelo Pequeno Teorema de Fermat, temos que $a^{p-1}\equiv 1 \pmod p$. Assim:
+    $$a\cdot(a^{p-2}b)=\textcolor{RawSienna}{a^{p-1}}b\equiv \textcolor{RawSienna}{1}\cdot b=b \pmod p.$$
+	\task[\alt{b}]
+    Como $\mdc(6,11)=1$ e $1\mid 5$, a equação tem solução. Assim,
+    $$
+    \begin{array}{rcl}
+        6x&\equiv&5\pmod{11}\\
+        \textcolor{Plum}{2} \cdot 6x&\equiv&\textcolor{Plum}{2} \cdot 5\pmod{11}\\
+        12x&\equiv&10\pmod{11}\\
+        x&\equiv&10\pmod{11}.
+    \end{array}$$
+    Como $\mdc(3,29)=1$ e $1\mid 17$, a equação tem solução. Assim,
+    $$
+    \begin{array}{rcl}
+    3x&\equiv&17\pmod{29}\\
+    \textcolor{Plum}{10} \cdot 3x&\equiv&\textcolor{Plum}{10} \cdot 17\pmod{29}\\
+    30x&\equiv&170\pmod{29}\\
+    x&\equiv&25\pmod{29}.
+    \end{array}$$
+}
+\end{solution}
+
+\begin{exercicio}
+Encontre o resto da divisão de
+\itensladoalado{3}{ 
+\task[\alt{a}] $5^{14}$ por $7$.     
+\task[\alt{b}] $5^{100}$ por $11$. 
+\task[\alt{c}] $15^{175}$ por $11$. 
+\task[\alt{d}] $31^{200}$ por $28$. 
+\task[\alt{e}] $2^{7^{2002}}$ por $352$. 
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Pelo Pequeno Teorema de Fermat, temos que
+\[
+5^7 \equiv 5 \pmod 7.
+\]
+Assim,
+\begin{align*}
+    5^{14} = (\textcolor{PineGreen}{5^7})^2 &\equiv \textcolor{PineGreen}{5}^2 \pmod 7 \\
+    &= 25 \pmod 7 \\
+    &= 4 \pmod 7
+\end{align*}
+    O resto da divisão de $5^{14}$ por $7$ é $4$.
+\task[\alt{b}]  Pelo Pequeno Teorema de Fermat, temos que
+\[
+5^{11-1} \equiv 1 \pmod{11}.
+\]
+Assim,
+\begin{align*}
+    5^{100} = (\textcolor{Mahogany}{5^{10}})^{10} &\equiv \textcolor{Mahogany}{1}^{10} \pmod{11} \\
+    &= 1 \pmod{11} 
+\end{align*}
+    O resto da divisão de $5^{100}$ por $11$ é $1$.
+    \task[\alt{c}]  Pelo Pequeno Teorema de Fermat, temos que
+\[
+15^{11-1} \equiv 1 \pmod{11}.
+\]
+Assim,
+\begin{align*}
+    15^{175} = (\textcolor{Mahogany}{5^{10}})^{17} \cdot 15^5 &\equiv \textcolor{Mahogany}{1}^{17} \cdot 15^5 \pmod{11} \\
+    &= 15^5 \pmod{11} 
+\end{align*}
+Agora, pelo item (a) do exercício 7, temos que
+\[
+15^5 = 15^{\frac{11-1}{2}} \equiv 1 \pmod{11}.
+\]
+Portanto, $15^{175} \equiv 1 \pmod{11}.$ O resto da divisão de $15^{175}$ por $11$ é $1$.
+\task[\alt{d}] Como $\mdc(31,28)=1$, pelo Teorema de Euler, temos que
+    \[
+    31^{\varphi(28)} \equiv 1 \pmod{28}.
+    \]
+    Como $\varphi$ é multiplicativa, $\varphi(28)=\varphi(2^2\cdot7)=\varphi(2^2)\cdot\varphi(7)=(2^2-2)\cdot(7-1)=12,$ lembrando que $\varphi(p^a) = p^a - p^{a-1}$ e $\varphi(p) = p -1.$
+    Consequentemente,
+      \[
+    31^{\varphi(28)} \equiv 1 \pmod{28} \Rightarrow 31^{12} \equiv 1 \pmod{28} \Rightarrow 31^{12k} \equiv 1 \pmod{28}.
+    \]  
+    
+    Como $200 = 12\cdot16+8,$ então temos que
+    \begin{align*}
+        31^{200} = 31^{12 \cdot 16 + 8} = \textcolor{Cerulean}{31^{12 \cdot 16}} \cdot 3^8 & \equiv \textcolor{Cerulean}{1} \cdot 3^8 \pmod{28} \\
+        &\equiv 3^{8} \pmod{28}\\
+        &\equiv \textcolor{Orange}{3^3} \cdot  \textcolor{Orange}{3^3} \cdot 3^2 \pmod{28} \\
+       &\equiv \textcolor{Orange}{(-1)} \cdot  \textcolor{Orange}{(-1)} \cdot 3^2 \pmod{28} \\
+       &\equiv 9 \pmod{28}.
+    \end{align*}
+    
+ O resto da divisão de $31^{200}$ por $28$ é $9$.
+ 
+\task[\alt{e}] Seja $x$ tal que $2^{7^{2002}} \equiv x \pmod{352}.$ Equivalentemente, pode-se escrever $x \equiv 2^{7^{2002}} \pmod{352}.$ Como $352=2^5\cdot11$ e $\mdc(32,11)=1$, então, pelo Teorema Chinês dos Restos, devemos achar $x$ tal que:
+    $$\left\{\begin{array}{l}
+    x\equiv 2^{7^{2002}} \pmod{32}\\
+    x\equiv 2^{7^{2002}} \pmod{11}
+    \end{array}\right.
+    .$$
+    A primeira congruência tem solução $x\equiv 0 \pmod 32$. (isso é fácil de ver, uma vez que $2^5 = 32$ e $2^{7^{2002}} > 2^5.$) Para resolver a segunda congruência, vamos utilizar o Teorema de Euler. Temos que
+    \[
+    2^{\varphi(11)} \equiv 1 \pmod{11}.
+    \]
+    Como $\varphi(11)=11-1=10$, temos
+    \[
+    2^{10} \equiv 1 \pmod{11} \Rightarrow 2^{10k} \equiv 1 \pmod{11}.
+    \]    
+    Agora, escreva $7^{2002} = 10k + r.$ Então,
+    \[
+    2^{\textcolor{Periwinkle}{7^{2002}}} = 2^{\textcolor{Periwinkle}{10k+r}} = 2^{10k} \cdot 2^r
+    \]
+    Assim, precisamos achar o resto da divisão de $7^{2002}$ por $10$. Veja que
+    \begin{align*}
+        7^{2002} = (7^2)^{1001} = \textcolor{Emerald}{49}^{1001} &\equiv \textcolor{Emerald}{(-1)}^{1001} \pmod{10} \\ 
+        &\equiv -1 \pmod{10} \\
+        &\equiv 9 \pmod{10}
+    \end{align*}
+
+    Portanto, 
+
+\begin{align*}
+    2^{7^{2002}} = 2^{10k + 9} = \textcolor{Magenta}{2^{10k}} \cdot 2^9 &\equiv \textcolor{Magenta}{1} \cdot 2^9 \pmod{11} \\
+    &\equiv 2^9 \pmod{11} \\
+    &\equiv 512 \pmod{11} \\
+    &\equiv 6 \pmod{11}.
+\end{align*}
+    Logo:
+    $$\left\{\begin{array}{l}
+    x\equiv 0 \pmod{32}\\
+    x\equiv 6 \pmod{11}
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=32k\\
+    32k\equiv 6 \pmod{11}
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=32k\\
+    k = 5+11t
+    \end{array}\right. \Rightarrow x\equiv 160\pmod{352}
+    .$$
+ Assim, o resto da divisão de $2^{7^{2002}}$ por $352$ é $160$.
+}
+\end{solution}
+
+\begin{exercicio}
+Encontre os dois últimos dígitos de
+\itensladoalado{3}{ 
+\task[\alt{a}] $2^{999}$;
+\task[\alt{b}] $3^{999}$; 
+\task[\alt{c}] $5^{2020}$; 
+\task[\alt{d}] $7^{2019}$; 
+\task[\alt{e}] $123^{2010}$; 
+\task[\alt{f}] $557^{2012}$.
+}
+\end{exercicio}
+\begin{solution}
+Tendo em mente que encontrar os dois últimos dígitos de um número é o mesmo que obter seu resto na divisão por 100, podemos resolver a questão:
+\itens{
+\task[\alt{a}] Seja $x$ tal que $2^{999} \equiv x \pmod{100}.$ Equivalentemente, pode-se escrever $x \equiv 2^{999} \pmod{100}.$ Como $100=2^2\cdot5^2$ e $\mdc(4,25)=1$, então, pelo Teorema Chinês dos Restos, devemos achar $x$ tal que:
+    $$\left\{\begin{array}{l}
+    x\equiv 2^{999} \pmod 4\\
+    x\equiv 2^{999} \pmod{25}
+    \end{array}\right.
+    .$$
+    A primeira congruência tem solução $x\equiv 0 \pmod 4$. Para resolver a segunda congruência, vamos utilizar o Teorema de Euler. Sabemos que
+    \[
+    2^{\varphi(25)} \equiv 1 \pmod{25}.
+    \]
+    Como $\varphi(25)=\varphi(5^2)=5^2-5=20$, temos que
+    \[
+    2^{20} \equiv 1 \pmod{25} \Rightarrow 2^{20k} \equiv 1 \pmod{25}. 
+    \]
+    
+    Como $999=20\cdot49+19,$ então
+    \begin{align*}
+        2^{999} = 2^{20 \cdot 49 + 19} = \textcolor{Plum}{2^{20 \cdot 49}} \cdot 2^{19} &\equiv \textcolor{Plum}{1} \cdot \textcolor{JungleGreen}{2^{19}} \pmod{25} \\
+        &\equiv \textcolor{JungleGreen}{2^{10} \cdot 2^9 } \pmod{25} \\
+        &\equiv 1024 \cdot 512 \pmod{25} \\
+        &\equiv (-1) \cdot 12 \pmod{25} \\
+        &\equiv -12 \pmod{25} \\
+        &\equiv 13 \pmod{25}.
+    \end{align*}
+    Logo:
+    $$\left\{\begin{array}{l}
+    x\equiv 0 \pmod 4\\
+    x\equiv 13 \pmod{25}
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=4k\\
+    4k\equiv 13 \pmod{25}
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=4k\\
+    k = 22+25t
+    \end{array}\right. \Rightarrow x\equiv 88 \pmod{100}
+    .$$
+ Assim, $2^{999}$ termina com $88$.
+\task[\alt{b}] Seja $x$ tal que $3^{999} \equiv x \pmod{100}.$ Equivalentemente, pode-se escrever $x \equiv 2^{999} \pmod{100}.$ Pelo Teorema de Euler. Sabemos que
+    \[
+    3^{\varphi(100)} \equiv 1 \pmod{100}.
+    \]
+    Como \[\varphi(100)=\varphi(2^2\cdot5^2)=\varphi(2^2)\cdot\varphi(5^2)=(2^2-2)\cdot(5^2-5)=40,\] temos que
+    \[
+    3^{40} \equiv 1 \pmod{100} \Rightarrow 3^{40k} \equiv 1 \pmod{100}. 
+    \]
+    
+    Como $1000 = 40 \cdot 25,$ então
+\[ 3^{1000} = \textcolor{Cyan}{3^{40 \cdot 25}} \equiv \textcolor{Cyan}{1} \pmod{100}\]
+Como $3^{999} \cdot 3 = 3^{1000}$ e $3 \cdot 67 \equiv 1 \pmod{100},$ então
+\[
+67 \cdot 3^{999} \cdot 3 = 67 \cdot 3^{1000} \equiv 67 \cdot 1\pmod{100} \Rightarrow 3^{999} \equiv 67 \pmod{100} 
+\]
+ Assim, $3^{999}$ termina em $67$.
+ 
+ \task[\alt{c}] Qualquer potência de 5 com expoente maior do que 1 sempre termina em $25$. Assim, os dois últimos algarismos de $5^{2020}$ são $2$ e $5.$ Supondo que tal fato não seja conhecido, pode-se calcular seu valor a exemplo do feito nos itens anteriores: seja $x$ tal que $5^{2020} \equiv x \pmod{100}.$ Equivalentemente, pode-se escrever $x \equiv 5^{2020} \pmod{100}.$ 
+ Como $100=2^2\cdot5^2$ e $\mdc(4,25)=1$, então, pelo Teorema Chinês dos Restos, devemos achar $x$ tal que:
+    $$\left\{\begin{array}{l}
+    x\equiv 5^{2020} \pmod 4\\
+    x\equiv 5^{2020} \pmod{25}
+    \end{array}\right.$$
+    
+    A segunda congruência tem solução $x\equiv 0 \pmod{25}$. Para resolver a primeira congruência, temos que $5\equiv 1 \pmod{4}$, logo $5^{2020}\equiv 1 \pmod{4}.$
+    Logo:
+    $$\left\{\begin{array}{l}
+    x\equiv 1 \pmod 4\\
+    x\equiv 0 \pmod{25}
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=25k\\
+    25k\equiv 1 \pmod 4
+    \end{array}\right. \Rightarrow 
+    \left\{\begin{array}{l}
+    x=25k\\
+    k = 1+4t
+    \end{array}\right. \Rightarrow x\equiv 25 \pmod{100}
+    .$$
+  Assim, $5^{2020}$ termina em $25$.
+  \task[\alt{d}] Pelo Teorema de Euler,
+  \[
+  7^{\varphi{100}} \equiv 1 \pmod{100}.
+  \]
+  Como $\varphi(100)=\varphi(2^2\cdot5^2)=\varphi(2^2)\cdot\varphi(5^2)=(2^2-2)\cdot(5^2-5)=40$, temos
+  \[7^{40} \equiv 1 \pmod{100} \Rightarrow 7^{40k}\equiv 1 \pmod{100}.\] 
+Note que $2019=40\cdot50+19.$ Desse modo,
+\begin{align*}
+    7^{2019} = 7^{40 \cdot 50 + 19} = \textcolor{RoyalBlue}{7^{40 \cdot 50}} \cdot 7^{19} &\equiv \textcolor{RoyalBlue}{1} \cdot 7^{19} \pmod{100} \\
+    &\equiv 7^{19} \pmod{100} \\
+    &\equiv 7^{16} \cdot 7^3 \pmod{100} \\
+    &\equiv (\textcolor{ForestGreen}{7^4})^4 \cdot 7^3 \pmod{100} \\
+   &\equiv (\textcolor{ForestGreen}{1})^4 \cdot 7^3 \pmod{100} \\
+   &\equiv 7^3 \pmod{100} \\
+   &\equiv 343 \pmod{100} \\
+   &\equiv 43 \pmod{100}
+\end{align*}
+ Assim, $7^{2019}$ termina em $43$.
+  \task[\alt{e}] Pelo Teorema de Euler,
+  \[
+  123^{\varphi{100}} \equiv 1 \pmod{100}.
+  \]
+  Como $\varphi(100)=\varphi(2^2\cdot5^2)=\varphi(2^2)\cdot\varphi(5^2)=(2^2-2)\cdot(5^2-5)=40$, temos
+  \[123^{40} \equiv 1 \pmod{100} \Rightarrow 123^{40k}\equiv 1 \pmod{100}.\] 
+Note que $2010=40\cdot50+10.$ Desse modo,
+\begin{align*}
+    123^{2010} = 123^{40 \cdot 50 + 10} = \textcolor{Violet}{123^{40 \cdot 50}} \cdot 123^{10} &\equiv \textcolor{Violet}{1} \cdot 123^{10} \pmod{100} \\
+    &\equiv 123^{10} \pmod{100} \\
+    &\equiv 23^{10} \pmod{100} \\
+    &\equiv (\textcolor{ForestGreen}{23^2})^5 \pmod{100} \\
+   &\equiv (\textcolor{ForestGreen}{29})^5 \pmod{100} \\
+   &\equiv 20511149 \pmod{100} \\
+   &\equiv 49 \pmod{100}
+\end{align*}
+ Assim, $123^{2010}$ termina em $49$.
+  \task[\alt{f}] Pelo Teorema de Euler,
+  \[
+  557^{\varphi{100}} \equiv 1 \pmod{100}.
+  \]
+  Como $\varphi(100)=\varphi(2^2\cdot5^2)=\varphi(2^2)\cdot\varphi(5^2)=(2^2-2)\cdot(5^2-5)=40$, temos
+  \[557^{40} \equiv 1 \pmod{100} \Rightarrow 557^{40k}\equiv 1 \pmod{100}.\] 
+Note que $2012=40\cdot50+12.$ Desse modo,
+\begin{align*}
+    557^{2012} = 557^{40 \cdot 50 + 12} = \textcolor{Gray}{557^{40 \cdot 50}} \cdot 557^{12} &\equiv \textcolor{Gray}{1} \cdot 557^{12} \pmod{100} \\
+    &\equiv 557^{12} \pmod{100} \\
+    &\equiv 57^{12} \pmod{100} \\
+    &\equiv (\textcolor{Lavender}{57^2})^6 \pmod{100} \\
+   &\equiv (\textcolor{Lavender}{49})^6 \pmod{100} \\
+   &\equiv (\textcolor{Sepia}{49^2})^3 \pmod{100} \\
+   &\equiv \textcolor{Sepia}{1}^3 \pmod{100} \\
+   &\equiv 1 \pmod{100}
+\end{align*}
+ Assim, $557^{2012}$ termina em $01$.
+}
+\end{solution}
+
+\begin{exercicio}
+\itens{
+\task[\alt{a}] Seja $p$ um inteiro primo e sejam $a,b$ inteiros arbitrários. Mostre que se $a^{p}\equiv b^{p}\ \pmod p$ então $a\equiv b \pmod p$.
+\task[\alt{b}] Seja $p>2$ um primo. Mostre que
+$$
+	1^p+2^p+\dots+(p-1)^p\equiv 0 \pmod p.
+$$
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Se $a^{p}\equiv b^{p} \pmod p,$ por propriedades de aritmética modular, temos que
+\[a^p \textcolor{Magenta}{-b^p} \equiv b^p \textcolor{Magenta}{-b^p} \pmod p \Rightarrow a^p-b^p\equiv 0 \pmod p.\]
+ Pelo Pequeno Teorema de Fermat, temos que:
+    $$\left\{ \begin{array}{l}
+    \textcolor{NavyBlue}{a^p\equiv a \pmod p}\\
+    \textcolor{Emerald}{b^p \equiv b \pmod p}
+    \end{array}\right.$$ 
+Portanto,
+    $$\textcolor{NavyBlue}{a^p}- \textcolor{Emerald}{b^p}\equiv \textcolor{NavyBlue}{a}- \textcolor{Emerald}{b} \pmod p \Rightarrow 0\equiv a-b \pmod p \Rightarrow a\equiv b \pmod p.$$
+    \task[\alt{b}] Pelo Pequeno Teorema de Fermat, temos:
+    $$\left\{\begin{array}{rcl}
+    \textcolor{NavyBlue}{1^p}&\textcolor{NavyBlue}{\equiv}&\textcolor{NavyBlue}{1 \pmod p}\\
+    \textcolor{Emerald}{2^p}&\textcolor{Emerald}{\equiv} &\textcolor{Emerald}{2\pmod p}\\
+    \textcolor{Magenta}{3^p}&\textcolor{Magenta}{\equiv}&\textcolor{Magenta}{3\pmod p}\\
+    &\vdots&\\
+    \textcolor{Brown}{(p-1)^p}& \textcolor{Brown}{\equiv}& \textcolor{Brown}{p-1 \pmod p}
+    \end{array}\right. $$
+    Portanto,
+    $$\textcolor{NavyBlue}{1^p}+\textcolor{Emerald}{2^p}+ \textcolor{Magenta}{3^p} + \ldots+\textcolor{Brown}{(p-1)^p} \equiv \textcolor{NavyBlue}{1}+\textcolor{Emerald}{2}+\textcolor{Magenta}{3} + \cdots+\textcolor{Brown}{p-1}=p\cdot\left(\frac{p-1}{2}\right)\equiv 0 \pmod p.$$
+    Note que se $p$ é primo maior que $2$, então $p$ é ímpar, $p-1$ é par e $\displaystyle \frac{p-1}{2} \in \mathbb{N}$. 
+}
+\end{solution}
+
+
+\begin{exercicio}
+Mostre que $2^{8}\equiv 1 \pmod{17}$ e que $2^{16}\equiv 1\pmod{17}$.
+\end{exercicio}
+\begin{solution}
+Pelo Exercício 7, temos que
+\[
+2^8 = 2^{\frac{17-1}{2}} \equiv 1 \pmod{17}.
+\]
+Pelo Pequeno Teorema de Fermat, temos que
+\[
+2^{16} = 2^{17-1} \equiv 1 \pmod{17}. 
+\]
+\textcolor{Red}{Solução Alternativa:}         Temos $$2^8=(2^4)^2=16^2\equiv (-1)^2\equiv1\pmod{17};$$
+    $$2^{16}=(2^8)^2\equiv1^2\equiv1\pmod{17}.$$
+\end{solution}
+\begin{exercicio}
+Sejam $p$ um primo e $a$ um inteiro tal que $p \nmid a$. Prove que 
+\itens{
+\task[\alt{a}] se $p>2, a^{\frac{p-1}{2}}\equiv 1  \pmod p$ ou $a^{\frac{p-1}{2}} \equiv -1 \pmod p$;
+\task[\alt{b}] o menor inteiro positivo $e$ tal que $a^{e}\equiv 1 \pmod p$ é divisor de $p-1$;
+\task[\alt{c}] se $e$ é o inteiro acima de $x$ é um inteiro tal que $a^{x}\equiv 1 \pmod p$ então $e \mid x$.
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] 
+
+}
+\end{solution}
+
+\begin{exercicio}
+\itens{
+\task[\alt{a}] Sejam $p$, $q$ primos distintos e impares tais que $(p-1) \mid(q-1)$. Mostre que se $\mdc(a,pq)=1$ então $a^{q-1}\equiv 1 \ \pmod{pq}$.
+\task[\alt{b}] Seja $a$ um inteiro. Prove que $a^{37}\equiv a \pmod{1729}$; $a^{79}\equiv a \pmod{158}.$
+}
+
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Sejam $a$ um inteiro e $n$ um inteiro positivo tais que $\mdc(a,n)=\mdc(a-1,n)=1$. Prove que 
+$$
+	1+a+\dots+a^{\varphi(n)-1}\equiv 0 \pmod n.
+$$
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Sejam $m,n$ inteiros positivos relativamente primos. Prove que 
+$$
+	m^{\varphi(n)}+n^{\varphi(m)}\equiv 1\pmod{mn}.
+$$
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Determine o resto da divisão de $a$ por $b$ nos casos
+\itens{
+	\task[\alt{a}] $a=15!$ e $b=17$.
+\task[\alt{b}] $a=2\cdot (26)!$ e $b=29$.
+}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}
+Reúna os inteiros $2,3,\dots,21$ em pares $(a,b)$ tais que $ab\equiv 1 \pmod{23}$.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+
+\begin{exercicio}
+Mostre que $18!\equiv -1\pmod{437}$.
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}Encontre o resto da divisão de 
+\itensladoalado{3}{
+    \task[\alt{a}] $5!\cdot 25!$ por $31$;
+    \task[\alt{b}]  $ 97!$ por $101$; 
+    \task[\alt{c}]  $ 65!$ por $71$;
+    \task[\alt{d}]  $ 53!$ por $61$;
+    \task[\alt{e}]  $ 149!$ por $139$;
+    \task[\alt{f}]  $ 97!$ por $103$.
+}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+
+\begin{exercicio}
+Resolva cada uma das equações abaixo:
+\itensladoalado{3}{
+    \task[\alt{a}] $\varphi(n)=\dfrac{n}{3}.$
+    \task[\alt{b}] $\varphi(2n)=\varphi(3n).$
+    \task[\alt{c}] $\varphi(n)=2.$ 
+    \task[\alt{d}] $\varphi(n)=\dfrac{2n}{3}.$    
+    \task[\alt{e}] $\varphi(n)=6.$
+    \task[\alt{f}] $\varphi(n)=26.$
+}
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Mostre que para todo $n$ temos
+\itensladoalado{2}{
+    \task[\alt{a}]
+ $\varphi(4n) =2\varphi(2n)$;
+    \task[\alt{b}]
+ $\varphi(4n+2) =\varphi(2n+1)$;
+} 
+\end{exercicio}
+\begin{exercicio}
+Observe que 
+\[\begin{array}{rcl}
+6! &\equiv& -1 \pmod 7 \\
+5!1! &\equiv& 1 \pmod 7\\
+4!2! &\equiv&-1 \pmod 7\\
+3!3! &\equiv& 1 \pmod 7
+\end{array}\]
+\itens{
+\task[\alt{a}] Faça o mesmo cálculo para o módulo 11, ou seja, calcule $10! \pmod{11}, 9!1! \pmod{11}, \ldots, 5!5! \pmod{11}.$
+\task[\alt{b}] Com base no enunciado e nos resultados do item (a), conjecture uma fórmula para realizar esses cálculos e demonstre-a.
+\task[\alt{c}] Qual é o resto da divisão de $15! \cdot 31!$ por $2021?$ 
+}
+%https://www.uvm.edu/~cvincen1/files/teaching/spring2018-math255/hw10sol.pdf -exericio 6
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+
+\begin{exercicio}
+Existem exatamente $5$ pares de números primos de 2 algarismos $(p,q)$, $p < q,$ tais que $p!$ deixa resto $p$ na divisão por $q,$ e $15$ pares de números primos de 3 algarismos satisfazendo essa condição.
+\itens{
+\task[\alt{a}] Mostre que $(11,29), (19, 59), (43, 61), (47,83
+)$ e $(53, 61)$ são todos os pares de primos de 2 algarismos satisfazendo essa condição.
+\task[\alt{b}] Mostre que $(653,661)$ é um par de números primos de 3 algarismos satisfazendo a condição do enunciado.\\
+\textsf{[Dica:]} Use que $8! + 1 \equiv 0 \pmod{661}$ e $8 \cdot 248 \equiv 1 \pmod{661}.$
+}
+\end{exercicio}
+\begin{exercicio}
+Verifique se cada afirmação abaixo é verdadeira ou falsa:
+\itens{
+\task[\alt{a}] Se $\mdc(m,n) = 1$ então $\mdc(\varphi(n), \varphi(m)) = 1.$
+\task[\alt{b}] Se $n$ não é primo, então $\mdc(n, \varphi(n)) > 1.$
+\task[\alt{c}] Se $m$ e $n$ satisfazem $n \varphi(m) = m \varphi(n),$ então $m = n.$
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Falso. Como $\varphi(n)$ é para para todo $n > 2,$ então, tomando qualquer par $m,n > 2$ tal que $\mdc(m,n) = 1,$ então $2 \mid \mdc(\varphi(n), \varphi(m)) \Rightarrow \mdc(\varphi(n), \varphi(m)) \neq 1.$
+Tome por exemplo $m = 5$ e $n = 8.$
+\task[\alt{b}] Falso. Por exemplo, $\mdc(7, \varphi(7)) = \mdc(7,6) = 1.$
+\task[\alt{c}] Falso. Pegue por exemplo $m= 6$ e $n = 18$. Então $\varphi(6) = (2-1)(3-1) = 2$ e $\varphi(18) = \varphi(2 \cdot 3^2) = \varphi(3^2) = (3-1) \cdot 3 = 6,$ e 
+\[
+18 \cdot \varphi(6) = 18 \cdot 2 = 36 = 6 \cdot 6 = 6 \cdot \varphi(18) \Rightarrow  18 \cdot \varphi(6) = \varphi(18),
+\]
+mas $18 \neq 6.$\\
+\textbf{Observação:} Na verdade, $n \varphi(m) = m \varphi(n)$ se e somente se $m$ e $n$ possuírem os mesmos fatores primos.
+}
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Sejam $D(n) = \{d_1, \ldots, d_k \}$ os divisores positivos de $n.$ Assim, $d_1 = 1,$ e $d_k = n.$ 
+\itens{
+\task[\alt{a}] Se $n = 12,$ calcule $\varphi(d_1) + \ldots + \varphi(d_k).$
+\task[\alt{b}] Encontre o valor de
+\[
+\varphi(1) + \varphi(2) + \ldots + \varphi(2^\ell),
+\]
+onde $\ell \in \mathbb{N}.$
+\task[\alt{c}] Sendo $p$ um número primo, encontre o valor de
+\[
+\varphi(1) + \varphi(p) + \ldots + \varphi(p^\ell),
+\]
+onde $\ell \in \mathbb{N}.$
+\task[\alt{d}] Prove que, para todo $n \in \mathbb{N}^{*},$
+\[
+\sum\limits_{d \in D(n)} \varphi(d) = n
+\]
+
+\textsf{[Dica:]} Utilize o Teorema Fundamental da Aritmética e o item anterior.  
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}]
+\task[\alt{b}]
+\task[\alt{c}]
+\task[\alt{d}] Do item anterior, sabemos que, se $n = p^{\ell},$ então
+\[
+\sum\limits_{d \in D(n)} \varphi(d) = p^{\ell}
+\]
+Pelo Teorema Fundamental da Aritmética, $n = p_1^{a_1} \cdot p_2^{a_2} \cdot \ldots \cdot p_k^{a_k}.$ Então
+\begin{align*}
+\sum\limits_{d \in D(n)} \varphi(d) &= \sum\limits_{a_1 = 0}^{\ell_1} \cdots \sum\limits_{a_k = 0}^{\ell_k} \varphi(p_1^{\ell_1} \cdot \ldots \cdot p_k^{\ell_k})\\ &= \sum\limits_{a_1 = 0}^{\ell_1} \cdots \sum\limits_{a_k = 0}^{\ell_k} \varphi(p_1^{\ell_1}) \cdot \ldots \cdot \varphi(p_k^{\ell_k}) \\
+&= \left( \sum\limits_{a_1 = 0}^{\ell_1} \varphi(p_1^{\ell_1}) \right) \cdot \ldots \cdot \left( \sum\limits_{a_k = 0}^{\ell_k} \varphi(p_k^{\ell_k})  \right)\\
+&= p_1^{a_1} \cdot \ldots \cdot p_k^{a_k}  \\
+&= n
+\end{align*}
+%https://www.mat.unb.br/~maierr/tnotas.pdf
+}
+\end{solution}
+
+\begin{comment}
+\begin{exercicio}
+A conjectura da soma de potências de Euler diz que, se $n$ e $k$ são números inteiros positivos, e existe uma sequência de inteiros positivos $a_1, \ldots, a_n$ tal que
+\[
+a_1^k + \ldots + a_n^k = b^k, b \in \mathbb{N},
+\]
+então $n \ge k.$ Esta conjectura corresponde precisamente ao Último Teorema de Fermat para o caso $k = 2.$ Provou-se também a validade dessa conjectura para $k = 3,$ mas contraexemplos foram encontrados para $k = 5.$ Os matemáticos estadunidenses Leon Lander e Thomas Parkin, em 1966, publicaram um artigo com apenas 5 linhas apresentando este contra-exemplo. Eles mostraram que existem um inteiro positivo $n$ quadrado perfeito tal que 
+\[
+27^5 + 84^5 + 110^5 + 133^5 = n^5
+\]
+Encontre o valor de $n.$
+%https://artofproblemsolving.com/wiki/index.php/Fermat%27s_Little_Theorem#Introductory
+%https://artofproblemsolving.com/wiki/index.php/1989_AIME_Problems/Problem_9
+
+%https://www.yumpu.com/pt/document/read/31276527/3-teorema-de-euler-e-teorema-de-wilson
+\end{exercicio}
+\end{comment}
+%https://www.math.cmu.edu/~cargue/arml/archive/15-16/number-theory-09-27-15-solutions.pdf
+\newpage
+\begin{exercicio}
+\itens{
+\task[\alt{a}] Prove que, para $n$ número natural e $a \in \mathbb{Z},$ com $\mdc(a,n) = 1$ se $m, k$ são naturais positivos tais que $m \equiv k \pmod{\varphi(n)},$ então $a^m \equiv a^k \pmod{n}.$
+\task[\alt{b}] Seja $a \in \mathbb{Z}$ tal que $\mdc(a, 561) = 1.$ Prove que $a^{560} \equiv 1 \pmod{561}.$ Isto é um contraexemplo ao Pequeno Teorema de Fermat? 
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] Como $m \equiv k \pmod{\varphi(n)},$ então existe um $q \in \mathbb{N}$ tal que $m - k = q \varphi(n),$ e portanto
+\[
+\begin{array}{rcl}
+a^{\textcolor{Cyan}{m}} = a^{\textcolor{Cyan}{q \varphi(n) + k}} = \left(\textcolor{Green}{a^{\varphi(n)}}\right)^q \cdot a^k  &\equiv& \left(\textcolor{Green}{1}\right)^q \cdot a^k \pmod n \\
+&\equiv& a^k \pmod n,
+\end{array}
+\]
+onde pelo Teorema de Euler usamos que $\textcolor{Green}{a^{\varphi(n)} \equiv 1 \pmod n}$
+\task[\alt{b}] Como $561 = 3 \cdot 11 \cdot 17,$ e temos que 
+\[\begin{cases}
+\varphi(3) \mid 560 \\ \varphi(11) \mid 560 \\ \varphi(17) \mid 560
+\end{cases} \Rightarrow \begin{cases} 
+560 \equiv 0 \pmod{\varphi(3)} \\
+560 \equiv 0 \pmod{\varphi(11)} \\
+560 \equiv 0 \pmod{\varphi(17)} \\
+\end{cases} 
+\]
+e pelo item (a),
+\[
+\begin{cases} 
+\textcolor{Magenta}{560} \equiv \textcolor{Plum}{0} \pmod{\varphi(\textcolor{NavyBlue}{3})} \\
+\textcolor{Magenta}{560} \equiv \textcolor{Plum}{0} \pmod{\varphi(\textcolor{NavyBlue}{11})} \\
+\textcolor{Magenta}{560} \equiv \textcolor{Plum}{0} \pmod{\varphi(\textcolor{NavyBlue}{17})} \\
+\end{cases}  \Rightarrow \begin{cases}
+a^{\textcolor{Magenta}{560}} \equiv a^{\textcolor{Plum}{0}} \pmod{\textcolor{NavyBlue}{3}} \\
+a^{\textcolor{Magenta}{560}} \equiv a^{\textcolor{Plum}{0}} \pmod{\textcolor{NavyBlue}{11}} \\
+a^{\textcolor{Magenta}{560}} \equiv a^{\textcolor{Plum}{0}} \pmod{\textcolor{NavyBlue}{17}} \\
+\end{cases} \Rightarrow \begin{cases}
+a^{560} \equiv 1 \pmod{3} \\
+a^{560} \equiv 1 \pmod{11} \\
+a^{560} \equiv 1 \pmod{17} \\
+\end{cases} \Rightarrow \]\[ a^{560} \equiv 1 \pmod{3 \cdot 11 \cdot 17}\Rightarrow  a^{560} \equiv 1 \pmod{561}
+\]
+
+Não, pois $561$ não é primo. De fato, esta questão mostra que a \textit{recíproca} do Pequeno Teorema de Fermat não é válida em geral, ou seja, se para todo $a \in \mathbb{N}$, com $\mdc(a,n) = 1$, vale $a^{n-1} \equiv 1 \pmod{n},$ isso não implica que $n$ seja primo. Este resultado é válido para os números compostos $n = 561, 1105, 1729, 2465, 2821, 6601, 8911, \ldots$ que são conhecidos como \textbf{números de Carmichael}. 
+}
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Mostre que 
+\[
+\dfrac{\sqrt{n}}{2} \le \varphi(n) < n,
+\]
+para todo $n$ inteiro positivo.
+%https://www.slader.com/discussion/question/verify-the-following-a-for-any-positive-integer-n-12-sqrtn-leq-phin-leq-n-e211f080/
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+Nessa questão, vamos analisar um algoritmo para determinar o menor $n$ tal que $\varphi(n) = m.$ Seja $D(m) = \{d_1, \ldots, d_k\}$ o conjunto dos divisores positivos de $m,$ e seja $S(m)$ o conjunto dos números primos tais que seu antecessor é divisor de $m.$ Para cada $p \in S(m),$ vamos criar o conjunto
+\[
+L_p = \{ (1,1) \} \cup \{ (p^e, (p-1)p^{e-1} ) | 1 \le e \le t+1\},
+\]
+onde $t$ é tal que $p^t \mid m,$ mas $p^{t+1} \nmid m.$ Note que cada $L_p$ pode ser escrito na forma
+\[
+L_p = \{ (a_{d_1}, d_1), (a_{d_2}, d_2), \ldots, (a_{d_k},d_k) \}.
+\]
+Agora, definimos os conjuntos $P_i,$ para $i \in \mathbb{N}^{*}$ recursivamente da seguinte maneira:
+%P_0 = \{ (1,1) \},
+\[P_1 = L_{p_1},
+P_\ell = \left\{ \left(\sum\limits_{t \mid d} a_tb_{\frac{d}{t}}, d \right), (a_d, d) \in P_{\ell - 1}, (b_d,d) \in L_{p_\ell} \right\}, \ell \ge 2.
+\]
+Então, a soma de todos os $n$ tais que $\varphi(n) = m$ é dada pelo termo de $P_{\ell}$ correspondente ao par $(a_{m},m).$ Vejamos um exemplo para entender este processo:
+Se $m = 6,$ então $D(6) = \{1,2,3,6\},$ e $S(6) = \{2,3,7\}.$ Temos então
+\[
+L_2 = \{(1,1),(2,1),(4,2) \}, \quad
+L_3 = \{ (1,1), (3, 2), (9, 6) \} \quad \mbox{e} \quad 
+L_7 = \{(1,1), (7, 6) \}.
+\]
+Os conjuntos $P_i$ respectivos serão
+\[
+P_1 = L_2, \quad
+P_2 = \{ (3,1), (13,2), (27,6) \} \quad \mbox{e} \quad
+P_3 = \{ (3,1), (13,2), (48,6) \}.
+\]
+Assim, a soma de todos os n tais que $\varphi(n) = 6$ é $48.$ De fato, $7+9+14+18=48.$ 
+
+Utilize esse método para encontrar a soma de todos os valores de $n$ que satisfazem
+\itensladoalado{2}{
+\task[\alt{a}] $\varphi(n) = 12$
+\task[\alt{b}] $\varphi(n) = 28$
+}
+%https://arxiv.org/pdf/1401.6054.pdf
+%Computing the inverses, their power sums,and extrema for Euler’s totient and othermultiplicative functionsMax A. Alekseyev
+\end{exercicio}
+\begin{solution}
+
+\end{solution}
+\begin{exercicio}\textcolor{Blue}{*}
+O sistema de criptografia RSA é um dos mais utilizados do mundo para criptografar mensagens. Nesse método, há uma chave pública e uma chave privada. A chave pública pode ser distribuída livremente, enquanto a chave privada é a única que permite decriptografar a mensagem. Para gerar essas chaves, seguem-se os seguintes passos:
+\begin{itemize}
+    \item Escolha de forma aleatória dois números primos $p$ e $q$;
+    \item Calcule $n = pq;$
+    \item Calcule $\varphi(n) = (p-1)(q-1);$
+    \item  Escolha um inteiro $e$ tal que $1 < e < \varphi(n),$ de forma que $\mdc(e, \varphi(n)) = 1;$
+    \item - Calcule $d$ de forma que $de \equiv 1 \pmod{\varphi(n)},$ ou seja, $d$ seja o inverso multiplicativo de $e$ em $\pmod{\varphi(n)}.$
+\end{itemize}
+Portanto, a chave pública será o par $(n, e),$ e a chave privada será a tripla $(p, q,d).$ 
+
+Assim, se associarmos a cada letra do alfabeto o número que representa sua posição, ou seja, A valer 1, B valer 2, C valer 3, e assim por diante, podemos criptografar e decriptografar mensagens. 
+\itens{
+\task[\alt{a}] Vamos criptografar a palavra IME. Podemos descrevê-la como 9-13-5. Utilizando $p = 3$ e $q = 11:$ 
+\begin{itemize} 
+\item[$\clubsuit$] Encontre $n$ e $\varphi(n).$
+\item[$\textcolor{Red}{\varheart}$] Verifique que $e = 7$ é um possível valor para compor a chave pública;
+\item[$\spadesuit$] Encontre o valor de $d$ tal que $(p,q,d)$ seja uma chave privada.
+\item[$\textcolor{Red}{\vardiamond}$] Criptografe a palavra IME, calculando $m^e \pmod{n}$ para cada número $m$ correspondente à respectiva letra. 
+\end{itemize}
+\task[\alt{b}] Utilizando a chave privada do item anterior, decriptografe a mensagem abaixo:
+\begin{center}
+Z U L Z X C A E I
+\end{center}
+
+%E U L E R I A N O 
+%5 21 12 5 18 9 1 14 15
+
+%26 21 12 26 24 3 1 5 9
+%Z U L Z X C A E I
+}
+\end{exercicio}
+\begin{solution}
+\itens{
+\task[\alt{a}] 
+\begin{itemize} 
+\item[$\clubsuit$] Temos $n = p \cdot q = 33$ e $\varphi(33) = (3-1) \cdot (11-1) = 20.$
+\item[$\textcolor{Red}{\varheart}$] Temos que $1 < 3 < 20,$ e $\mdc(3,20) = 1.$ Assim, $e = 2$ é um valor adequado para a chave pública.
+\item[$\spadesuit$] Devemos ter $3d \equiv 1 \pmod{20}.$ Como $3 \cdot 7 = 2 \cdot 20 + 1,$ então $d = 7.$
+\item[$\textcolor{Red}{\vardiamond}$] Temos:
+\begin{itemize}
+    \item $9^3 \equiv x \pmod{33} \Rightarrow  x \equiv 3 \pmod{33}.$
+Assim, I corresponde a C.
+    \item $13^3 \equiv x \pmod{33} \Rightarrow x \equiv 13 \pmod{33}.$
+Assim, M corresponde a S.
+    \item $5^3 \equiv x \pmod{33} \Rightarrow x \equiv 26 \pmod{33}.$
+Assim, E corresponde a Z.
+\end{itemize}
+Logo, a versão criptografada de IME é CSZ.
+\end{itemize}
+\task[\alt{b}] 
+}
+\end{solution}
+\begin{comment}
+\begin{exercicio}
+Vamos utilizar o Teorema de Euler para criar uma versão mais geral do Teorema de Wilson.
+\itens{
+\task[\alt{a}] Seja $x$ tal que $ax \equiv 1 \pmod{n}.$ Mostre que, se $\mdc(a,n) = 1,$ então $x \equiv a^{\varphi(n) - 1} \pmod n.$
+\task[\alt{b}] Calcule 
+\[
+\prod\limits_{\substack{r=1 \\ \mdc(r,n) = 1}}^{n} r \equiv \pm 1 \pmod n.
+\]
+%https://www.uvm.edu/~cvincen1/files/teaching/spring2018-math255/
+}
+\end{exercicio}
+\end{comment}
+\end{document}
+
+%https://alozano.clas.uconn.edu/wp-content/uploads/sites/490/2014/01/mid2practicesolved.pdf
+\od{}{x} \dfrac{f}{g} = \dfrac{f'g - fg'}{g^2}
+\od[2]{}{x} = \od{}{x} \dfrac{f'g - fg'}{g^2} = \dfrac{(f'g - fg')' g^2 - (f'g - fg')(g^2)'}{g^4} =  \dfrac{(f''g - fg'')g^2 - 2(f'g'g^2 - fg(g')^2)}{g^4}
